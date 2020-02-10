@@ -149,6 +149,7 @@
 				B915CDC723F0EAAD00F7AED1 /* Sources */,
 				B915CDC823F0EAAD00F7AED1 /* Frameworks */,
 				B915CDC923F0EAAD00F7AED1 /* Resources */,
+				B929573123F0ED75008F4FE4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -264,6 +265,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B929573123F0ED75008F4FE4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)",
+				"~/accessTokens/petfinderAccessToken",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Look for a global file named 'petfinderAccessToken' within the home directory\ntoken_file=~/accessTokens/petfinderAccessToken\ntoken=\"$(cat $token_file 2>/dev/null)\"\nif [ \"$token\" ]; then\n  plutil -replace PetfinderAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n  echo 'warning: Missing Petfinder access token'\n  open 'https://www.petfinder.com/developers/v2/docs/'\n  echo \"warning: Get an access token from <https://www.petfinder.com/developers/v2/docs/>, then create a new file at $token_file that contains the access token.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B915CDC723F0EAAD00F7AED1 /* Sources */ = {
