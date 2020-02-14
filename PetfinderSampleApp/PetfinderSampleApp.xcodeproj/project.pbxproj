@@ -18,7 +18,7 @@
 		B915CDF423F0EAB300F7AED1 /* PetfinderSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B915CDF323F0EAB300F7AED1 /* PetfinderSampleAppUITests.swift */; };
 		B929573523F0F7B8008F4FE4 /* PetSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929573423F0F7B8008F4FE4 /* PetSearchView.swift */; };
 		B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */; };
-		B929573C23F0F8A3008F4FE4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B929573B23F0F8A3008F4FE4 /* Default-568h@2x.png */; };
+		B999C4F523F75AED0077465F /* PetFinderApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4F423F75AED0077465F /* PetFinderApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 		B915CDF523F0EAB300F7AED1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B929573423F0F7B8008F4FE4 /* PetSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSearchView.swift; sourceTree = "<group>"; };
 		B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePetsView.swift; sourceTree = "<group>"; };
-		B929573B23F0F8A3008F4FE4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B999C4F423F75AED0077465F /* PetFinderApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderApi.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,6 @@
 		B915CDC223F0EAAD00F7AED1 = {
 			isa = PBXGroup;
 			children = (
-				B929573B23F0F8A3008F4FE4 /* Default-568h@2x.png */,
 				B915CDCD23F0EAAD00F7AED1 /* PetfinderSampleApp */,
 				B915CDE723F0EAB300F7AED1 /* PetfinderSampleAppTests */,
 				B915CDF223F0EAB300F7AED1 /* PetfinderSampleAppUITests */,
@@ -110,6 +109,7 @@
 			children = (
 				B929573623F0F7CF008F4FE4 /* Favorites */,
 				B929573323F0F73B008F4FE4 /* PetSearch */,
+				B999C4F323F75AC80077465F /* Networking */,
 				B915CDCE23F0EAAD00F7AED1 /* AppDelegate.swift */,
 				B915CDD023F0EAAD00F7AED1 /* SceneDelegate.swift */,
 				B915CDD523F0EAAD00F7AED1 /* ContentView.swift */,
@@ -170,6 +170,14 @@
 				B915CDD923F0EAB200F7AED1 /* Preview Content */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B999C4F323F75AC80077465F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B999C4F423F75AED0077465F /* PetFinderApi.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B915CDDE23F0EAB200F7AED1 /* LaunchScreen.storyboard in Resources */,
-				B929573C23F0F8A3008F4FE4 /* Default-568h@2x.png in Resources */,
 				B915CDDB23F0EAB200F7AED1 /* Preview Assets.xcassets in Resources */,
 				B915CDD823F0EAB200F7AED1 /* Assets.xcassets in Resources */,
 			);
@@ -332,6 +339,7 @@
 				B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */,
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
 				B915CDD623F0EAAD00F7AED1 /* ContentView.swift in Sources */,
+				B999C4F523F75AED0077465F /* PetFinderApi.swift in Sources */,
 				B915CDD123F0EAAD00F7AED1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
