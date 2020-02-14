@@ -1,6 +1,9 @@
 # iOSPetfinderSampleApp
 Sample App created to practice with different iOS Tech
 
+## iOS Tech
+* SwiftUI
+
 ## Disclaimers
 
 Using Petfinder API v2 for sample app:
