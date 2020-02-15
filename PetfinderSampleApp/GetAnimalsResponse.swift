@@ -34,63 +34,6 @@ struct GetAnimalsResponse: Codable {
         let publishDate: String
         let distance: String?
         
-        struct Breeds: Codable {
-            let primary: String?
-            let secondary: String?
-            let mixed: Bool
-            let unknown: Bool
-        }
-        
-        struct Colors: Codable {
-            let primary: String?
-            let secondary: String?
-            let tertiary: String?
-        }
-        
-        struct Photo: Codable {
-            let small: URL?
-            let medium: URL?
-            let large: URL?
-            let full: URL?
-        }
-        
-        struct Attributes: Codable {
-            let spayedNeutered: Bool
-            let houseTrained: Bool
-            let declawed: Bool
-            let specialNeeds: Bool
-            let shotsCurrent: Bool
-            
-            enum CodingKeys: String, CodingKey {
-                case spayedNeutered = "spayed_neutered"
-                case houseTrained = "house_trained"
-                case declawed
-                case specialNeeds = "special_needs"
-                case shotsCurrent = "shots_current"
-            }
-        }
-        
-        struct Environment: Codable {
-            let children: Bool
-            let dogs: Bool
-            let cats: Bool
-        }
-        
-        struct Contact: Codable {
-            let email: String?
-            let phone: String?
-            let address: Address
-            
-            struct Address: Codable {
-                let address1: String?
-                let address2: String?
-                let city: String?
-                let state: String?
-                let postcode: String?
-                let country: String?
-            }
-        }
-        
         enum CodingKeys: String, CodingKey {
             case id
             case organizationId = "organization_id"
@@ -114,6 +57,63 @@ struct GetAnimalsResponse: Codable {
             case publishDate = "published_at"
             case distance
         }
+    }
+    
+    struct Breeds: Codable {
+        let primary: String?
+        let secondary: String?
+        let mixed: Bool
+        let unknown: Bool
+    }
+    
+    struct Colors: Codable {
+        let primary: String?
+        let secondary: String?
+        let tertiary: String?
+    }
+    
+    struct Photo: Codable {
+        let small: URL?
+        let medium: URL?
+        let large: URL?
+        let full: URL?
+    }
+    
+    struct Attributes: Codable {
+        let spayedNeutered: Bool
+        let houseTrained: Bool
+        let declawed: Bool
+        let specialNeeds: Bool
+        let shotsCurrent: Bool
+        
+        enum CodingKeys: String, CodingKey {
+            case spayedNeutered = "spayed_neutered"
+            case houseTrained = "house_trained"
+            case declawed
+            case specialNeeds = "special_needs"
+            case shotsCurrent = "shots_current"
+        }
+    }
+    
+    struct Environment: Codable {
+        let children: Bool
+        let dogs: Bool
+        let cats: Bool
+    }
+    
+    struct Contact: Codable {
+        let email: String?
+        let phone: String?
+        let address: Address
+    }
+    
+    struct Address: Codable {
+        let address1: String?
+        let address2: String?
+        let city: String?
+        let state: String?
+        let postcode: String?
+        let country: String?
     }
     
     enum CodingKeys: String, CodingKey {
