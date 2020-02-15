@@ -20,6 +20,8 @@
 		B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */; };
 		B999C4F523F75AED0077465F /* PetFinderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4F423F75AED0077465F /* PetFinderAPI.swift */; };
 		B999C4F923F760450077465F /* GetAnimalsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4F823F760450077465F /* GetAnimalsResponse.swift */; };
+		B999C4FB23F89A6D0077465F /* PetFinderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4FA23F89A6D0077465F /* PetFinderError.swift */; };
+		B999C4FE23F89EE60077465F /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4FD23F89EE60077465F /* Parsing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePetsView.swift; sourceTree = "<group>"; };
 		B999C4F423F75AED0077465F /* PetFinderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderAPI.swift; sourceTree = SOURCE_ROOT; };
 		B999C4F823F760450077465F /* GetAnimalsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAnimalsResponse.swift; sourceTree = SOURCE_ROOT; };
+		B999C4FA23F89A6D0077465F /* PetFinderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderError.swift; sourceTree = SOURCE_ROOT; };
+		B999C4FD23F89EE60077465F /* Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 		B999C4F323F75AC80077465F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B999C4FC23F89EC50077465F /* Utilities */,
 				B999C4F723F760120077465F /* Errors */,
 				B999C4F623F760060077465F /* Responses */,
 				B999C4F423F75AED0077465F /* PetFinderAPI.swift */,
@@ -195,8 +200,17 @@
 		B999C4F723F760120077465F /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				B999C4FA23F89A6D0077465F /* PetFinderError.swift */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		B999C4FC23F89EC50077465F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B999C4FD23F89EE60077465F /* Parsing.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,8 +373,10 @@
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
 				B915CDD623F0EAAD00F7AED1 /* ContentView.swift in Sources */,
 				B999C4F523F75AED0077465F /* PetFinderAPI.swift in Sources */,
+				B999C4FE23F89EE60077465F /* Parsing.swift in Sources */,
 				B915CDD123F0EAAD00F7AED1 /* SceneDelegate.swift in Sources */,
 				B999C4F923F760450077465F /* GetAnimalsResponse.swift in Sources */,
+				B999C4FB23F89A6D0077465F /* PetFinderError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

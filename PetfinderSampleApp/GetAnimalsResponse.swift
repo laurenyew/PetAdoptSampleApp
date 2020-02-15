@@ -10,6 +10,7 @@ import Foundation
 
 struct GetAnimalsResponse: Codable {
     let animals: [Animal]
+    let pagination: Pagination
     
     struct Animal: Codable {
         let id: String
@@ -116,7 +117,17 @@ struct GetAnimalsResponse: Codable {
         let country: String?
     }
     
-    enum CodingKeys: String, CodingKey {
-        case animals
+    struct Pagination: Codable {
+        let countPerPage: String
+        let totalCount: Int
+        let currentPage: Int
+        let totalPages: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case countPerPage = "count_per_page"
+            case totalCount = "total_count"
+            case currentPage = "current_page"
+            case totalPages = "total_pages"
+        }
     }
 }
