@@ -7,7 +7,14 @@
 //
 
 import Foundation
+import Combine
 
-struct PetFinderApi {
+protocol PetFinderSearchAPI {
+    func getAnimals() -> AnyPublisher {
+    
+    }
+}
+
+struct PetFinderAPI {
     let apiKey = Bundle.main.object(forInfoDictionaryKey: "PetfinderAccessToken") as? String
 }

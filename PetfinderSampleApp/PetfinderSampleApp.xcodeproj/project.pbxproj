@@ -18,7 +18,8 @@
 		B915CDF423F0EAB300F7AED1 /* PetfinderSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B915CDF323F0EAB300F7AED1 /* PetfinderSampleAppUITests.swift */; };
 		B929573523F0F7B8008F4FE4 /* PetSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929573423F0F7B8008F4FE4 /* PetSearchView.swift */; };
 		B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */; };
-		B999C4F523F75AED0077465F /* PetFinderApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4F423F75AED0077465F /* PetFinderApi.swift */; };
+		B999C4F523F75AED0077465F /* PetFinderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4F423F75AED0077465F /* PetFinderAPI.swift */; };
+		B999C4F923F760450077465F /* GetAnimalsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4F823F760450077465F /* GetAnimalsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +57,8 @@
 		B915CDF523F0EAB300F7AED1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B929573423F0F7B8008F4FE4 /* PetSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSearchView.swift; sourceTree = "<group>"; };
 		B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePetsView.swift; sourceTree = "<group>"; };
-		B999C4F423F75AED0077465F /* PetFinderApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderApi.swift; sourceTree = SOURCE_ROOT; };
+		B999C4F423F75AED0077465F /* PetFinderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderAPI.swift; sourceTree = SOURCE_ROOT; };
+		B999C4F823F760450077465F /* GetAnimalsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAnimalsResponse.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,9 +177,26 @@
 		B999C4F323F75AC80077465F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				B999C4F423F75AED0077465F /* PetFinderApi.swift */,
+				B999C4F723F760120077465F /* Errors */,
+				B999C4F623F760060077465F /* Responses */,
+				B999C4F423F75AED0077465F /* PetFinderAPI.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		B999C4F623F760060077465F /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				B999C4F823F760450077465F /* GetAnimalsResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		B999C4F723F760120077465F /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,8 +358,9 @@
 				B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */,
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
 				B915CDD623F0EAAD00F7AED1 /* ContentView.swift in Sources */,
-				B999C4F523F75AED0077465F /* PetFinderApi.swift in Sources */,
+				B999C4F523F75AED0077465F /* PetFinderAPI.swift in Sources */,
 				B915CDD123F0EAAD00F7AED1 /* SceneDelegate.swift in Sources */,
+				B999C4F923F760450077465F /* GetAnimalsResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
