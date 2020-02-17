@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AnimalRowViewModel {
+class AnimalRowViewModel: Identifiable {
     private let animal: GetAnimalsResponse.Animal
     
     var id: String {

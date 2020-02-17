@@ -27,7 +27,7 @@ struct PetSearchView: View {
           }
         }
           .listStyle(GroupedListStyle())
-          .navigationBarTitle("PetFinder Dog Search 🐶")
+          .navigationBarTitle("Dog Search 🐶")
       }
     }
 }
@@ -35,13 +35,13 @@ struct PetSearchView: View {
 private extension PetSearchView {
   var searchField: some View {
     HStack(alignment: .center) {
-      TextField("e.g. 78759", text: $viewModel.location)
+        TextField("e.g. 78759", text: $viewModel.location)
     }
   }
 
   var animalSection: some View {
     Section {
-      ForEach(viewModel.dataSource, content: DailyWeatherRow.init(viewModel:))
+      ForEach(viewModel.dataSource, content: AnimalPreviewRow.init(viewModel:))
     }
   }
 

@@ -11,9 +11,11 @@ import SwiftUI
 struct ContentView: View {
     @State private var selection = 0
  
+    let petSearchViewModel = PetSearchViewModel(petFinderSearchAPI: petFinderAPI)
+    
     var body: some View {
-        TabView(selection: $selection){
-            PetSearchView()
+        TabView(){
+            PetSearchView(viewModel: self.petSearchViewModel)
                 .font(.title)
                 .tabItem {
                     VStack {

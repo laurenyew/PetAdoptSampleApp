@@ -32,6 +32,8 @@ protocol PetFinderSearchAPI {
         limit: Int?) -> AnyPublisher<GetAnimalsResponse, PetFinderError>
 }
 
+let petFinderAPI = PetFinder()
+
 class PetFinder {
     private let session: URLSession
     
