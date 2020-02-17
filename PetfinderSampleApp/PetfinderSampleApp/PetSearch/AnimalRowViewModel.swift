@@ -27,3 +27,13 @@ class AnimalRowViewModel {
         self.animal = animal
     }
 }
+
+extension AnimalRowViewModel: Hashable {
+    static func == (lhs: AnimalRowViewModel, rhs: AnimalRowViewModel) -> Bool {
+      return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(self.id)
+    }
+}
