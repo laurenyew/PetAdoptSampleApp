@@ -19,6 +19,10 @@ class AnimalRowViewModel {
         return animal.name
     }
     
+    var gender: String {
+        return animal.gender
+    }
+    
     var photoUrl: URL? {
         return animal.photos.first?.full
     }
