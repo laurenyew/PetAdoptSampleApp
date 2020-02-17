@@ -11,6 +11,18 @@ import Foundation
 class AnimalRowViewModel {
     private let animal: GetAnimalsResponse.Animal
     
+    var id: String {
+        return animal.id
+    }
+    
+    var name: String {
+        return animal.name
+    }
+    
+    var photoUrl: URL? {
+        return animal.photos.first?.full
+    }
+    
     init(animal: GetAnimalsResponse.Animal) {
         self.animal = animal
     }
