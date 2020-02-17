@@ -22,6 +22,8 @@
 		B999C4F923F760450077465F /* GetAnimalsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4F823F760450077465F /* GetAnimalsResponse.swift */; };
 		B999C4FB23F89A6D0077465F /* PetFinderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4FA23F89A6D0077465F /* PetFinderError.swift */; };
 		B999C4FE23F89EE60077465F /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4FD23F89EE60077465F /* Parsing.swift */; };
+		B999C50023FAF9DB0077465F /* PetSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */; };
+		B999C50223FB24DD0077465F /* AnimalRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		B999C4F823F760450077465F /* GetAnimalsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAnimalsResponse.swift; sourceTree = SOURCE_ROOT; };
 		B999C4FA23F89A6D0077465F /* PetFinderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFinderError.swift; sourceTree = SOURCE_ROOT; };
 		B999C4FD23F89EE60077465F /* Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = SOURCE_ROOT; };
+		B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSearchViewModel.swift; sourceTree = "<group>"; };
+		B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalRowViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				B929573423F0F7B8008F4FE4 /* PetSearchView.swift */,
+				B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */,
+				B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */,
 			);
 			path = PetSearch;
 			sourceTree = "<group>";
@@ -376,7 +382,9 @@
 				B999C4FE23F89EE60077465F /* Parsing.swift in Sources */,
 				B915CDD123F0EAAD00F7AED1 /* SceneDelegate.swift in Sources */,
 				B999C4F923F760450077465F /* GetAnimalsResponse.swift in Sources */,
+				B999C50223FB24DD0077465F /* AnimalRowViewModel.swift in Sources */,
 				B999C4FB23F89A6D0077465F /* PetFinderError.swift in Sources */,
+				B999C50023FAF9DB0077465F /* PetSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

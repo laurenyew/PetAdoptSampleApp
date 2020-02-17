@@ -43,7 +43,7 @@ class PetFinder {
 // MARK: - PetFinderSearchAPI
 extension PetFinder: PetFinderSearchAPI {
     func getDogsNearMe(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetFinderError> {
-        return getAnimals(forType: "Dog", location: "78759", distance: 50)
+        return getAnimals(forType: "Dog", location: location, distance: 50)
     }
     
     func getAnimals(forType type: String? = nil, breed: String? = nil, size: String? = nil, gender: String? = nil, age: String? = nil, color: String? = nil, coat: String? = nil, status: String? = nil, name: String? = nil, organization: String? = nil, goodWithChildren: Bool? = nil, goodWithDogs: Bool? = nil, goodWithCats: Bool? = nil, location: String? = nil, distance: Int? = nil, page: Int? = nil, limit: Int? = nil) -> AnyPublisher<GetAnimalsResponse, PetFinderError> {
@@ -69,12 +69,12 @@ extension PetFinder: PetFinderSearchAPI {
         
         return session.dataTaskPublisher(for: URLRequest(url: url))
             .mapError { error in
-                .network(description: error.localizedDescription)
+                .network(description: error.localizedDescription) // Convert Error to PetFinderError
         }
-        .flatMap(maxPublishers: .max(1)) { pair in
+        .flatMap(maxPublishers: .max(1)) { pair in // Get first value result
             decode(pair.data)
         }
-        .eraseToAnyPublisher()
+        .eraseToAnyPublisher() // Remove the AnyPublisher type
     }
 }
 
