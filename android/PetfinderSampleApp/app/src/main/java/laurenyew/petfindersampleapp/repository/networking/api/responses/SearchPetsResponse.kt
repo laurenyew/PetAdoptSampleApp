@@ -1,4 +1,4 @@
-package laurenyew.petfindersampleapp.networking.api.responses
+package laurenyew.petfindersampleapp.repository.networking.api.responses
 
 import com.squareup.moshi.Json
 import java.net.URL

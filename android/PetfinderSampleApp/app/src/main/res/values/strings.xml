@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">PetfinderSampleApp</string>
-    <string name="title_home">Home</string>
+    <string name="title_pet_search_page">Pet Search</string>
     <string name="title_favorites">Favorites</string>
+
+    <!-- Pet Search Page -->
+    <string name="search_title">Search for nearby dogs by your zipcode:</string>
+    <string name="search_hint">Enter your zipcode</string>
+    <string name="empty_results">No results. Please try again.</string>
+
+    <!-- Errors -->
+    <string name="error_unknown">Uh oh. Something went wrong.</string>
 </resources>

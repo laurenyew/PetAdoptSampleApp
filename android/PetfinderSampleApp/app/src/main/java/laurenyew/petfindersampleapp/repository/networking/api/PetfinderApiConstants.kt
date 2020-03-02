@@ -1,4 +1,4 @@
-package laurenyew.petfindersampleapp.networking.api
+package laurenyew.petfindersampleapp.repository.networking.api
 
 object PetfinderApiConstants {
     const val BASE_URL = "https://api.petfinder.com/v2/"

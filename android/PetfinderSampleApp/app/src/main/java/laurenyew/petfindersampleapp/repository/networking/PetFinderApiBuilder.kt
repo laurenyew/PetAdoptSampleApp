@@ -1,9 +1,9 @@
-package laurenyew.petfindersampleapp.networking
+package laurenyew.petfindersampleapp.repository.networking
 
 import androidx.annotation.VisibleForTesting
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
-import laurenyew.petfindersampleapp.networking.api.PetfinderApiConstants
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

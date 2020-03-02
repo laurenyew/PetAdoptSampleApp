@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="laurenyew.petfindersampleapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="laurenyew.petfindersampleapp.ui.search.PetSearchFragment"
+        android:label="@string/title_pet_search_page"
+        tools:layout="@layout/fragment_pet_search" />
 
     <fragment
         android:id="@+id/navigation_favorites"
