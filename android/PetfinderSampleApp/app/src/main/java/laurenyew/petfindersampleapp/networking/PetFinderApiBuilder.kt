@@ -9,6 +9,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 
+/**
+ * Api Builder to keep the retrofit creation logic separate from the commands
+ * Update AUTH_TOKEN in this class with your auth token from Petfinder to use the API
+ */
 object PetFinderApiBuilder {
     private const val AUTH_TOKEN = "" //TODO: Fill in with your auth token
     private val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
