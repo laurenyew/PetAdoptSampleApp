@@ -27,13 +27,12 @@ class PetSearchFragment : Fragment() {
         petSearchViewModel =
             ViewModelProvider(this).get(PetSearchViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_pet_search, container, false)
-
-        setupAnimalListView()
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupAnimalListView()
         petSearchViewModel.animals.observe(viewLifecycleOwner, Observer {
             loadAnimalSearchResults(it)
         })
