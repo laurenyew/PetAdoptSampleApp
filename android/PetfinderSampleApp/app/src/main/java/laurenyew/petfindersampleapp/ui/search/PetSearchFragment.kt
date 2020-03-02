@@ -26,8 +26,7 @@ class PetSearchFragment : Fragment() {
     ): View? {
         petSearchViewModel =
             ViewModelProvider(this).get(PetSearchViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_pet_search, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_pet_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
