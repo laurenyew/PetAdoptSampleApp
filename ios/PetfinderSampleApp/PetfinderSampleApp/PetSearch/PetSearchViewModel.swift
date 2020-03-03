@@ -6,11 +6,15 @@
 //  Copyright © 2020 laurenyew. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 class PetSearchViewModel: ObservableObject, Identifiable {
-    @Published var location: String = ""
+    @Published var location: String = "" {
+        didSet{
+            print("set")
+        }
+    }
     
     @Published var dataSource: [AnimalRowViewModel] = []
     
@@ -21,15 +25,16 @@ class PetSearchViewModel: ObservableObject, Identifiable {
     init(petFinderSearchAPI: PetFinderSearchAPI,
          scheduler: DispatchQueue = DispatchQueue(label: "PetSearchViewModel")) {
         self.petFinderSearchAPI = petFinderSearchAPI
-        _ = $location
-            .dropFirst(1)
-            .debounce(for: .seconds(0.5), scheduler: scheduler)
-            .sink(receiveValue: searchForNearbyDogs(forLocation:))
+        $location
+        .dropFirst(1)
+        .debounce(for: .seconds(0.5), scheduler: scheduler)
+        .sink(receiveValue: searchForNearbyDogs(forLocation:))
+        .store(in: &disposables)
     }
     
     func searchForNearbyDogs(forLocation location:String) {
         petFinderSearchAPI.getDogsNearMe(forLocation: location)
-            .map { response in
+        .map { response in
                 response.animals.map(AnimalRowViewModel.init)
         }
         .receive(on: DispatchQueue.main)
