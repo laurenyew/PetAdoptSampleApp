@@ -29,6 +29,6 @@ struct AnimalPreviewRow: View {
             }
             .padding(.leading, 8)
         }
-        .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: 10.0, alignment: Alignment.leading)
+        .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: 60.0, alignment: Alignment.leading)
     }
 }
