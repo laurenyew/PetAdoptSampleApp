@@ -19,6 +19,7 @@ struct AnimalPreviewRow: View {
         HStack {
             VStack {
                 ImageView(withURL: viewModel.photoUrl)
+                .aspectRatio(contentMode: .fit)
             }
             VStack(alignment: .leading) {
                 Text("\(viewModel.name)")
@@ -28,5 +29,6 @@ struct AnimalPreviewRow: View {
             }
             .padding(.leading, 8)
         }
+        .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: 10.0, alignment: Alignment.leading)
     }
 }

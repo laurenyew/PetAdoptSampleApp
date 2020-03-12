@@ -10,30 +10,30 @@ import Foundation
 
 struct GetAnimalsResponse: Codable {
     let animals: [Animal]
-    let pagination: Pagination
+    let pagination: Pagination?
     
     struct Animal: Codable {
-        let id: String
-        let organizationId: String
-        let url: URL
+        let id: Int
+        let organizationId: String?
+        let url: URL?
         let type: String
         let species: String
-        let breeds: Breeds
-        let colors: Colors
-        let age: String
+        let breeds: Breeds?
+        let colors: Colors?
+        let age: String?
         let gender: String
-        let size: String
-        let coat: String
-        let name: String
-        let description: String
-        let photos: [Photo]
-        let status: String
-        let attributes: Attributes
-        let environment: Environment
+        let size: String?
+        let coat: String?
+        let name: String?
+        let description: String?
+        let photos: [Photo]?
+        let status: String?
+        let attributes: Attributes?
+        let environment: Environment?
         let tags: [String]
         let contact: Contact
-        let publishDate: String
-        let distance: String?
+        let publishDate: String?
+        let distance: Double?
         
         enum CodingKeys: String, CodingKey {
             case id
@@ -63,8 +63,8 @@ struct GetAnimalsResponse: Codable {
     struct Breeds: Codable {
         let primary: String?
         let secondary: String?
-        let mixed: Bool
-        let unknown: Bool
+        let mixed: Bool?
+        let unknown: Bool?
     }
     
     struct Colors: Codable {
@@ -81,11 +81,11 @@ struct GetAnimalsResponse: Codable {
     }
     
     struct Attributes: Codable {
-        let spayedNeutered: Bool
-        let houseTrained: Bool
-        let declawed: Bool
-        let specialNeeds: Bool
-        let shotsCurrent: Bool
+        let spayedNeutered: Bool?
+        let houseTrained: Bool?
+        let declawed: Bool?
+        let specialNeeds: Bool?
+        let shotsCurrent: Bool?
         
         enum CodingKeys: String, CodingKey {
             case spayedNeutered = "spayed_neutered"
@@ -97,15 +97,15 @@ struct GetAnimalsResponse: Codable {
     }
     
     struct Environment: Codable {
-        let children: Bool
-        let dogs: Bool
-        let cats: Bool
+        let children: Bool?
+        let dogs: Bool?
+        let cats: Bool?
     }
     
     struct Contact: Codable {
         let email: String?
         let phone: String?
-        let address: Address
+        let address: Address?
     }
     
     struct Address: Codable {
@@ -118,10 +118,10 @@ struct GetAnimalsResponse: Codable {
     }
     
     struct Pagination: Codable {
-        let countPerPage: String
-        let totalCount: Int
-        let currentPage: Int
-        let totalPages: Int
+        let countPerPage: Int?
+        let totalCount: Int?
+        let currentPage: Int?
+        let totalPages: Int?
         
         enum CodingKeys: String, CodingKey {
             case countPerPage = "count_per_page"

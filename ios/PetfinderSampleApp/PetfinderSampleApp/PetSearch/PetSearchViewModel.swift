@@ -10,11 +10,7 @@ import SwiftUI
 import Combine
 
 class PetSearchViewModel: ObservableObject, Identifiable {
-    @Published var location: String = "" {
-        didSet{
-            print("set")
-        }
-    }
+    @Published var location: String = ""
     
     @Published var dataSource: [AnimalRowViewModel] = []
     
@@ -48,7 +44,7 @@ class PetSearchViewModel: ObservableObject, Identifiable {
             }
         }) { [weak self] animalViewModels in
             guard let self = self else { return }
-            self.dataSource = animalViewModels // Success: Update data source
+            self.dataSource = animalViewModels// Success: Update data source
         }
         .store(in: &disposables)
     }

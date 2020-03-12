@@ -11,12 +11,12 @@ import Foundation
 class AnimalRowViewModel: Identifiable {
     private let animal: GetAnimalsResponse.Animal
     
-    var id: String {
+    var id: Int {
         return animal.id
     }
     
     var name: String {
-        return animal.name
+        return animal.name ?? "Unknown"
     }
     
     var gender: String {
@@ -24,7 +24,7 @@ class AnimalRowViewModel: Identifiable {
     }
     
     var photoUrl: URL? {
-        return animal.photos.first?.full
+        return animal.photos?.first?.full
     }
     
     init(animal: GetAnimalsResponse.Animal) {

@@ -61,17 +61,18 @@ extension PetFinder: PetFinderSearchAPI {
             return Fail(error: error).eraseToAnyPublisher()
         }
         
-        let request = NSMutableURLRequest(url: url)
+        var request = URLRequest(url: url)
         guard let accessToken = PetFinderAPI.apiKey else {
             let error = PetFinderError.network(description: "Invalid access token")
             return Fail(error: error).eraseToAnyPublisher()
         }
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        
-        return session.dataTaskPublisher(for: URLRequest(url: url))
+        return session.dataTaskPublisher(for: request)
             .mapError { error in
-                .network(description: error.localizedDescription) // Convert Error to PetFinderError
+                PetFinderError.network(description: error.localizedDescription) // Convert Error to PetFinderError
         }
         .flatMap(maxPublishers: .max(1)) { pair in // Get first value result
             decode(pair.data)
@@ -112,25 +113,56 @@ extension PetFinder {
         components.scheme = PetFinderAPI.scheme
         components.host = PetFinderAPI.host
         components.path = PetFinderAPI.path + "/animals"
-        components.queryItems = [
-            URLQueryItem(name: "type", value: type),
-            URLQueryItem(name: "breed", value: breed),
-            URLQueryItem(name: "size", value: size),
-            URLQueryItem(name: "gender", value: gender),
-            URLQueryItem(name: "age", value: age),
-            URLQueryItem(name: "color", value: color),
-            URLQueryItem(name: "coat", value: coat),
-            URLQueryItem(name: "status", value: status),
-            URLQueryItem(name: "name", value: name),
-            URLQueryItem(name: "organization", value: organization),
-            URLQueryItem(name: "goodWithChildren", value: goodWithChildren?.description),
-            URLQueryItem(name: "goodWithDogs", value: goodWithDogs?.description),
-            URLQueryItem(name: "goodWithCats", value: goodWithCats?.description),
-            URLQueryItem(name: "location", value: location),
-            URLQueryItem(name: "distance", value: distance?.description),
-            URLQueryItem(name: "page", value: page?.description),
-            URLQueryItem(name: "limit", value: limit?.description)
-        ]
+        var queryItems : [URLQueryItem] = []
+        if let type = type {
+            queryItems.append(URLQueryItem(name: "type", value: type))
+        }
+        if let breed = breed {
+            queryItems.append(URLQueryItem(name: "breed", value: breed))
+        }
+        if let size = size {
+            queryItems.append(URLQueryItem(name: "size", value: size))
+        }
+        if let gender = gender {
+            queryItems.append(URLQueryItem(name: "gender", value: gender))
+        }
+        if let age = age {
+            queryItems.append(URLQueryItem(name: "age", value: age))
+        }
+        if let color = color {
+            queryItems.append(URLQueryItem(name: "color", value: color))
+        }
+        if let coat = coat {
+            queryItems.append(URLQueryItem(name: "coat", value: coat))
+        }
+        if let status = status {
+            queryItems.append(URLQueryItem(name: "status", value: status))
+        }
+        if let name = name {
+            queryItems.append(URLQueryItem(name: "name", value: name))
+        }
+        if let organization = organization {
+            queryItems.append(URLQueryItem(name: "organization", value: organization))
+        }
+        if let goodWithChildren = goodWithChildren?.description {
+            queryItems.append(URLQueryItem(name: "goodWithChildren", value: goodWithChildren))
+        }
+        if let goodWithDogs = goodWithDogs?.description {
+            queryItems.append(URLQueryItem(name: "goodWithDogs", value: goodWithDogs))
+        }
+        if let location = location {
+            queryItems.append(URLQueryItem(name: "location", value: location))
+        }
+        if let distance = distance?.description {
+            queryItems.append(URLQueryItem(name: "distance", value: distance))
+        }
+        if let page = page?.description {
+            queryItems.append(URLQueryItem(name: "page", value: page))
+        }
+        if let limit = limit?.description {
+            queryItems.append(URLQueryItem(name: "limit", value: limit))
+        }
+        components.queryItems = queryItems
 
         return components
     }
