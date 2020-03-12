@@ -1,6 +1,8 @@
 # iOS PetfinderSampleApp
 Sample App created to practice with different iOS Tech
 
+<img src="https://github.com/laurenyew/PetfinderSampleApp/blob/develop/ios/Screenshots/Dog_Search_iOS_Demo_Screenshot.png" data-canonical-src="https://github.com/laurenyew/PetfinderSampleApp/blob/develop/ios/Screenshots/Dog_Search_iOS_Demo_Screenshot.png" width="200" height="400" />
+
 ## iOS Tech
 * SwiftUI
 * Combine
