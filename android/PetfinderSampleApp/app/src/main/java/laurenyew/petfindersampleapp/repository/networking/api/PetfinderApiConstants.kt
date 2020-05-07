@@ -20,7 +20,7 @@ object PetfinderApiConstants {
     const val IS_CHILD_FRIENDLY_PARAM = "goodWithChildren"
     const val IS_DOG_FRIENDLY_PARAM = "goodWithDogs"
     const val IS_CAT_FRIENDLY_PARAM = "goodWithCats"
-    const val LOCATION_PARAM =  "location"
+    const val LOCATION_PARAM = "location"
     const val DISTANCE_PARAM = "distance"
     const val PAGE_PARAM = "page"
     const val RESULT_NUM_LIMIT_PARAM = "limit"

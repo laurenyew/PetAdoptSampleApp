@@ -34,7 +34,9 @@ class SearchPetsCommands : BaseNetworkCommand() {
     ): ArrayList<AnimalModel> {
         val data = response?.body()
         if (response?.code() != 200 || data == null) {
-            throw RuntimeException("API call failed. Response error: ${response?.errorBody()?.toString()}")
+            throw RuntimeException(
+                "API call failed. Response error: ${response?.errorBody()?.toString()}"
+            )
         } else {
             val animalList = ArrayList<AnimalModel>()
             data.animals.forEach {
