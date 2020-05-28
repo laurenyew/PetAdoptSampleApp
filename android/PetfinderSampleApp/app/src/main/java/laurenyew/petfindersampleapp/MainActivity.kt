@@ -7,18 +7,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import laurenyew.petfindersampleapp.di.ApplicationComponent
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var applicationComponent: ApplicationComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
-        // Setup Dagger
 
         //Setup Navigation
 

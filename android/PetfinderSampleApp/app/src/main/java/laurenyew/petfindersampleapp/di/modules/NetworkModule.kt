@@ -1,4 +1,4 @@
-package laurenyew.petfindersampleapp.di
+package laurenyew.petfindersampleapp.di.modules
 
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
