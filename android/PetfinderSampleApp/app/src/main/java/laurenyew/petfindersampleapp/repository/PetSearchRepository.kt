@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.networking.commands.SearchPetsCommands
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PetSearchRepository {
-    private val searchPetCommand: SearchPetsCommands = SearchPetsCommands()
+@Singleton
+class PetSearchRepository @Inject constructor(
+    private val searchPetCommand: SearchPetsCommands
+) {
     suspend fun getNearbyDogs(location: String): LiveData<List<AnimalModel>> {
         val data = MutableLiveData<List<AnimalModel>>()
         try {

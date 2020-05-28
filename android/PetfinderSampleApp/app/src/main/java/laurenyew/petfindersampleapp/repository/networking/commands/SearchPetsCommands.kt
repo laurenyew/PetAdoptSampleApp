@@ -3,23 +3,25 @@ package laurenyew.petfindersampleapp.repository.networking.commands
 import android.util.Log
 import kotlinx.coroutines.async
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
 import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsResponse
 import retrofit2.Response
+import javax.inject.Inject
 
-class SearchPetsCommands : BaseNetworkCommand() {
+class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : BaseNetworkCommand() {
     @Throws(RuntimeException::class)
     suspend fun searchForNearbyDogs(location: String): List<AnimalModel>? {
         val deferred = async {
             Log.d(
                 TAG, "Executing $SEARCH_FOR_NEARBY_DOGS_TAG"
             )
-            val call = api?.searchPets(location = location)
+            val call = api.searchPets(location = location)
             try {
-                val response = call?.execute()
+                val response = call.execute()
                 parseResponse(response)
             } finally {
                 //Clean up network call and cancel
-                call?.cancel()
+                call.cancel()
             }
         }
         return deferred.await()

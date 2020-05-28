@@ -40,5 +40,5 @@ interface PetfinderApi {
         @Query(DISTANCE_PARAM) distance: Int? = null,
         @Query(PAGE_PARAM) page: Int? = null,
         @Query(RESULT_NUM_LIMIT_PARAM) resultLimit: Int? = null
-    ): Call<SearchPetsResponse?>?
+    ): Call<SearchPetsResponse?>
 }
