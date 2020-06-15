@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,10 +14,13 @@ import kotlinx.android.synthetic.main.fragment_pet_search.*
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.ui.search.views.PetSearchAnimalRecyclerViewAdapter
+import javax.inject.Inject
 
 class PetSearchFragment : Fragment() {
     private var adapter: PetSearchAnimalRecyclerViewAdapter? = null
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var petSearchViewModel: PetSearchViewModel
 
     override fun onCreateView(
@@ -25,15 +29,33 @@ class PetSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         petSearchViewModel =
-            ViewModelProvider(this).get(PetSearchViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory)[PetSearchViewModel::class.java]
         return inflater.inflate(R.layout.fragment_pet_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupSearchView()
         setupAnimalListView()
-        petSearchViewModel.animals.observe(viewLifecycleOwner, Observer {
-            loadAnimalSearchResults(it)
+        petSearchViewModel.animals.observe(viewLifecycleOwner, Observer { results ->
+            loadAnimalSearchResults(results)
+        })
+        petSearchViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            progress_bar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+        })
+    }
+
+    private fun setupSearchView() {
+        pet_location_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                petSearchViewModel.searchAnimals(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
         })
     }
 
@@ -60,7 +82,6 @@ class PetSearchFragment : Fragment() {
             } else {
                 empty_search_results.visibility = View.GONE
             }
-            progress_bar.visibility = View.GONE
         }
     }
 }
