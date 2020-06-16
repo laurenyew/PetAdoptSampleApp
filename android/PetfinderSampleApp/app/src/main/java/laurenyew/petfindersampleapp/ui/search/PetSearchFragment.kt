@@ -10,13 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_pet_search.*
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.ui.search.views.PetSearchAnimalRecyclerViewAdapter
 import javax.inject.Inject
 
-class PetSearchFragment : Fragment() {
+class PetSearchFragment : DaggerFragment() {
     private var adapter: PetSearchAnimalRecyclerViewAdapter? = null
 
     @Inject
@@ -42,20 +43,6 @@ class PetSearchFragment : Fragment() {
         })
         petSearchViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             progress_bar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
-        })
-    }
-
-    private fun setupSearchView() {
-        pet_location_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                petSearchViewModel.searchAnimals(query)
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-
         })
     }
 
