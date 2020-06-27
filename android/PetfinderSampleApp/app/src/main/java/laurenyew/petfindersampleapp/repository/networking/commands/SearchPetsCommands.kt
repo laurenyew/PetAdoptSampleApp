@@ -9,7 +9,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : BaseNetworkCommand() {
-    @Throws(RuntimeException::class)
+
     suspend fun searchForNearbyDogs(location: String): List<AnimalModel>? {
         val deferred = async {
             Log.d(
@@ -19,6 +19,8 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
             try {
                 val response = call.execute()
                 parseResponse(response)
+            } catch (e: Exception) {
+                null
             } finally {
                 //Clean up network call and cancel
                 call.cancel()
@@ -42,7 +44,12 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
         } else {
             val animalList = ArrayList<AnimalModel>()
             data.animals.forEach {
-                animalList.add(AnimalModel(it.id, it.name, it.photos[0].fullUrl))
+                val photo = if (it.photos.isNotEmpty()) {
+                    it.photos[0].fullUrl
+                } else {
+                    null
+                }
+                animalList.add(AnimalModel(it.id, it.name, photo))
             }
             Log.d(TAG, "Completed command with animal list: ${animalList.size}")
             return animalList
