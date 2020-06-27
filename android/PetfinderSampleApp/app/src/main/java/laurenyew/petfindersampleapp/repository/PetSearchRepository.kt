@@ -1,7 +1,7 @@
 package laurenyew.petfindersampleapp.repository
 
-import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.networking.commands.SearchPetsCommands
+import laurenyew.petfindersampleapp.repository.responses.SearchPetsRepoResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -10,6 +10,12 @@ import javax.inject.Singleton
 class PetSearchRepository @Inject constructor(
     private val searchPetCommand: SearchPetsCommands
 ) {
-    suspend fun getNearbyDogs(location: String): List<AnimalModel>? =
-        searchPetCommand.searchForNearbyDogs(location)
+    suspend fun getNearbyDogs(location: String): SearchPetsRepoResponse =
+        try {
+            val animals = searchPetCommand.searchForNearbyDogs(location)
+            SearchPetsRepoResponse.Success(animals)
+        }catch (e: Exception){
+            SearchPetsRepoResponse.Error(e)
+        }
+
 }

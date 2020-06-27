@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_pet_search.*
+import laurenyew.petfindersampleapp.BuildConfig
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.ui.search.views.PetSearchAnimalRecyclerViewAdapter
@@ -43,6 +44,11 @@ class PetSearchFragment : DaggerFragment() {
         })
         petSearchViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             progress_bar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+        })
+        petSearchViewModel.isError.observe(viewLifecycleOwner, Observer { isError ->
+            if(isError && BuildConfig.DEBUG) {
+                Toast.makeText(context, "An Error Occurred", Toast.LENGTH_LONG).show()
+            }
         })
     }
 
