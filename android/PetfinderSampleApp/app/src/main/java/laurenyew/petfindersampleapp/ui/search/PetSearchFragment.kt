@@ -59,6 +59,20 @@ class PetSearchFragment : Fragment() {
         })
     }
 
+    private fun setupSearchView() {
+        pet_location_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                petSearchViewModel.searchAnimals(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
+    }
+
     private fun setupAnimalListView() {
         animal_search_results_recycler_view.apply {
             val linearLayoutManager = LinearLayoutManager(context)
