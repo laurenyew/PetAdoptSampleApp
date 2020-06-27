@@ -1,9 +1,10 @@
 package laurenyew.petfindersampleapp.repository.networking.api.responses
 
+import android.net.Uri
 import com.squareup.moshi.Json
 import java.net.URL
 
-data class SearchPetsResponse(
+data class SearchPetsNetworkResponse(
     @Json(name = "animals") val animals: List<Animal>,
     @Json(name = "pagination") val pagination: Pagination
 )
@@ -11,7 +12,7 @@ data class SearchPetsResponse(
 data class Animal(
     @Json(name = "id") val id: String,
     @Json(name = "organization_id") val organizationId: String,
-    @Json(name = "url") val url: URL,
+    @Json(name = "url") val url: String,
     @Json(name = "type") val type: String,
     @Json(name = "species") val species: String,
     @Json(name = "breeds") val breeds: Breeds,
@@ -46,10 +47,10 @@ data class Colors(
 )
 
 data class Photo(
-    @Json(name = "small") val small: URL?,
-    @Json(name = "medium") val medium: URL?,
-    @Json(name = "large") val large: URL?,
-    @Json(name = "full") val full: URL?
+    @Json(name = "small") val smallUrl: String?,
+    @Json(name = "medium") val mediumUrl: String?,
+    @Json(name = "large") val largeUrl: String?,
+    @Json(name = "full") val fullUrl: String?
 )
 
 data class Attributes(

@@ -1,7 +1,9 @@
 package laurenyew.petfindersampleapp.di.modules
 
-import com.squareup.moshi.KotlinJsonAdapterFactory
+import android.net.Uri
+import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
@@ -38,7 +40,9 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
         return Retrofit.Builder()
             .baseUrl(PetfinderApiConstants.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi))

@@ -4,7 +4,7 @@ import android.util.Log
 import kotlinx.coroutines.async
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
-import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsResponse
+import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -32,17 +32,17 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
      */
     @Throws(RuntimeException::class)
     private fun parseResponse(
-        response: Response<SearchPetsResponse?>?
+        networkResponse: Response<SearchPetsNetworkResponse?>?
     ): ArrayList<AnimalModel> {
-        val data = response?.body()
-        if (response?.code() != 200 || data == null) {
+        val data = networkResponse?.body()
+        if (networkResponse?.code() != 200 || data == null) {
             throw RuntimeException(
-                "API call failed. Response error: ${response?.errorBody()?.toString()}"
+                "API call failed. Response error: ${networkResponse?.errorBody()?.toString()}"
             )
         } else {
             val animalList = ArrayList<AnimalModel>()
             data.animals.forEach {
-                animalList.add(AnimalModel(it.id, it.name, it.photos[0].full))
+                animalList.add(AnimalModel(it.id, it.name, it.photos[0].fullUrl))
             }
             Log.d(TAG, "Completed command with animal list: ${animalList.size}")
             return animalList

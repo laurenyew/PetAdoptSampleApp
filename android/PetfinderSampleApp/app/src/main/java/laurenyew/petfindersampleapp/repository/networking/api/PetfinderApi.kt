@@ -16,7 +16,7 @@ import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConsta
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.SEARCH_PETS_METHOD
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.STATUS_PARAM
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.TYPE_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsResponse
+import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -40,5 +40,5 @@ interface PetfinderApi {
         @Query(DISTANCE_PARAM) distance: Int? = null,
         @Query(PAGE_PARAM) page: Int? = null,
         @Query(RESULT_NUM_LIMIT_PARAM) resultLimit: Int? = null
-    ): Call<SearchPetsResponse?>
+    ): Call<SearchPetsNetworkResponse?>
 }
