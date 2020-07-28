@@ -9,21 +9,19 @@ import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.coroutines.CoroutineContext
 
 class PetSearchAnimalRecyclerViewAdapter :
-    RecyclerView.Adapter<AnimalViewHolder>(), CoroutineScope {
+    RecyclerView.Adapter<AnimalViewHolder>() {
 
     private val job = Job()
     private var data: MutableList<AnimalModel> = ArrayList()
     private var pendingDataUpdates = ArrayDeque<List<AnimalModel>>()
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Default + job
+    private val scope = CoroutineScope(Dispatchers.Default + job)
 
     //RecyclerView Diff.Util (List Updates)
     fun updateData(newData: List<AnimalModel>?) {
-        if (isActive) {
+        if (scope.isActive) {
             val data = newData ?: ArrayList()
             pendingDataUpdates.add(data)
             if (pendingDataUpdates.size <= 1) {
@@ -45,7 +43,7 @@ class PetSearchAnimalRecyclerViewAdapter :
     private fun updateDataInternal(newData: List<AnimalModel>?) {
         val oldData = ArrayList(data)
 
-        launch {
+        scope.launch {
             val diffCallback = createDataDiffCallback(oldData, newData)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
             if (isActive) {

@@ -8,11 +8,10 @@ import kotlin.coroutines.CoroutineContext
 /**
  * Base network command with appropriate coroutine scope
  */
-open class BaseNetworkCommand : CoroutineScope {
+open class BaseNetworkCommand {
     private var job = Job()
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.IO + job
+    protected val scope = CoroutineScope(Dispatchers.IO + job)
 
     fun finish() {
         job.cancel()

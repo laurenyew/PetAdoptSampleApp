@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : BaseNetworkCommand() {
 
     suspend fun searchForNearbyDogs(location: String): List<AnimalModel>? {
-        val deferred = async {
+        val deferred = scope.async {
             Log.d(
                 TAG, "Executing $SEARCH_FOR_NEARBY_DOGS_TAG"
             )
