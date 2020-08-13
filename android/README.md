@@ -1,7 +1,7 @@
 # Android PetfinderSampleApp
 Sample App created to practice with different Android Tech
 
-<img src="https://github.com/laurenyew/PetfinderSampleApp/blob/develop/android/Screenshots/Dog_Search_Android_Demo_Screenshot.png" data-canonical-src="https://github.com/laurenyew/PetfinderSampleApp/blob/develop/android/Screenshots/Dog_Search_Android_Demo_Screenshot.png" width="200" height="400" />
+<img src="https://github.com/laurenyew/PetfinderSampleApp/blob/master/android/Screenshots/Animal_Search_Android_Demo_Screenshot.png" data-canonical-src="https://github.com/laurenyew/PetfinderSampleApp/blob/master/android/Screenshots/Animal_Search_Android_Demo_Screenshot.png" width="200" height="400" />
 
 ## Android Tech
 * Kotlin
