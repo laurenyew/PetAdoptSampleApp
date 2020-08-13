@@ -4,26 +4,25 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.coroutines.CoroutineContext
 
 class PetSearchAnimalRecyclerViewAdapter :
-    RecyclerView.Adapter<AnimalViewHolder>(), CoroutineScope {
+    RecyclerView.Adapter<AnimalViewHolder>() {
 
     private val job = Job()
     private var data: MutableList<AnimalModel> = ArrayList()
     private var pendingDataUpdates = ArrayDeque<List<AnimalModel>>()
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Default + job
+    private val scope = CoroutineScope(Dispatchers.Default + job)
 
     //RecyclerView Diff.Util (List Updates)
     fun updateData(newData: List<AnimalModel>?) {
-        if (isActive) {
+        if (scope.isActive) {
             val data = newData ?: ArrayList()
             pendingDataUpdates.add(data)
             if (pendingDataUpdates.size <= 1) {
@@ -45,7 +44,7 @@ class PetSearchAnimalRecyclerViewAdapter :
     private fun updateDataInternal(newData: List<AnimalModel>?) {
         val oldData = ArrayList(data)
 
-        launch {
+        scope.launch {
             val diffCallback = createDataDiffCallback(oldData, newData)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
             if (isActive) {
@@ -96,7 +95,20 @@ class PetSearchAnimalRecyclerViewAdapter :
 
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
         val item = data[position]
-        holder.nameTextView.text = item.name
+        val context = holder.itemView.context
+        holder.nameTextView.text = item.name ?: "Name TBD"
+        val age = item.age ?: context.getString(R.string.unknown)
+        val sex = item.sex ?: context.getString(R.string.unknown)
+        val size = item.size ?: context.getString(R.string.unknown)
+        holder.basicInfoTextView.text = context.getString(R.string.basic_info_formatted_string, age, sex, size)
+        holder.descriptionTextView.text = item.description
+        Picasso.get()
+            .load(item.photoUrl)
+            .fit()
+            .error(R.drawable.ic_baseline_image_24)
+            .placeholder(R.drawable.ic_baseline_image_24)
+            .into(holder.imageView)
+
     }
 
     override fun getItemCount(): Int = data.size
