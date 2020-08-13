@@ -8,6 +8,10 @@
     <string name="search_hint">Enter your zipcode</string>
     <string name="empty_results">No results. Please try again.</string>
 
+    <string name="basic_info_formatted_string">%s %s %s</string>
+
+    <string name="unknown">Unknown</string>
+
     <!-- Errors -->
     <string name="error_unknown">Uh oh. Something went wrong.</string>
 </resources>

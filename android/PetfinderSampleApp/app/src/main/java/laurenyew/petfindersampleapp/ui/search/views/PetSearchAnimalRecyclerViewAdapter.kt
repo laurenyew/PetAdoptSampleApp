@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
@@ -94,7 +95,20 @@ class PetSearchAnimalRecyclerViewAdapter :
 
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
         val item = data[position]
-        holder.nameTextView.text = item.name
+        val context = holder.itemView.context
+        holder.nameTextView.text = item.name ?: "Name TBD"
+        val age = item.age ?: context.getString(R.string.unknown)
+        val sex = item.sex ?: context.getString(R.string.unknown)
+        val size = item.size ?: context.getString(R.string.unknown)
+        holder.basicInfoTextView.text = context.getString(R.string.basic_info_formatted_string, age, sex, size)
+        holder.descriptionTextView.text = item.description
+        Picasso.get()
+            .load(item.photoUrl)
+            .fit()
+            .error(R.drawable.ic_baseline_image_24)
+            .placeholder(R.drawable.ic_baseline_image_24)
+            .into(holder.imageView)
+
     }
 
     override fun getItemCount(): Int = data.size

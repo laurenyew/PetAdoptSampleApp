@@ -3,6 +3,7 @@ package laurenyew.petfindersampleapp.repository.networking.commands
 import android.util.Log
 import kotlinx.coroutines.async
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
+import laurenyew.petfindersampleapp.repository.models.ContactModel
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
 import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Response
@@ -49,11 +50,40 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
                 } else {
                     null
                 }
-                animalList.add(AnimalModel(it.id, it.name, photo))
+
+                val description = parseDescription(it.description)
+                animalList.add(
+                    AnimalModel(
+                        id = it.id,
+                        orgId = it.organizationId,
+                        type = it.type,
+                        name = it.name,
+                        age = it.age,
+                        sex = it.gender,
+                        size = it.size,
+                        description = description,
+                        status = it.status,
+                        breed = it.breeds.primary,
+                        photoUrl = photo,
+                        distance = it.distance,
+                        contact = ContactModel(
+                            email = it.contact.email,
+                            phone = it.contact.phone,
+                            address = it.contact.address.address1 + "\n"
+                                    + it.contact.address.city + ", "
+                                    + it.contact.address.state + ", "
+                                    + it.contact.address.postcode
+                        )
+                    )
+                )
             }
             Log.d(TAG, "Completed command with animal list: ${animalList.size}")
             return animalList
         }
+    }
+
+    private fun parseDescription(description: String?): String? = description?.apply {
+        replace("&#039;", "'")
     }
 
     companion object {
