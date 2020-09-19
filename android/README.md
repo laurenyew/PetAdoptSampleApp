@@ -24,4 +24,9 @@ Icons from: https://icons8.com/
 
 To build and use this app yourself with the petfinder API,
 Follow the [Getting Authenticated](https://www.petfinder.com/developers/v2/docs/) steps on the Petfinder.com website to create an account and API key with access token. 
-Copy the auth token into the source code under `NetworkModule` for the constant value of `AUTH_TOKEN`. This will use your auth token when making the network calls.
+Copy your client id / secret into the `local.properties` file as:
+``` 
+client.id=<your client id>
+client.secret=<your client secret>
+```
+These will be used to create your Petfinder API token

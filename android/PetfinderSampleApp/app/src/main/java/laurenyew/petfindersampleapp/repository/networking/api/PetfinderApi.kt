@@ -1,27 +1,30 @@
 package laurenyew.petfindersampleapp.repository.networking.api
 
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.AGE_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.BREED_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.COAT_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.COLOR_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.DISTANCE_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.GENDER_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.IS_CAT_FRIENDLY_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.IS_CHILD_FRIENDLY_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.IS_DOG_FRIENDLY_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.LOCATION_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.ORG_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.PAGE_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.RESULT_NUM_LIMIT_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.SEARCH_PETS_METHOD
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.STATUS_PARAM
-import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.TYPE_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.AGE_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.BREED_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.COAT_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.COLOR_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.DISTANCE_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.GENDER_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.IS_CAT_FRIENDLY_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.IS_CHILD_FRIENDLY_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.IS_DOG_FRIENDLY_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.LOCATION_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.ORG_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.PAGE_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.RESULT_NUM_LIMIT_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.SEARCH_PETS_METHOD
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.STATUS_PARAM
+import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.TYPE_PARAM
 import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface PetfinderApi {
+    /**
+     * Search pets using the given query parameters)
+     */
     @Throws(RuntimeException::class)
     @GET(SEARCH_PETS_METHOD)
     fun searchPets(
