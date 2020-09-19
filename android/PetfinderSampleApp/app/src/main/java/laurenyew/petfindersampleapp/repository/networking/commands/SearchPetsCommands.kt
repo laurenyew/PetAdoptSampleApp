@@ -40,7 +40,7 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
         val data = networkResponse?.body()
         if (networkResponse?.code() != 200 || data == null) {
             throw RuntimeException(
-                "API call failed. Response error: ${networkResponse?.errorBody()?.toString()}"
+                "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
             )
         } else {
             val animalList = ArrayList<AnimalModel>()
