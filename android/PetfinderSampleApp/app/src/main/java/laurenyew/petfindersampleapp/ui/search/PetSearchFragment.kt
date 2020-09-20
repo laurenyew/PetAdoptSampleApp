@@ -46,7 +46,7 @@ class PetSearchFragment : DaggerFragment() {
             progress_bar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
         })
         petSearchViewModel.isError.observe(viewLifecycleOwner, Observer { isError ->
-            if(isError && BuildConfig.DEBUG) {
+            if (isError && BuildConfig.DEBUG) {
                 Toast.makeText(context, "An Error Occurred", Toast.LENGTH_LONG).show()
             }
         })
