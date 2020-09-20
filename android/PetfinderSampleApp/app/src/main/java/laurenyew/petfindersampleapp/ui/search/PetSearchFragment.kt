@@ -53,17 +53,21 @@ class PetSearchFragment : DaggerFragment() {
     }
 
     private fun setupSearchView() {
-        pet_location_search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                petSearchViewModel.searchAnimals(query)
-                return true
-            }
+        pet_location_search_view.apply {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    petSearchViewModel.searchAnimals(query)
+                    pet_location_search_view.clearFocus()
+                    return true
+                }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
 
-        })
+            })
+            onActionViewExpanded()
+        }
     }
 
     private fun setupAnimalListView() {
