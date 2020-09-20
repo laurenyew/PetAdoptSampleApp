@@ -2,7 +2,10 @@ package laurenyew.petfindersampleapp.repository.networking.auth
 
 import android.content.Context
 import android.util.Log
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import laurenyew.petfindersampleapp.BuildConfig
 import laurenyew.petfindersampleapp.repository.networking.commands.AuthCommands
 import laurenyew.petfindersampleapp.repository.responses.RefreshTokenRepoResponse
@@ -12,36 +15,26 @@ class PetfinderTokenRepository @Inject constructor(
     private val authCommands: AuthCommands,
     context: Context?
 ) : AccessTokenProvider {
-    private val scope = CoroutineScope(Dispatchers.Default + Job())
-
+    private val coroutineContext = Dispatchers.Default + Job()
     private val sharedPreferences =
         context?.getSharedPreferences(ACCESS_TOKEN_SHARED_PREFS, Context.MODE_PRIVATE)
 
-    override fun token(): String? {
-        val cachedToken = cachedToken()
-        if (cachedToken == null) {
-            scope.launch { fetchToken() }
-        }
-        return cachedToken
-    }
+    override fun token(): String? = cachedToken() ?: runBlocking { refreshToken() }
 
-    override fun refreshToken(): String? =
-        runBlocking {
-            fetchToken()
-        }
-
-    private suspend fun fetchToken(): String? =
-        when (val response =
-            authCommands.refreshToken(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET)) {
-            is RefreshTokenRepoResponse.Success -> {
-                storeToken(response.token, response.expirationDate)
-                response.token
+    override suspend fun refreshToken(): String? =
+        withContext(coroutineContext) {
+            when (val response =
+                authCommands.refreshToken(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET)) {
+                is RefreshTokenRepoResponse.Success -> {
+                    storeToken(response.token, response.expirationDate)
+                    response.token
+                }
+                is RefreshTokenRepoResponse.Error -> {
+                    Log.e(TAG, "Failed to refresh API token: " + response.error?.localizedMessage)
+                    null
+                }
+                else -> null
             }
-            is RefreshTokenRepoResponse.Error -> {
-                Log.e(TAG, "Failed to refresh API token: " + response.error?.localizedMessage)
-                null
-            }
-            else -> null
         }
 
     /**

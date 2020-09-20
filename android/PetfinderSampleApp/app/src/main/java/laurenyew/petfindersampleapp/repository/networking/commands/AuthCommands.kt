@@ -1,6 +1,7 @@
 package laurenyew.petfindersampleapp.repository.networking.commands
 
 import android.util.Log
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderTokenApi
 import laurenyew.petfindersampleapp.repository.networking.api.requests.AuthTokenRequestBody
@@ -10,28 +11,33 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class AuthCommands @Inject constructor(private val api: PetfinderTokenApi) : BaseNetworkCommand() {
+    // Only let one job run at a time.
+    private var deferredTokenJob: Deferred<RefreshTokenRepoResponse?>? = null
+
     suspend fun refreshToken(clientId: String, clientSecret: String): RefreshTokenRepoResponse? {
-        val deferred = scope.async {
-            Log.d(
-                TAG, "Executing $REFRESH_TOKEN_TAG"
-            )
-            val call = api.refreshToken(
-                AuthTokenRequestBody(
-                    clientId = clientId,
-                    clientSecret = clientSecret
+        if (deferredTokenJob == null || deferredTokenJob?.isActive == false) {
+            deferredTokenJob = scope.async {
+                Log.d(
+                    TAG, "Executing $REFRESH_TOKEN_TAG"
                 )
-            )
-            try {
-                val response = call.execute()
-                parseResponse(response)
-            } catch (e: Exception) {
-                null
-            } finally {
-                //Clean up network call and cancel
-                call.cancel()
+                val call = api.refreshToken(
+                    AuthTokenRequestBody(
+                        clientId = clientId,
+                        clientSecret = clientSecret
+                    )
+                )
+                try {
+                    val response = call.execute()
+                    parseResponse(response)
+                } catch (e: Exception) {
+                    null
+                } finally {
+                    //Clean up network call and cancel
+                    call.cancel()
+                }
             }
         }
-        return deferred.await()
+        return deferredTokenJob?.await()
     }
 
     /**

@@ -43,10 +43,7 @@ class NetworkModule {
         authCommands: AuthCommands,
         context: Context?
     ): AccessTokenProvider =
-        PetfinderTokenRepository(authCommands, context).apply {
-            //Refresh on startup (TODO: Feels like this should go somewhere else with a startup library)
-            refreshToken()
-        }
+        PetfinderTokenRepository(authCommands, context)
 
     @Singleton
     @Provides
