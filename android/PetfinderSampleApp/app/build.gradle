@@ -1,7 +1,7 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
 
 def localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.file("local.properties")))
@@ -16,14 +16,18 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    buildFeatures {
+        // Enables Jetpack Compose for this module
+        compose true
+    }
     buildTypes {
         all {
-            buildConfigField("String", "CLIENT_ID", "\"" + localProperties['client.id'] + "\"")
-            buildConfigField("String", "CLIENT_SECRET", "\"" + localProperties['client.secret'] + "\"")
+            buildConfigField("String", "CLIENT_ID", "\"" + localProperties["client.id"] + "\"")
+            buildConfigField("String", "CLIENT_SECRET", "\"" + localProperties["client.secret"] + "\"")
         }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
     compileOptions {
@@ -33,7 +37,14 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        useIR = true
     }
+
+    composeOptions {
+        kotlinCompilerVersion "1.4.21"
+        kotlinCompilerExtensionVersion "1.0.0-alpha10"
+    }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -43,18 +54,34 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "com.google.android.material:material:1.2.1"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$android_navigation_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$android_navigation_version"
-
+    
+    // Jetpack Compose
+    implementation "androidx.compose.ui:ui:$compose_version"
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:1.0.0-alpha10"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:1.0.0-alpha10"
+    // Material Design
+    implementation "androidx.compose.material:material:1.0.0-alpha10"
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:1.0.0-alpha10"
+    implementation "androidx.compose.material:material-icons-extended:1.0.0-alpha10"
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime-livedata:1.0.0-alpha10"
+    implementation "androidx.compose.runtime:runtime-rxjava2:1.0.0-alpha10"
+    
+    // Dagger
     implementation "com.google.dagger:dagger:2.29.1"
     kapt "com.google.dagger:dagger-compiler:2.29.1"
     implementation "com.google.dagger:dagger-android-support:2.29.1"
@@ -75,10 +102,13 @@ dependencies {
     api "com.squareup.moshi:moshi-kotlin:1.10.0"
     api "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
-    testImplementation 'junit:junit:4.13'
-    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+    testImplementation "junit:junit:4.13"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2"
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    // UI Tests
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.0.0-alpha10"
+
+    androidTestImplementation "androidx.test.ext:junit:1.1.2"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
 }

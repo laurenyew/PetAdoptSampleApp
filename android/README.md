@@ -13,6 +13,12 @@ Sample App created to practice with different Android Tech
 * Kotlin Flow
 * Jetpack Compose
 
+## TODO
+* Add Jetpack Compose
+* Add Hilt 
+* Add Kotlin FLow
+* Add Room
+
 ## Disclaimers
 
 Using Petfinder API v2 for sample app:
