@@ -1,10 +1,13 @@
-package laurenyew.petfindersampleapp.di.modules
+package laurenyew.petfindersampleapp.di
 
 import android.content.Context
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderTokenApi
@@ -20,6 +23,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class NetworkModule {
 
     @Singleton
@@ -41,7 +45,7 @@ class NetworkModule {
     @Provides
     fun provideAccessTokenProvider(
         authCommands: AuthCommands,
-        context: Context?
+        @ApplicationContext context: Context?
     ): AccessTokenProvider =
         PetfinderTokenRepository(authCommands, context)
 
