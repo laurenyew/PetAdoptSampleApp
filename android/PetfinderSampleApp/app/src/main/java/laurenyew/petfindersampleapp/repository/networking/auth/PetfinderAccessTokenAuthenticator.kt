@@ -1,8 +1,5 @@
 package laurenyew.petfindersampleapp.repository.networking.auth
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -23,22 +20,18 @@ class PetfinderAccessTokenAuthenticator(
      */
     override fun authenticate(route: Route?, response: Response): Request? {
         val token = tokenProvider.token() ?: return null
-        if (!hasAuthHeader(response)) {
-            return response.request()
+        return if (!hasAuthHeader(response)) {
+            response.request()
                 .newBuilder()
                 .addHeader("Authorization", "Bearer $token")
                 .build()
         } else {
-            val updatedToken = tokenProvider.refreshToken()
-            if (updatedToken != token) {
-                return response.request()
-                    .newBuilder()
-                    .removeHeader("Authorization")
-                    .addHeader("Authorization", "Bearer $updatedToken")
-                    .build()
-            }
+            response.request()
+                .newBuilder()
+                .removeHeader("Authorization")
+                .addHeader("Authorization", "Bearer $token")
+                .build()
         }
-        return null
     }
 
 

@@ -7,12 +7,13 @@ interface AccessTokenProvider {
 
     /**
      * Returns an access token. In the event that you don't have a token return null.
+     * Automatically calls [refreshToken] if cached token is null.
      */
     fun token(): String?
 
     /**
-     * Refreshes the token and returns it. This call should be made synchronously.
+     * Refreshes the token and returns it.
      * In the event that the token could not be refreshed return null.
      */
-    fun refreshToken(): String?
+    suspend fun refreshToken(): String?
 }

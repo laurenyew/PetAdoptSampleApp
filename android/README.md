@@ -4,14 +4,38 @@ Sample App created to practice with different Android Tech
 <img src="https://github.com/laurenyew/PetfinderSampleApp/blob/master/android/Screenshots/Animal_Search_Android_Demo_Screenshot.png" data-canonical-src="https://github.com/laurenyew/PetfinderSampleApp/blob/master/android/Screenshots/Animal_Search_Android_Demo_Screenshot.png" width="200" height="400" />
 
 ## Android Tech
-* Kotlin
-* MVVM
-* ViewModels
-* LiveData
-* Room
-* Coroutines
-* Kotlin Flow
-* Jetpack Compose
+* Kotlin :heavy_check_mark:
+* MVVM :heavy_check_mark:
+* ViewModels :heavy_check_mark:
+* LiveData :heavy_check_mark:
+* Room (TODO)
+* Coroutines :heavy_check_mark:
+* Kotlin Flow (TODO)
+* Jetpack Compose :heavy_check_mark:
+* Hilt :heavy_check_mark:
+
+## TODO Next
+* Fix placeholder image
+* Fix images on list
+* Fix card look / feel
+* Make keyboard hide on search
+* Make bottom sheet hide on scroll down and search hide on scroll down
+
+## TODO (Tech)
+* Add Kotlin FLow
+* Add Room
+
+## TODO (Features)
+* Details Screen
+* Favorite an animal
+* More Filters (Animal type, etc)
+* Favorites Screen
+* Profile
+* Share Animal w/ others
+* Dark Mode
+* Tablet
+* Map? w/ directions
+* Onboarding
 
 ## Disclaimers
 
