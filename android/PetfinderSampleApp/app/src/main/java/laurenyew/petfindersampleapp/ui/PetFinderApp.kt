@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,6 +23,15 @@ fun PetFinderApp() {
 
     MaterialTheme {
         Scaffold(
+            topBar = {
+                TopAppBar {
+                    Text(
+                        text = stringResource(id = R.string.app_name),
+                        style = MaterialTheme.typography.h6,
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    )
+                }
+            },
             bodyContent = {
                 PetFinderContent(selectedTab = selectedTab.value)
             },
