@@ -2,6 +2,7 @@ package laurenyew.petfindersampleapp.ui.search
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.widget.ProgressBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -20,8 +21,11 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.viewModel
@@ -34,6 +38,8 @@ import laurenyew.petfindersampleapp.repository.models.AnimalModel
 fun PetSearchScreen(viewModel: PetSearchViewModel = viewModel()) {
     val animalsState = viewModel.animals.observeAsState(initial = emptyList())
     val locationState = viewModel.location
+    val isLoading = viewModel.isLoading.observeAsState(initial = false)
+    val isError = viewModel.isError.observeAsState(false)
 
     Column {
         PetSearchBar(
@@ -47,6 +53,20 @@ fun PetSearchScreen(viewModel: PetSearchViewModel = viewModel()) {
         PetSearchList(animals = animalsState,
             onItemClicked = { viewModel.openAnimalDetail(it) }
         )
+        if (isLoading.value) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+        if (isError.value) {
+            Text(
+                text = stringResource(id = R.string.empty_results),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
     }
 }
 
@@ -153,18 +173,23 @@ fun PetSearchListItem(
                     .align(Alignment.CenterVertically)
             )
         }
-        Spacer(modifier = Modifier.width(10.dp))
+        Spacer(modifier = Modifier.width(5.dp))
         Column(
             modifier = Modifier
                 .weight(1f)
+                .padding(2.dp)
                 .align(Alignment.CenterVertically)
         ) {
-            Text(item.name ?: unknown)
+            Text(item.name ?: unknown, style = TextStyle(fontWeight = FontWeight.Bold))
             Spacer(modifier = Modifier.height(3.dp))
             Text(basicInfo)
             item.description?.let { description ->
                 Spacer(modifier = Modifier.height(3.dp))
-                Text(description)
+                Text(
+                    description,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
     }
@@ -179,7 +204,7 @@ fun PetSearchListItem() {
         sex = "Male",
         age = "7 years",
         size = "Large",
-        description = "A great dog\nLoves to play ball",
+        description = "A great dog is an amazing companion that loves to play ball and fetch and give kisses\nLoves to play ball",
         status = "Ready for Adoption",
         breed = "Mixed",
         photoUrl = null,
