@@ -2,11 +2,11 @@ package laurenyew.petfindersampleapp.ui.search
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.widget.ProgressBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -19,8 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -28,14 +29,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.viewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 
 @Composable
-fun PetSearchScreen(viewModel: PetSearchViewModel = viewModel()) {
+fun PetSearchScreen(viewModel: PetSearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
     val animalsState = viewModel.animals.observeAsState(initial = emptyList())
     val locationState = viewModel.location
     val isLoading = viewModel.isLoading.observeAsState(initial = false)
@@ -72,6 +72,7 @@ fun PetSearchScreen(viewModel: PetSearchViewModel = viewModel()) {
 
 @Composable
 fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
+    val focusManager = LocalFocusManager.current
     Row(modifier = Modifier.padding(10.dp)) {
         Text(
             text = stringResource(id = R.string.search_title),
@@ -90,10 +91,10 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             ),
-            onImeActionPerformed = { _, softwareController ->
+            keyboardActions = KeyboardActions(onDone = {
                 onSearch(searchState.value)
-                softwareController?.hideSoftwareKeyboard()
-            },
+                focusManager.clearFocus()
+            }),
             modifier = Modifier.weight(1f)
         )
     }
@@ -110,7 +111,8 @@ fun PetSearchBar() {
 fun PetSearchList(animals: State<List<AnimalModel>>, onItemClicked: (id: String) -> Unit) {
     val items = animals.value ?: emptyList()
     LazyColumn {
-        items(items) { item ->
+        items(items.size) { index ->
+            val item = items[index]
             val animalImageState = loadPicture(url = item.photoUrl)
             PetSearchListItem(
                 item = item,
@@ -140,7 +142,7 @@ fun PetSearchListItem(
     val size = item.size ?: unknown
     val basicInfo = stringResource(id = R.string.basic_info_formatted_string, age, sex, size)
     val imageModifier = Modifier
-        .preferredSize(72.dp)
+        .size(72.dp)
         .padding(2.dp)
         .fillMaxSize()
     val loadedImageState = imageState.value
@@ -152,12 +154,14 @@ fun PetSearchListItem(
         when (loadedImageState) {
             is ImageState.Success -> Image(
                 bitmap = loadedImageState.image.asImageBitmap(),
+                contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
             )
             ImageState.Failed -> Image(
-                imageVector = vectorResource(id = R.drawable.ic_baseline_broken_image_24),
+                painter = painterResource(id = R.drawable.ic_baseline_broken_image_24),
+                contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
@@ -167,7 +171,8 @@ fun PetSearchListItem(
                     .align(Alignment.CenterVertically)
             )
             ImageState.Empty -> Image(
-                imageVector = vectorResource(id = R.drawable.ic_baseline_image_24),
+                painter = painterResource(id = R.drawable.ic_baseline_image_24),
+                contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)

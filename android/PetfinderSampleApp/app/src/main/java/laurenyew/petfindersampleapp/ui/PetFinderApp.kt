@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.runBlocking
 import laurenyew.petfindersampleapp.ui.favorites.PetFavoritesScreen
 import laurenyew.petfindersampleapp.ui.search.PetSearchScreen
 
@@ -36,9 +37,11 @@ fun PetFinderApp() {
             scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar {
-                    Icon(
-                        Icons.Default.Menu,
-                        modifier = Modifier.clickable { drawerState.open() })
+                    Icon(imageVector = Icons.Default.Menu,
+                        null,
+                        modifier = Modifier.clickable {
+                            runBlocking { drawerState.open() }
+                        })
                     Text(
                         text = stringResource(id = R.string.app_name),
                         style = MaterialTheme.typography.h6,
@@ -50,12 +53,12 @@ fun PetFinderApp() {
                 PetFinderDrawer(
                     onTabSelected = { newTab ->
                         selectedTab.value = newTab
-                        drawerState.close()
+                        runBlocking { drawerState.close() }
                     }
                 )
             },
             drawerGesturesEnabled = true,
-            bodyContent = {
+            content = {
                 PetFinderContent(selectedTab = selectedTab.value)
             }
         )
