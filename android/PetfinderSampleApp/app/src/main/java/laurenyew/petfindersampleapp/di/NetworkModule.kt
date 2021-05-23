@@ -6,8 +6,8 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderTokenApi
@@ -23,7 +23,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
 
     @Singleton

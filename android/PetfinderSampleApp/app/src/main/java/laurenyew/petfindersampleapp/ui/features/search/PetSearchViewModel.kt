@@ -1,18 +1,20 @@
-package laurenyew.petfindersampleapp.ui.search
+package laurenyew.petfindersampleapp.ui.features.search
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import laurenyew.petfindersampleapp.repository.PetSearchRepository
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.responses.SearchPetsRepoResponse
+import javax.inject.Inject
 
-class PetSearchViewModel @ViewModelInject constructor(
+@HiltViewModel
+class PetSearchViewModel @Inject constructor(
     private val repository: PetSearchRepository
 ) : ViewModel() {
     private val _animals = MutableLiveData<List<AnimalModel>>().apply {

@@ -1,11 +1,13 @@
-package laurenyew.petfindersampleapp.ui.favorites
+package laurenyew.petfindersampleapp.ui.features.favorites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import laurenyew.petfindersampleapp.repository.PetSearchRepository
 import javax.inject.Inject
 
+@HiltViewModel
 class FavoritesViewModel @Inject constructor(
     private val repository: PetSearchRepository
 ) : ViewModel() {
