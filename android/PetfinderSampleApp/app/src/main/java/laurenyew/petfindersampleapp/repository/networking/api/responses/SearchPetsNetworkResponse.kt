@@ -2,6 +2,7 @@ package laurenyew.petfindersampleapp.repository.networking.api.responses
 
 import com.squareup.moshi.Json
 
+//TODO: Use Jetpack Compose Pages
 data class SearchPetsNetworkResponse(
     @Json(name = "animals") val animals: List<Animal>,
     @Json(name = "pagination") val pagination: Pagination

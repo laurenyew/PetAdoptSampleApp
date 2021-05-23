@@ -14,7 +14,7 @@ class PetSearchRepository @Inject constructor(
         try {
             val animals = searchPetCommand.searchForNearbyDogs(location)
             SearchPetsRepoResponse.Success(animals)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             SearchPetsRepoResponse.Error(e)
         }
 

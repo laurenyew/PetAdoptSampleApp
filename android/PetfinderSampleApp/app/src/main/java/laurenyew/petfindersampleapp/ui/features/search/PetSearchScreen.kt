@@ -51,8 +51,10 @@ fun PetSearchScreen(
         )
         PetSearchBar(
             searchState = locationState,
-            onSearch = { newLocation ->
+            onSearchFieldChange = { newLocation ->
                 locationState.value = newLocation
+            },
+            onExecuteSearch = {
                 viewModel.searchAnimals()
             }
         )
@@ -78,7 +80,11 @@ fun PetSearchScreen(
 }
 
 @Composable
-fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
+fun PetSearchBar(
+    searchState: State<String>,
+    onSearchFieldChange: (String) -> Unit,
+    onExecuteSearch: () -> Unit
+) {
     val focusManager = LocalFocusManager.current
     Row(modifier = Modifier.padding(10.dp)) {
         Text(
@@ -89,7 +95,7 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
         Spacer(modifier = Modifier.width(10.dp))
         TextField(
             value = searchState.value,
-            onValueChange = onSearch,
+            onValueChange = onSearchFieldChange,
             placeholder = {
                 Text(stringResource(id = R.string.search_hint))
             },
@@ -99,7 +105,7 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(onDone = {
-                onSearch(searchState.value)
+                onExecuteSearch()
                 focusManager.clearFocus()
             }),
             modifier = Modifier.weight(1f)
@@ -111,7 +117,7 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
 @Composable
 fun PetSearchBarPreview() {
     val searchState = remember { mutableStateOf("78759") }
-    PetSearchBar(searchState = searchState, onSearch = { })
+    PetSearchBar(searchState = searchState, onSearchFieldChange = {}, onExecuteSearch = {})
 }
 
 @Composable

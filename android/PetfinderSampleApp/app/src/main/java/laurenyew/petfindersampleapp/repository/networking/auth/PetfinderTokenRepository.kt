@@ -1,14 +1,11 @@
 package laurenyew.petfindersampleapp.repository.networking.auth
 
 import android.content.Context
-import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import laurenyew.petfindersampleapp.BuildConfig
 import laurenyew.petfindersampleapp.repository.networking.commands.AuthCommands
 import laurenyew.petfindersampleapp.repository.responses.RefreshTokenRepoResponse
+import timber.log.Timber
 import javax.inject.Inject
 
 class PetfinderTokenRepository @Inject constructor(
@@ -23,14 +20,16 @@ class PetfinderTokenRepository @Inject constructor(
 
     override suspend fun refreshToken(): String? =
         withContext(coroutineContext) {
+            Timber.d("refreshToken started")
             when (val response =
                 authCommands.refreshToken(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET)) {
                 is RefreshTokenRepoResponse.Success -> {
+                    Timber.d("refreshToken success! Token: %s", response.token)
                     storeToken(response.token, response.expirationDate)
                     response.token
                 }
                 is RefreshTokenRepoResponse.Error -> {
-                    Log.e(TAG, "Failed to refresh API token: " + response.error?.localizedMessage)
+                    Timber.e("Failed to refresh API token: %s", response.error?.localizedMessage)
                     null
                 }
                 else -> null
@@ -41,11 +40,11 @@ class PetfinderTokenRepository @Inject constructor(
      * Return the cached token if it's within the expiration time
      * Otherwise, clear the token if it exists, and return null
      */
-    private fun cachedToken(): String? =
-        sharedPreferences?.getString(TOKEN_KEY, null)?.let { token ->
+    private fun cachedToken(): String? {
+        val token = sharedPreferences?.getString(TOKEN_KEY, null)?.let { token ->
             val currentDate = System.currentTimeMillis()
             val expirationDate =
-                sharedPreferences.getLong(EXPIRATION_DATE, INVALID_DATE) ?: INVALID_DATE
+                sharedPreferences.getLong(EXPIRATION_DATE, INVALID_DATE)
             if (currentDate < expirationDate) {
                 token
             } else {
@@ -53,6 +52,15 @@ class PetfinderTokenRepository @Inject constructor(
                 null
             }
         }
+
+        if (token != null) {
+            Timber.d("Found cached auth token: %s", token)
+        } else {
+            Timber.d("No cached token. Token refresh required.")
+        }
+        return token
+    }
+
 
     /**
      * Store the token and expiration date in shared prefs for now
@@ -81,7 +89,5 @@ class PetfinderTokenRepository @Inject constructor(
         private const val EXPIRATION_DATE = "expiration_date"
 
         private const val INVALID_DATE = -1L
-
-        val TAG: String = PetfinderTokenRepository::class.java.simpleName
     }
 }

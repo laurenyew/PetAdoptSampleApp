@@ -34,7 +34,7 @@ class PetSearchViewModel @Inject constructor(
 
     fun searchAnimals() {
         val newLocation = location.value
-        if (newLocation.isNotBlank()) {
+        if (newLocation.isNotBlank() && newLocation.length >= 5) {
             _isLoading.postValue(true)
             viewModelScope.launch {
                 when (val response = repository.getNearbyDogs(newLocation)) {

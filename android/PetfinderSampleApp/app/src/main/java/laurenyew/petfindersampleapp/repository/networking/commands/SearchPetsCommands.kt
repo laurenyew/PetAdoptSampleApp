@@ -1,34 +1,27 @@
 package laurenyew.petfindersampleapp.repository.networking.commands
 
-import android.util.Log
-import kotlinx.coroutines.async
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.models.ContactModel
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
 import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
-class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : BaseNetworkCommand() {
-
-    suspend fun searchForNearbyDogs(location: String): List<AnimalModel>? {
-        val deferred = scope.async {
-            Log.d(
-                TAG, "Executing $SEARCH_FOR_NEARBY_DOGS_TAG"
-            )
+class SearchPetsCommands @Inject constructor(
+    private val api: PetfinderApi,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) {
+    suspend fun searchForNearbyDogs(location: String): List<AnimalModel> =
+        withContext(ioDispatcher) {
+            Timber.d("Executing $SEARCH_FOR_NEARBY_DOGS_TAG")
             val call = api.searchPets(location = location)
-            try {
-                val response = call.execute()
-                parseResponse(response)
-            } catch (e: Exception) {
-                null
-            } finally {
-                //Clean up network call and cancel
-                call.cancel()
-            }
+            val response = call.execute()
+            parseResponse(response)
         }
-        return deferred.await()
-    }
 
     /**
      * Parse the response from the network call
@@ -77,7 +70,7 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
                     )
                 )
             }
-            Log.d(TAG, "Completed command with animal list: ${animalList.size}")
+            Timber.d("Completed command with animal list: ${animalList.size}")
             return animalList
         }
     }
@@ -88,6 +81,5 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
 
     companion object {
         const val SEARCH_FOR_NEARBY_DOGS_TAG: String = "search_for_nearby_dogs"
-        val TAG: String = SearchPetsCommands::class.java.simpleName
     }
 }

@@ -1,44 +1,38 @@
 package laurenyew.petfindersampleapp.repository.networking.commands
 
-import android.util.Log
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderTokenApi
 import laurenyew.petfindersampleapp.repository.networking.api.requests.AuthTokenRequestBody
 import laurenyew.petfindersampleapp.repository.networking.api.responses.RefreshApiTokenNetworkResponse
 import laurenyew.petfindersampleapp.repository.responses.RefreshTokenRepoResponse
+import laurenyew.petfindersampleapp.utils.ControlledRunner
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
-class AuthCommands @Inject constructor(private val api: PetfinderTokenApi) : BaseNetworkCommand() {
+class AuthCommands @Inject constructor(
+    private val api: PetfinderTokenApi,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) {
     // Only let one job run at a time.
-    private var deferredTokenJob: Deferred<RefreshTokenRepoResponse?>? = null
+    private val refreshTokenControlledRunner = ControlledRunner<RefreshTokenRepoResponse>()
 
-    suspend fun refreshToken(clientId: String, clientSecret: String): RefreshTokenRepoResponse? {
-        if (deferredTokenJob == null || deferredTokenJob?.isActive == false) {
-            deferredTokenJob = scope.async {
-                Log.d(
-                    TAG, "Executing $REFRESH_TOKEN_TAG"
-                )
+    suspend fun refreshToken(clientId: String, clientSecret: String): RefreshTokenRepoResponse =
+        refreshTokenControlledRunner.joinPreviousOrRun {
+            withContext(ioDispatcher) {
+                Timber.d("Executing $REFRESH_TOKEN_TAG")
                 val call = api.refreshToken(
                     AuthTokenRequestBody(
                         clientId = clientId,
                         clientSecret = clientSecret
                     )
                 )
-                try {
-                    val response = call.execute()
-                    parseResponse(response)
-                } catch (e: Exception) {
-                    null
-                } finally {
-                    //Clean up network call and cancel
-                    call.cancel()
-                }
+                val response = call.execute()
+                parseResponse(response)
             }
         }
-        return deferredTokenJob?.await()
-    }
 
     /**
      * Parse the response from the network call
@@ -62,8 +56,6 @@ class AuthCommands @Inject constructor(private val api: PetfinderTokenApi) : Bas
 
     companion object {
         const val SECONDS_TO_MILLIS = 1000L
-
         const val REFRESH_TOKEN_TAG: String = "refresh_petfinder_api_token"
-        val TAG: String = AuthCommands::class.java.simpleName
     }
 }
