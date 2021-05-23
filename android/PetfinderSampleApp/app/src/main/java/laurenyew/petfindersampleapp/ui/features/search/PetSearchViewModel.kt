@@ -1,8 +1,7 @@
-package laurenyew.petfindersampleapp.ui.search
+package laurenyew.petfindersampleapp.ui.features.search
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

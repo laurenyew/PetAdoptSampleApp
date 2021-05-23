@@ -1,4 +1,4 @@
-package laurenyew.petfindersampleapp.ui.favorites
+package laurenyew.petfindersampleapp.ui.features.favorites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

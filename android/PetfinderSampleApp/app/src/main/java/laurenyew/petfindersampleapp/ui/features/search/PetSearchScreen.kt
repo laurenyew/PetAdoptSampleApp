@@ -1,4 +1,4 @@
-package laurenyew.petfindersampleapp.ui.search
+package laurenyew.petfindersampleapp.ui.features.search
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -9,11 +9,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,15 +30,25 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
+import laurenyew.petfindersampleapp.ui.theme.sectionHeader
 
 @Composable
-fun PetSearchScreen(viewModel: PetSearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun PetSearchScreen(
+    viewModel: PetSearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
     val animalsState = viewModel.animals.observeAsState(initial = emptyList())
     val locationState = viewModel.location
     val isLoading = viewModel.isLoading.observeAsState(initial = false)
     val isError = viewModel.isError.observeAsState(false)
 
     Column {
+        Text(
+            text = "Search for available pets.",
+            style = MaterialTheme.typography.sectionHeader(),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(8.dp)
+        )
         PetSearchBar(
             searchState = locationState,
             onSearch = { newLocation ->
@@ -102,14 +109,14 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
 
 @Preview
 @Composable
-fun PetSearchBar() {
-    val searchState = mutableStateOf("78759")
+fun PetSearchBarPreview() {
+    val searchState = remember { mutableStateOf("78759") }
     PetSearchBar(searchState = searchState, onSearch = { })
 }
 
 @Composable
 fun PetSearchList(animals: State<List<AnimalModel>>, onItemClicked: (id: String) -> Unit) {
-    val items = animals.value ?: emptyList()
+    val items = animals.value
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
@@ -203,7 +210,7 @@ fun PetSearchListItem(
 
 @Preview
 @Composable
-fun PetSearchListItem() {
+fun PetSearchListItemPreview() {
     val animalModel = AnimalModel(
         id = "testId", name = "Fido", type = "Dog",
         sex = "Male",
@@ -218,7 +225,7 @@ fun PetSearchListItem() {
         orgId = null
     )
     val imageState: State<ImageState> =
-        mutableStateOf(ImageState.Loading)
+        remember { mutableStateOf(ImageState.Loading) }
 
     PetSearchListItem(
         item = animalModel,
@@ -229,7 +236,7 @@ fun PetSearchListItem() {
 
 @Composable
 fun loadPicture(url: String?): State<ImageState> {
-    val imageState: MutableState<ImageState> = mutableStateOf(ImageState.Empty)
+    val imageState: MutableState<ImageState> = remember { mutableStateOf(ImageState.Empty) }
     url?.let {
         Picasso.get()
             .load(url)
