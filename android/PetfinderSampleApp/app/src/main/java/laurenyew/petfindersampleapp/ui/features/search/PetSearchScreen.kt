@@ -116,7 +116,7 @@ fun PetSearchBarPreview() {
 
 @Composable
 fun PetSearchList(animals: State<List<AnimalModel>>, onItemClicked: (id: String) -> Unit) {
-    val items = animals.value
+    val items = animals.value ?: emptyList()
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
