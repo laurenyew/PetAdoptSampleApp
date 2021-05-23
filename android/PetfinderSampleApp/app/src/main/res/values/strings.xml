@@ -4,11 +4,11 @@
     <string name="title_favorites">Favorites</string>
 
     <!-- Pet Search Page -->
-    <string name="search_title">Search for nearby dogs by your zipcode:</string>
-    <string name="search_hint">Enter your zipcode</string>
+    <string name="search_title">Zipcode:</string>
+    <string name="search_hint">Ex: 78759</string>
     <string name="empty_results">No results. Please try again.</string>
 
-    <string name="basic_info_formatted_string">%s %s %s</string>
+    <string name="basic_info_formatted_string">%s, %s, %s</string>
 
     <string name="unknown">Unknown</string>
 
