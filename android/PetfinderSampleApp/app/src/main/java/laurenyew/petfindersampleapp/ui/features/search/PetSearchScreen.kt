@@ -10,7 +10,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,10 +35,10 @@ import laurenyew.petfindersampleapp.ui.theme.sectionHeader
 fun PetSearchScreen(
     viewModel: PetSearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val animalsState = viewModel.animals.observeAsState(initial = emptyList())
+    val animalsState = viewModel.animals.collectAsState(initial = emptyList())
     val locationState = viewModel.location
-    val isLoading = viewModel.isLoading.observeAsState(initial = false)
-    val isError = viewModel.isError.observeAsState(false)
+    val isLoading = viewModel.isLoading.collectAsState(initial = false)
+    val isError = viewModel.isError.collectAsState(false)
 
     Column {
         Text(
@@ -122,7 +121,7 @@ fun PetSearchBarPreview() {
 
 @Composable
 fun PetSearchList(animals: State<List<AnimalModel>>, onItemClicked: (id: String) -> Unit) {
-    val items = animals.value ?: emptyList()
+    val items = animals.value
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]

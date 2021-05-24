@@ -111,6 +111,13 @@ dependencies {
     api "com.squareup.moshi:moshi-kotlin:1.10.0"
     api "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
+    // Room
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-common:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+
     // Logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
 

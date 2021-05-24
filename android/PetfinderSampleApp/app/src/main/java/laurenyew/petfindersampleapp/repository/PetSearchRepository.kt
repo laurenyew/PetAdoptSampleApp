@@ -17,5 +17,4 @@ class PetSearchRepository @Inject constructor(
         } catch (e: Exception) {
             SearchPetsRepoResponse.Error(e)
         }
-
 }

@@ -13,7 +13,8 @@ data class AnimalModel(
     val breed: String?,
     val photoUrl: String?,
     val distance: String?,
-    val contact: ContactModel?
+    val contact: ContactModel?,
+    var isFavorite: Boolean = false
 )
 
 data class ContactModel(
