@@ -32,15 +32,16 @@ import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.ui.features.list.PetList
 import laurenyew.petfindersampleapp.ui.theme.sectionHeader
+import laurenyew.petfindersampleapp.utils.collectAsStateLifecycleAware
 
 @Composable
 fun PetSearchScreen(
     viewModel: PetSearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val animalsState = viewModel.animals.collectAsState(initial = emptyList())
+    val animalsState = viewModel.animals.collectAsStateLifecycleAware(initial = emptyList())
     val locationState = viewModel.location
-    val isLoading = viewModel.isLoading.collectAsState(initial = false)
-    val isError = viewModel.isError.collectAsState(false)
+    val isLoading = viewModel.isLoading.collectAsStateLifecycleAware(initial = false)
+    val isError = viewModel.isError.collectAsStateLifecycleAware(false)
 
     Column {
         Text(
