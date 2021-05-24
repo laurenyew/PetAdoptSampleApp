@@ -1,19 +1,36 @@
 package laurenyew.petfindersampleapp.ui.features.favorites
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import laurenyew.petfindersampleapp.repository.PetSearchRepository
+import kotlinx.coroutines.launch
+import laurenyew.petfindersampleapp.repository.PetFavoriteRepository
+import laurenyew.petfindersampleapp.repository.models.AnimalModel
+import laurenyew.petfindersampleapp.ui.features.list.PetListViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
-    private val repository: PetSearchRepository
-) : ViewModel() {
+    private val favoriteRepository: PetFavoriteRepository
+) : PetListViewModel(favoriteRepository) {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Favorites Fragment"
+    init {
+        refreshFavorites()
     }
-    val text: LiveData<String> = _text
+
+    fun refreshFavorites() {
+        _isLoading.value = true
+        viewModelScope.launch {
+            val favorites = favoriteRepository.favorites().map {
+                AnimalModel(
+                    id = it.id,
+                    photoUrl = it.photoUrl,
+                    name = it.name,
+                    isFavorite = true
+                )
+            }
+            _isLoading.value = false
+            _animals.value = favorites
+
+        }
+    }
 }

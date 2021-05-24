@@ -2,23 +2,23 @@ package laurenyew.petfindersampleapp.repository.models
 
 data class AnimalModel(
     val id: String,
-    val orgId: String?,
-    val type: String?,
-    val name: String?,
-    val sex: String?,
-    val age: String?,
-    val size: String?,
-    val description: String?,
-    val status: String?,
-    val breed: String?,
-    val photoUrl: String?,
-    val distance: String?,
-    val contact: ContactModel?,
+    val orgId: String? = null,
+    val type: String? = null,
+    val name: String? = null,
+    val sex: String? = null,
+    val age: String? = null,
+    val size: String? = null,
+    val description: String? = null,
+    val status: String? = null,
+    val breed: String? = null,
+    val photoUrl: String? = null,
+    val distance: String? = null,
+    val contact: ContactModel? = null,
     var isFavorite: Boolean = false
 )
 
 data class ContactModel(
-    val email: String?,
-    val phone: String?,
-    val address: String?
+    val email: String? = null,
+    val phone: String? = null,
+    val address: String? = null
 )
