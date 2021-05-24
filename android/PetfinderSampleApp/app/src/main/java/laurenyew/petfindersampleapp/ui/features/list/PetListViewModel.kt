@@ -28,7 +28,7 @@ open class PetListViewModel @Inject constructor(
             favoriteRepository.favorite(animalModel)
 
             val favoriteId = animalModel.id
-            _animals.value.firstOrNull { it.id == favoriteId }?.isFavorite = true
+            updateAnimalsForFavorite(favoriteId, true)
         }
     }
 
@@ -37,12 +37,22 @@ open class PetListViewModel @Inject constructor(
         viewModelScope.launch {
             favoriteRepository.unFavorite(id)
 
-            val unfavoriteId = id
-            _animals.value.firstOrNull { it.id == unfavoriteId }?.isFavorite = false
+            updateAnimalsForFavorite(id, false)
         }
     }
 
     fun openAnimalDetail(id: String) {
         Timber.d("Open Animal Detail $id")
+    }
+
+    private fun updateAnimalsForFavorite(id: String, favorite: Boolean) {
+        val updatedAnimals = _animals.value.map {
+            if (it.id == id) {
+                it.copy(favorite)
+            } else {
+                it
+            }
+        }
+        _animals.value = updatedAnimals
     }
 }

@@ -24,15 +24,16 @@ class PetSearchViewModel @Inject constructor(
             _isLoading.value = true
 
             viewModelScope.launch {
-                val searchResponse = searchRepository.getNearbyDogs(newLocation)
-                when (searchResponse) {
+                when (val searchResponse = searchRepository.getNearbyDogs(newLocation)) {
                     is SearchPetsRepoResponse.Success -> {
                         val favorites =
                             favoriteRepository.favoriteIds()
                         val searchedAnimals =
                             searchResponse.animals?.map {
-                                it.apply {
-                                    it.isFavorite = favorites.contains(it.id)
+                                if (favorites.contains(it.id)) {
+                                    it.copy(true)
+                                } else {
+                                    it
                                 }
                             }
 

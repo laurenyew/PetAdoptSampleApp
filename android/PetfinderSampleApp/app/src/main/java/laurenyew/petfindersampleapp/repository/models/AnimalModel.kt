@@ -14,8 +14,21 @@ data class AnimalModel(
     val photoUrl: String? = null,
     val distance: String? = null,
     val contact: ContactModel? = null,
-    var isFavorite: Boolean = false
-)
+    val isFavorite: Boolean = false
+) {
+    fun copy(isFavorite: Boolean): AnimalModel =
+        AnimalModel(
+            id,
+            orgId,
+            type,
+            name,
+            sex,
+            age,
+            size,
+            description,
+            status, breed, photoUrl, distance, contact, isFavorite
+        )
+}
 
 data class ContactModel(
     val email: String? = null,
