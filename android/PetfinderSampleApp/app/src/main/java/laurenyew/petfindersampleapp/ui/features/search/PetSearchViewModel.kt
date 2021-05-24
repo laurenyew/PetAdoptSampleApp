@@ -12,6 +12,7 @@ import laurenyew.petfindersampleapp.repository.PetFavoriteRepository
 import laurenyew.petfindersampleapp.repository.PetSearchRepository
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.responses.SearchPetsRepoResponse
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -61,41 +62,27 @@ class PetSearchViewModel @Inject constructor(
     }
 
     fun favorite(animalModel: AnimalModel) {
+        Timber.d("Favorite: ${animalModel.id}")
         viewModelScope.launch {
             favoriteRepository.favorite(animalModel)
 
             val favoriteId = animalModel.id
-            val updatedAnimals = _animals.value.map {
-                it.apply {
-                    if (id == favoriteId) {
-                        it.isFavorite = true
-                    }
-                }
-            }
-
-            _animals.value = updatedAnimals
+            _animals.value.firstOrNull { it.id == favoriteId }?.isFavorite = true
         }
     }
 
     fun unfavorite(id: String) {
+        Timber.d("Unfavorite: $id")
         viewModelScope.launch {
             favoriteRepository.unFavorite(id)
 
             val unfavoriteId = id
-            val updatedAnimals = _animals.value.map {
-                it.apply {
-                    if (id == unfavoriteId) {
-                        it.isFavorite = false
-                    }
-                }
-            }
-
-            _animals.value = updatedAnimals
+            _animals.value.firstOrNull { it.id == unfavoriteId }?.isFavorite = false
         }
     }
 
     fun openAnimalDetail(id: String) {
-        //TODO
+        Timber.d("Open Animal Detail $id")
     }
 
 }

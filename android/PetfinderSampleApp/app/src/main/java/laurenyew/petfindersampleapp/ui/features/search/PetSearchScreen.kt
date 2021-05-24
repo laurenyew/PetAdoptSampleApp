@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
@@ -58,8 +59,15 @@ fun PetSearchScreen(
             }
         )
         Spacer(Modifier.height(10.dp))
-        PetSearchList(animals = animalsState,
-            onItemClicked = { viewModel.openAnimalDetail(it) }
+        PetList(animals = animalsState,
+            onItemClicked = { viewModel.openAnimalDetail(it) },
+            onItemFavorited = { item, isFavorited ->
+                if (isFavorited) {
+                    viewModel.favorite(item)
+                } else {
+                    viewModel.unfavorite(item.id)
+                }
+            }
         )
         if (isLoading.value) {
             Column(
@@ -120,16 +128,24 @@ fun PetSearchBarPreview() {
 }
 
 @Composable
-fun PetSearchList(animals: State<List<AnimalModel>>, onItemClicked: (id: String) -> Unit) {
+fun PetList(
+    animals: State<List<AnimalModel>>,
+    onItemClicked: (id: String) -> Unit,
+    onItemFavorited: (item: AnimalModel, isFavorited: Boolean) -> Unit
+) {
     val items = animals.value
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
             val animalImageState = loadPicture(url = item.photoUrl)
-            PetSearchListItem(
+            PetListItem(
                 item = item,
                 imageState = animalImageState,
-                onItemClicked = { id -> onItemClicked(id) })
+                onItemClicked = { id -> onItemClicked(id) },
+                onItemFavorited = { isFavorited ->
+                    onItemFavorited(item, isFavorited)
+                }
+            )
             Divider(color = Color.Black)
         }
     }
@@ -143,10 +159,11 @@ sealed class ImageState {
 }
 
 @Composable
-fun PetSearchListItem(
+fun PetListItem(
     item: AnimalModel,
     imageState: State<ImageState>,
-    onItemClicked: (id: String) -> Unit
+    onItemClicked: (id: String) -> Unit,
+    onItemFavorited: (isFavorited: Boolean) -> Unit
 ) {
     val unknown = stringResource(id = R.string.unknown)
     val age = item.age ?: unknown
@@ -160,7 +177,6 @@ fun PetSearchListItem(
     val loadedImageState = imageState.value
     Row(
         modifier = Modifier
-            .wrapContentSize()
             .clickable(onClick = { onItemClicked(item.id) })
     ) {
         when (loadedImageState) {
@@ -197,18 +213,37 @@ fun PetSearchListItem(
                 .padding(2.dp)
                 .align(Alignment.CenterVertically)
         ) {
-            Text(item.name ?: unknown, style = TextStyle(fontWeight = FontWeight.Bold))
+            Text(item.name ?: unknown, style = MaterialTheme.typography.body1)
             Spacer(modifier = Modifier.height(3.dp))
             Text(basicInfo)
-            item.description?.let { description ->
-                Spacer(modifier = Modifier.height(3.dp))
-                Text(
-                    description,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
         }
+        Spacer(modifier = Modifier.width(5.dp))
+        if (item.isFavorite) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_baseline_favorite_24),
+                contentDescription = "Favorite-d",
+                contentScale = ContentScale.Inside,
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariant),
+                modifier = imageModifier
+                    .width(8.dp)
+                    .height(8.dp)
+                    .align(Alignment.CenterVertically)
+                    .clickable { onItemFavorited(false) }
+            )
+        } else {
+            Image(
+                painter = painterResource(id = R.drawable.ic_baseline_unfavorite_24),
+                contentDescription = "Not Favorite-d",
+                contentScale = ContentScale.Inside,
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariant),
+                modifier = imageModifier
+                    .width(8.dp)
+                    .height(8.dp)
+                    .align(Alignment.CenterVertically)
+                    .clickable { onItemFavorited(true) }
+            )
+        }
+        Spacer(modifier = Modifier.width(8.dp))
     }
 }
 
@@ -232,10 +267,11 @@ fun PetSearchListItemPreview() {
     val imageState: State<ImageState> =
         remember { mutableStateOf(ImageState.Loading) }
 
-    PetSearchListItem(
+    PetListItem(
         item = animalModel,
         imageState = imageState,
-        onItemClicked = { }
+        onItemClicked = { },
+        onItemFavorited = {}
     )
 }
 
