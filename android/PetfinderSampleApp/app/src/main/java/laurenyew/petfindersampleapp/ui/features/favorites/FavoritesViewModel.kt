@@ -25,6 +25,9 @@ class FavoritesViewModel @Inject constructor(
                     id = it.id,
                     photoUrl = it.photoUrl,
                     name = it.name,
+                    age = it.age,
+                    sex = it.sex,
+                    size = it.size,
                     isFavorite = true
                 )
             }

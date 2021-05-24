@@ -22,7 +22,10 @@ class PetFavoriteRepository @Inject constructor(
         val favoriteAnimal = FavoriteAnimal(
             id = animal.id,
             name = animal.name,
-            photoUrl = animal.photoUrl
+            photoUrl = animal.photoUrl,
+            age = animal.age,
+            sex = animal.sex,
+            size = animal.size
         )
         favoriteAnimalDatabaseProvider.favoriteAnimal(favoriteAnimal)
     }

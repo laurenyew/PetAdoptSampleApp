@@ -1,7 +1,5 @@
 package laurenyew.petfindersampleapp.ui.features.list
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,9 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import laurenyew.petfindersampleapp.repository.PetFavoriteRepository
-import laurenyew.petfindersampleapp.repository.PetSearchRepository
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
-import laurenyew.petfindersampleapp.repository.responses.SearchPetsRepoResponse
 import timber.log.Timber
 import javax.inject.Inject
 

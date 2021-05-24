@@ -8,6 +8,9 @@ data class FavoriteAnimal(
     @PrimaryKey val id: String,
     val name: String?,
     val photoUrl: String?,
+    val age: String?,
+    val sex: String?,
+    val size: String?,
 )
 
 @Dao
