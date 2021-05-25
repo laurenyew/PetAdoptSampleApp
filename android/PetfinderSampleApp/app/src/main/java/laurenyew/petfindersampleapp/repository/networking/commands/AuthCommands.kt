@@ -1,8 +1,5 @@
 package laurenyew.petfindersampleapp.repository.networking.commands
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderTokenApi
 import laurenyew.petfindersampleapp.repository.networking.api.requests.AuthTokenRequestBody
 import laurenyew.petfindersampleapp.repository.networking.api.responses.RefreshApiTokenNetworkResponse
@@ -13,25 +10,21 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class AuthCommands @Inject constructor(
-    private val api: PetfinderTokenApi,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val api: PetfinderTokenApi
 ) {
     // Only let one job run at a time.
     private val refreshTokenControlledRunner = ControlledRunner<RefreshTokenRepoResponse>()
 
     suspend fun refreshToken(clientId: String, clientSecret: String): RefreshTokenRepoResponse =
         refreshTokenControlledRunner.joinPreviousOrRun {
-            withContext(ioDispatcher) {
-                Timber.d("Executing $REFRESH_TOKEN_TAG")
-                val call = api.refreshToken(
-                    AuthTokenRequestBody(
-                        clientId = clientId,
-                        clientSecret = clientSecret
-                    )
+            Timber.d("Executing $REFRESH_TOKEN_TAG")
+            val response = api.refreshToken(
+                AuthTokenRequestBody(
+                    clientId = clientId,
+                    clientSecret = clientSecret
                 )
-                val response = call.execute()
-                parseResponse(response)
-            }
+            )
+            parseResponse(response)
         }
 
     /**

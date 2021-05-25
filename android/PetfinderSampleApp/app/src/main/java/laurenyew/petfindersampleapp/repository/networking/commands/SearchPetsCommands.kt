@@ -1,8 +1,5 @@
 package laurenyew.petfindersampleapp.repository.networking.commands
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.models.ContactModel
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
@@ -12,16 +9,13 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class SearchPetsCommands @Inject constructor(
-    private val api: PetfinderApi,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val api: PetfinderApi
 ) {
-    suspend fun searchForNearbyDogs(location: String): List<AnimalModel> =
-        withContext(ioDispatcher) {
-            Timber.d("Executing $SEARCH_FOR_NEARBY_DOGS_TAG")
-            val call = api.searchPets(location = location)
-            val response = call.execute()
-            parseResponse(response)
-        }
+    suspend fun searchForNearbyDogs(location: String): List<AnimalModel> {
+        Timber.d("Executing $SEARCH_FOR_NEARBY_DOGS_TAG")
+        val response = api.searchPets(location = location)
+        return parseResponse(response)
+    }
 
     /**
      * Parse the response from the network call
@@ -32,9 +26,9 @@ class SearchPetsCommands @Inject constructor(
     ): ArrayList<AnimalModel> {
         val data = networkResponse?.body()
         if (networkResponse?.code() != 200 || data == null) {
-            throw RuntimeException(
-                "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
-            )
+            val error = "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
+            Timber.e(error)
+            throw RuntimeException(error)
         } else {
             val animalList = ArrayList<AnimalModel>()
             data.animals.forEach {
