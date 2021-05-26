@@ -1,6 +1,6 @@
 //
 //  PetSearchViewModel.swift
-//  PetfinderSampleApp
+//  PetAdoptSampleApp
 //
 //  Created by laurenyew on 2/17/20.
 //  Copyright © 2020 laurenyew. All rights reserved.
@@ -14,13 +14,13 @@ class PetSearchViewModel: ObservableObject, Identifiable {
     
     @Published var dataSource: [AnimalRowViewModel] = []
     
-    private let petFinderSearchAPI: PetFinderSearchAPI
+    private let PetAdoptSearchAPI: PetAdoptSearchAPI
     
     private var disposables = Set<AnyCancellable>()
     
-    init(petFinderSearchAPI: PetFinderSearchAPI,
+    init(PetAdoptSearchAPI: PetAdoptSearchAPI,
          scheduler: DispatchQueue = DispatchQueue(label: "PetSearchViewModel")) {
-        self.petFinderSearchAPI = petFinderSearchAPI
+        self.PetAdoptSearchAPI = PetAdoptSearchAPI
         $location
         .dropFirst(1)
         .debounce(for: .seconds(0.5), scheduler: scheduler)
@@ -29,7 +29,7 @@ class PetSearchViewModel: ObservableObject, Identifiable {
     }
     
     func searchForNearbyDogs(forLocation location:String) {
-        petFinderSearchAPI.getDogsNearMe(forLocation: location)
+        PetAdoptSearchAPI.getDogsNearMe(forLocation: location)
         .map { response in
                 response.animals.map(AnimalRowViewModel.init)
         }

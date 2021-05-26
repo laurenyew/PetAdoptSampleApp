@@ -1,15 +1,15 @@
 //
-//  PetfinderSampleAppTests.swift
-//  PetfinderSampleAppTests
+//  PetAdoptSampleAppTests.swift
+//  PetAdoptSampleAppTests
 //
 //  Created by laurenyew on 2/9/20.
 //  Copyright © 2020 laurenyew. All rights reserved.
 //
 
 import XCTest
-@testable import PetfinderSampleApp
+@testable import PetAdoptSampleApp
 
-class PetfinderSampleAppTests: XCTestCase {
+class PetAdoptSampleAppTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

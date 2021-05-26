@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B915CDCA23F0EAAD00F7AED1"
-               BuildableName = "PetfinderSampleApp.app"
-               BlueprintName = "PetfinderSampleApp"
-               ReferencedContainer = "container:PetfinderSampleApp.xcodeproj">
+               BuildableName = "PetAdoptSampleApp.app"
+               BlueprintName = "PetAdoptSampleApp"
+               ReferencedContainer = "container:PetAdoptSampleApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B915CDE323F0EAB300F7AED1"
-               BuildableName = "PetfinderSampleAppTests.xctest"
-               BlueprintName = "PetfinderSampleAppTests"
-               ReferencedContainer = "container:PetfinderSampleApp.xcodeproj">
+               BuildableName = "PetAdoptSampleAppTests.xctest"
+               BlueprintName = "PetAdoptSampleAppTests"
+               ReferencedContainer = "container:PetAdoptSampleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B915CDEE23F0EAB300F7AED1"
-               BuildableName = "PetfinderSampleAppUITests.xctest"
-               BlueprintName = "PetfinderSampleAppUITests"
-               ReferencedContainer = "container:PetfinderSampleApp.xcodeproj">
+               BuildableName = "PetAdoptSampleAppUITests.xctest"
+               BlueprintName = "PetAdoptSampleAppUITests"
+               ReferencedContainer = "container:PetAdoptSampleApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B915CDCA23F0EAAD00F7AED1"
-            BuildableName = "PetfinderSampleApp.app"
-            BlueprintName = "PetfinderSampleApp"
-            ReferencedContainer = "container:PetfinderSampleApp.xcodeproj">
+            BuildableName = "PetAdoptSampleApp.app"
+            BlueprintName = "PetAdoptSampleApp"
+            ReferencedContainer = "container:PetAdoptSampleApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -89,9 +89,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B915CDCA23F0EAAD00F7AED1"
-            BuildableName = "PetfinderSampleApp.app"
-            BlueprintName = "PetfinderSampleApp"
-            ReferencedContainer = "container:PetfinderSampleApp.xcodeproj">
+            BuildableName = "PetAdoptSampleApp.app"
+            BlueprintName = "PetAdoptSampleApp"
+            ReferencedContainer = "container:PetAdoptSampleApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

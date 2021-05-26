@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  PetfinderSampleApp
+//  PetAdoptSampleApp
 //
 //  Created by laurenyew on 2/9/20.
 //  Copyright © 2020 laurenyew. All rights reserved.
@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var selection = 0
  
-    let petSearchViewModel = PetSearchViewModel(petFinderSearchAPI: petFinderAPI)
+    let petSearchViewModel = PetSearchViewModel(PetAdoptSearchAPI: PetAdoptAPI)
     
     var body: some View {
         TabView(){

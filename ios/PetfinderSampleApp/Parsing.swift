@@ -1,6 +1,6 @@
 //
 //  Parsing.swift
-//  PetfinderSampleApp
+//  PetAdoptSampleApp
 //
 //  Created by laurenyew on 2/15/20.
 //  Copyright © 2020 laurenyew. All rights reserved.
@@ -10,7 +10,7 @@ import Foundation
 
 import Combine
 
-func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, PetFinderError> {
+func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, PetAdoptError> {
   let decoder = JSONDecoder()
   decoder.dateDecodingStrategy = .secondsSince1970
 

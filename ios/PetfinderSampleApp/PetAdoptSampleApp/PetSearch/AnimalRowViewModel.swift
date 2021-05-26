@@ -1,6 +1,6 @@
 //
 //  AnimalRowViewModel.swift
-//  PetfinderSampleApp
+//  PetAdoptSampleApp
 //
 //  Created by laurenyew on 2/17/20.
 //  Copyright © 2020 laurenyew. All rights reserved.
