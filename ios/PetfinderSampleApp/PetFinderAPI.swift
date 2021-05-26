@@ -85,9 +85,9 @@ extension PetAdopt: PetAdoptSearchAPI {
 extension PetAdopt {
     struct PetAdoptAPI {
         static let scheme = "https"
-        static let host = "api.PetAdopt.com"
+        static let host = "api.petfinder.com"
         static let path = "/v2"
-        static let apiKey = Bundle.main.object(forInfoDictionaryKey: "PetAdoptAccessToken") as? String
+        static let apiKey = Bundle.main.object(forInfoDictionaryKey: "PetfinderAccessToken") as? String
     }
     
     func makeGetAnimalsComponents(

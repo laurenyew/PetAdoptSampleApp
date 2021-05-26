@@ -1,13 +1,15 @@
-# iOS PetfinderSampleApp
+# iOS PetAdoptSampleApp
 Sample App created to practice with different iOS Tech
 
-<img src="https://github.com/laurenyew/PetfinderSampleApp/blob/develop/ios/Screenshots/Dog_Search_iOS_Demo_Screenshot.png" data-canonical-src="https://github.com/laurenyew/PetfinderSampleApp/blob/develop/ios/Screenshots/Dog_Search_iOS_Demo_Screenshot.png" width="200" height="400" />
+<img src="./Screenshots/search.png" width="200"/>
 
 ## iOS Tech
 * SwiftUI
 * Combine
 
 ## Disclaimers
+
+Powered by [Petfinder](www.petfinder.com]
 
 Using Petfinder API v2 for sample app:
 https://www.petfinder.com/developers/v2/docs/
