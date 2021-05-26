@@ -2,10 +2,12 @@
 Sample App created to practice with different iOS/Android Tech
 These apps were built to have similar feature sets but to be use Android/iOS tech
 
-ANDROID
+## Android
+
 <img src="./android/Screenshots/drawer.png" width="200"/> <img src="./android/Screenshots/home.png" width="200"/> <img src="./android/Screenshots/search_favorite.png" width="200"/> <img src="./android/Screenshots/favorites.png" width="200"/>
 
-IOS
+## iOS
+
 <img src="./ios/Screenshots/search.png" width="200"/>
 
 ## Disclaimers
