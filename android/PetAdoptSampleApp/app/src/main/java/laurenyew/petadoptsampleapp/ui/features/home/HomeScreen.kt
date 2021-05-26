@@ -31,7 +31,7 @@ fun HomeScreen() {
                 .padding(8.dp)
         )
         Text(
-            text = "This sample app uses PetAdopt APIs to demo Jetpack libraries, Kotlin Coroutines & Flows, and other Android tech / architecture.",
+            text = "This sample app uses PetFinder APIs to demo Jetpack libraries, Kotlin Coroutines & Flows, and other Android tech / architecture.",
             style = MaterialTheme.typography.subtitle1,
             modifier = Modifier
                 .padding(8.dp)

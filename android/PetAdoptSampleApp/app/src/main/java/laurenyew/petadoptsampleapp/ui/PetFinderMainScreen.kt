@@ -44,6 +44,8 @@ fun PetAdoptMainScreen() {
         }
     }
 
+    val titleState = remember { mutableStateOf(DrawerScreens.Home.route) }
+
 
     PetAdoptTheme {
         Scaffold(
@@ -59,7 +61,7 @@ fun PetAdoptMainScreen() {
                             })
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        text = stringResource(id = R.string.app_name),
+                        text = titleState.value,
                         style = MaterialTheme.typography.h6,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
@@ -68,6 +70,7 @@ fun PetAdoptMainScreen() {
             drawerContent = {
                 PetAdoptDrawer(
                     onScreenSelected = { route ->
+                        titleState.value = route
                         scope.launch { drawerState.close() }
                         navController.navigate(route) {
                             popUpTo = navController.graph.startDestinationId
