@@ -1,6 +1,6 @@
 //
 //  GetAnimalsResponse.swift
-//  PetfinderSampleApp
+//  PetAdoptSampleApp
 //
 //  Created by laurenyew on 2/14/20.
 //  Copyright © 2020 laurenyew. All rights reserved.
