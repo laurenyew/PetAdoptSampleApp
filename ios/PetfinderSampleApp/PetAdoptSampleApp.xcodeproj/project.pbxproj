@@ -589,7 +589,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PetAdoptSampleApp/Preview Content\"";
 				DEVELOPMENT_TEAM = M534J7BM7R;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = PetfinderSampleApp/Info.plist;
+				INFOPLIST_FILE = PetAdoptSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -609,7 +609,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PetAdoptSampleApp/Preview Content\"";
 				DEVELOPMENT_TEAM = M534J7BM7R;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = PetfinderSampleApp/Info.plist;
+				INFOPLIST_FILE = PetAdoptSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -628,14 +628,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M534J7BM7R;
-				INFOPLIST_FILE = PetfinderSampleAppTests/Info.plist;
+				INFOPLIST_FILE = PetAdoptSampleAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetfinderSampleAppTests;
+				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetAdoptSampleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -650,14 +650,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M534J7BM7R;
-				INFOPLIST_FILE = PetfinderSampleAppTests/Info.plist;
+				INFOPLIST_FILE = PetAdoptSampleAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetfinderSampleAppTests;
+				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetAdoptSampleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -671,17 +671,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M534J7BM7R;
-				INFOPLIST_FILE = PetfinderSampleAppUITests/Info.plist;
+				INFOPLIST_FILE = PetAdoptSampleAppUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetfinderSampleAppUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetAdoptSampleAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PetfinderSampleApp;
+				TEST_TARGET_NAME = PetAdoptSampleApp;
 			};
 			name = Debug;
 		};
@@ -691,17 +691,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M534J7BM7R;
-				INFOPLIST_FILE = PetfinderSampleAppUITests/Info.plist;
+				INFOPLIST_FILE = PetAdoptSampleAppUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetfinderSampleAppUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = laurenyew.PetAdoptSampleAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PetfinderSampleApp;
+				TEST_TARGET_NAME = PetAdoptSampleApp;
 			};
 			name = Release;
 		};
