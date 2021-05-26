@@ -1,7 +1,6 @@
 package laurenyew.petadoptsampleapp.ui
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -11,18 +10,14 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
-import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesViewModel
 import laurenyew.petadoptsampleapp.ui.features.favorites.PetFavoritesScreen
 import laurenyew.petadoptsampleapp.ui.features.home.HomeScreen
@@ -32,7 +27,7 @@ import laurenyew.petadoptsampleapp.ui.theme.PetAdoptTheme
 
 
 @Composable
-fun PetAdoptMainScreen() {
+fun MainScreen() {
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
@@ -68,7 +63,7 @@ fun PetAdoptMainScreen() {
                 }
             },
             drawerContent = {
-                PetAdoptDrawer(
+                MainDrawer(
                     onScreenSelected = { route ->
                         titleState.value = route
                         scope.launch { drawerState.close() }
@@ -81,7 +76,7 @@ fun PetAdoptMainScreen() {
             },
             drawerGesturesEnabled = true,
             content = {
-                PetAdoptMainContent(
+                MainScreenContent(
                     navController = navController,
                 )
             }
@@ -90,7 +85,7 @@ fun PetAdoptMainScreen() {
 }
 
 @Composable
-fun PetAdoptMainContent(
+fun MainScreenContent(
     navController: NavHostController
 ) {
     NavHost(
@@ -115,6 +110,6 @@ fun PetAdoptMainContent(
 
 @Preview
 @Composable
-fun PetAdoptMainScreenPreview() {
-    PetAdoptMainScreen()
+fun MainScreenPreview() {
+    MainScreen()
 }

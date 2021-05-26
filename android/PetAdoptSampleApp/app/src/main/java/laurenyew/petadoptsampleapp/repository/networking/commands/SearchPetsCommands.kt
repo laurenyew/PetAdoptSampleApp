@@ -2,14 +2,14 @@ package laurenyew.petadoptsampleapp.repository.networking.commands
 
 import laurenyew.petadoptsampleapp.repository.models.AnimalModel
 import laurenyew.petadoptsampleapp.repository.models.ContactModel
-import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApi
+import laurenyew.petadoptsampleapp.repository.networking.api.PetFinderApi
 import laurenyew.petadoptsampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
 class SearchPetsCommands @Inject constructor(
-    private val api: PetAdoptApi
+    private val api: PetFinderApi
 ) {
     suspend fun searchForNearbyDogs(location: String): List<AnimalModel> {
         Timber.d("Executing $SEARCH_FOR_NEARBY_DOGS_TAG")

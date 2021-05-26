@@ -1,6 +1,6 @@
 package laurenyew.petadoptsampleapp.repository.networking.commands
 
-import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptTokenApi
+import laurenyew.petadoptsampleapp.repository.networking.api.TokenApi
 import laurenyew.petadoptsampleapp.repository.networking.api.requests.AuthTokenRequestBody
 import laurenyew.petadoptsampleapp.repository.networking.api.responses.RefreshApiTokenNetworkResponse
 import laurenyew.petadoptsampleapp.repository.responses.RefreshTokenRepoResponse
@@ -10,7 +10,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class AuthCommands @Inject constructor(
-    private val api: PetAdoptTokenApi
+    private val api: TokenApi
 ) {
     // Only let one job run at a time.
     private val refreshTokenControlledRunner = ControlledRunner<RefreshTokenRepoResponse>()

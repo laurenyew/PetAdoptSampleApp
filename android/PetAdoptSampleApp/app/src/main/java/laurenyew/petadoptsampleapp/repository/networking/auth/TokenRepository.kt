@@ -8,7 +8,7 @@ import laurenyew.petadoptsampleapp.repository.responses.RefreshTokenRepoResponse
 import timber.log.Timber
 import javax.inject.Inject
 
-class PetAdoptTokenRepository @Inject constructor(
+class TokenRepository @Inject constructor(
     private val authCommands: AuthCommands,
     context: Context?
 ) : AccessTokenProvider {
