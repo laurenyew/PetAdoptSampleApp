@@ -10,10 +10,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
@@ -30,16 +30,18 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import laurenyew.petfindersampleapp.R
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
+import laurenyew.petfindersampleapp.ui.features.list.PetList
 import laurenyew.petfindersampleapp.ui.theme.sectionHeader
+import laurenyew.petfindersampleapp.utils.collectAsStateLifecycleAware
 
 @Composable
 fun PetSearchScreen(
     viewModel: PetSearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    val animalsState = viewModel.animals.observeAsState(initial = emptyList())
+    val animalsState = viewModel.animals.collectAsStateLifecycleAware(initial = emptyList())
     val locationState = viewModel.location
-    val isLoading = viewModel.isLoading.observeAsState(initial = false)
-    val isError = viewModel.isError.observeAsState(false)
+    val isLoading = viewModel.isLoading.collectAsStateLifecycleAware(initial = false)
+    val isError = viewModel.isError.collectAsStateLifecycleAware(false)
 
     Column {
         Text(
@@ -51,14 +53,23 @@ fun PetSearchScreen(
         )
         PetSearchBar(
             searchState = locationState,
-            onSearch = { newLocation ->
+            onSearchFieldChange = { newLocation ->
                 locationState.value = newLocation
+            },
+            onExecuteSearch = {
                 viewModel.searchAnimals()
             }
         )
         Spacer(Modifier.height(10.dp))
-        PetSearchList(animals = animalsState,
-            onItemClicked = { viewModel.openAnimalDetail(it) }
+        PetList(animals = animalsState,
+            onItemClicked = { viewModel.openAnimalDetail(it) },
+            onItemFavorited = { item, isFavorited ->
+                if (isFavorited) {
+                    viewModel.favorite(item)
+                } else {
+                    viewModel.unfavorite(item.id)
+                }
+            }
         )
         if (isLoading.value) {
             Column(
@@ -78,7 +89,11 @@ fun PetSearchScreen(
 }
 
 @Composable
-fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
+fun PetSearchBar(
+    searchState: State<String>,
+    onSearchFieldChange: (String) -> Unit,
+    onExecuteSearch: () -> Unit
+) {
     val focusManager = LocalFocusManager.current
     Row(modifier = Modifier.padding(10.dp)) {
         Text(
@@ -89,7 +104,7 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
         Spacer(modifier = Modifier.width(10.dp))
         TextField(
             value = searchState.value,
-            onValueChange = onSearch,
+            onValueChange = onSearchFieldChange,
             placeholder = {
                 Text(stringResource(id = R.string.search_hint))
             },
@@ -99,7 +114,7 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(onDone = {
-                onSearch(searchState.value)
+                onExecuteSearch()
                 focusManager.clearFocus()
             }),
             modifier = Modifier.weight(1f)
@@ -111,153 +126,5 @@ fun PetSearchBar(searchState: State<String>, onSearch: (String) -> Unit) {
 @Composable
 fun PetSearchBarPreview() {
     val searchState = remember { mutableStateOf("78759") }
-    PetSearchBar(searchState = searchState, onSearch = { })
-}
-
-@Composable
-fun PetSearchList(animals: State<List<AnimalModel>>, onItemClicked: (id: String) -> Unit) {
-    val items = animals.value ?: emptyList()
-    LazyColumn {
-        items(items.size) { index ->
-            val item = items[index]
-            val animalImageState = loadPicture(url = item.photoUrl)
-            PetSearchListItem(
-                item = item,
-                imageState = animalImageState,
-                onItemClicked = { id -> onItemClicked(id) })
-            Divider(color = Color.Black)
-        }
-    }
-}
-
-sealed class ImageState {
-    data class Success(val image: Bitmap) : ImageState()
-    object Failed : ImageState()
-    object Loading : ImageState()
-    object Empty : ImageState()
-}
-
-@Composable
-fun PetSearchListItem(
-    item: AnimalModel,
-    imageState: State<ImageState>,
-    onItemClicked: (id: String) -> Unit
-) {
-    val unknown = stringResource(id = R.string.unknown)
-    val age = item.age ?: unknown
-    val sex = item.sex ?: unknown
-    val size = item.size ?: unknown
-    val basicInfo = stringResource(id = R.string.basic_info_formatted_string, age, sex, size)
-    val imageModifier = Modifier
-        .size(72.dp)
-        .padding(2.dp)
-        .fillMaxSize()
-    val loadedImageState = imageState.value
-    Row(
-        modifier = Modifier
-            .wrapContentSize()
-            .clickable(onClick = { onItemClicked(item.id) })
-    ) {
-        when (loadedImageState) {
-            is ImageState.Success -> Image(
-                bitmap = loadedImageState.image.asImageBitmap(),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                modifier = imageModifier
-                    .align(Alignment.CenterVertically)
-            )
-            ImageState.Failed -> Image(
-                painter = painterResource(id = R.drawable.ic_baseline_broken_image_24),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                modifier = imageModifier
-                    .align(Alignment.CenterVertically)
-            )
-            ImageState.Loading -> CircularProgressIndicator(
-                modifier = imageModifier
-                    .align(Alignment.CenterVertically)
-            )
-            ImageState.Empty -> Image(
-                painter = painterResource(id = R.drawable.ic_baseline_image_24),
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                modifier = imageModifier
-                    .align(Alignment.CenterVertically)
-            )
-        }
-        Spacer(modifier = Modifier.width(5.dp))
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .padding(2.dp)
-                .align(Alignment.CenterVertically)
-        ) {
-            Text(item.name ?: unknown, style = TextStyle(fontWeight = FontWeight.Bold))
-            Spacer(modifier = Modifier.height(3.dp))
-            Text(basicInfo)
-            item.description?.let { description ->
-                Spacer(modifier = Modifier.height(3.dp))
-                Text(
-                    description,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        }
-    }
-}
-
-
-@Preview
-@Composable
-fun PetSearchListItemPreview() {
-    val animalModel = AnimalModel(
-        id = "testId", name = "Fido", type = "Dog",
-        sex = "Male",
-        age = "7 years",
-        size = "Large",
-        description = "A great dog is an amazing companion that loves to play ball and fetch and give kisses\nLoves to play ball",
-        status = "Ready for Adoption",
-        breed = "Mixed",
-        photoUrl = null,
-        distance = null,
-        contact = null,
-        orgId = null
-    )
-    val imageState: State<ImageState> =
-        remember { mutableStateOf(ImageState.Loading) }
-
-    PetSearchListItem(
-        item = animalModel,
-        imageState = imageState,
-        onItemClicked = { }
-    )
-}
-
-@Composable
-fun loadPicture(url: String?): State<ImageState> {
-    val imageState: MutableState<ImageState> = remember { mutableStateOf(ImageState.Empty) }
-    url?.let {
-        Picasso.get()
-            .load(url)
-            .into(object : Target {
-                override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                    if (bitmap != null) {
-                        imageState.value = ImageState.Success(image = bitmap)
-                    } else {
-                        imageState.value = ImageState.Empty
-                    }
-                }
-
-                override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                    imageState.value = ImageState.Failed
-                }
-
-                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                    imageState.value = ImageState.Loading
-                }
-
-            })
-    }
-    return imageState
+    PetSearchBar(searchState = searchState, onSearchFieldChange = {}, onExecuteSearch = {})
 }

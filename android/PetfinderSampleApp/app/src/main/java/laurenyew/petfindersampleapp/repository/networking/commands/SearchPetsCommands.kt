@@ -1,33 +1,20 @@
 package laurenyew.petfindersampleapp.repository.networking.commands
 
-import android.util.Log
-import kotlinx.coroutines.async
 import laurenyew.petfindersampleapp.repository.models.AnimalModel
 import laurenyew.petfindersampleapp.repository.models.ContactModel
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApi
 import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
-class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : BaseNetworkCommand() {
-
-    suspend fun searchForNearbyDogs(location: String): List<AnimalModel>? {
-        val deferred = scope.async {
-            Log.d(
-                TAG, "Executing $SEARCH_FOR_NEARBY_DOGS_TAG"
-            )
-            val call = api.searchPets(location = location)
-            try {
-                val response = call.execute()
-                parseResponse(response)
-            } catch (e: Exception) {
-                null
-            } finally {
-                //Clean up network call and cancel
-                call.cancel()
-            }
-        }
-        return deferred.await()
+class SearchPetsCommands @Inject constructor(
+    private val api: PetfinderApi
+) {
+    suspend fun searchForNearbyDogs(location: String): List<AnimalModel> {
+        Timber.d("Executing $SEARCH_FOR_NEARBY_DOGS_TAG")
+        val response = api.searchPets(location = location)
+        return parseResponse(response)
     }
 
     /**
@@ -39,9 +26,9 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
     ): ArrayList<AnimalModel> {
         val data = networkResponse?.body()
         if (networkResponse?.code() != 200 || data == null) {
-            throw RuntimeException(
-                "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
-            )
+            val error = "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
+            Timber.e(error)
+            throw RuntimeException(error)
         } else {
             val animalList = ArrayList<AnimalModel>()
             data.animals.forEach {
@@ -77,7 +64,7 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
                     )
                 )
             }
-            Log.d(TAG, "Completed command with animal list: ${animalList.size}")
+            Timber.d("Completed command with animal list: ${animalList.size}")
             return animalList
         }
     }
@@ -88,6 +75,5 @@ class SearchPetsCommands @Inject constructor(private val api: PetfinderApi) : Ba
 
     companion object {
         const val SEARCH_FOR_NEARBY_DOGS_TAG: String = "search_for_nearby_dogs"
-        val TAG: String = SearchPetsCommands::class.java.simpleName
     }
 }

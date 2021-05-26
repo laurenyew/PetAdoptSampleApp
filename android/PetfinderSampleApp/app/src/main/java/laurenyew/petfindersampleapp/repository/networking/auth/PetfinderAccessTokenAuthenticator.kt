@@ -4,6 +4,7 @@ import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
+import timber.log.Timber
 
 /**
  * OKHTTP Authenticator for PetFinder Access token
@@ -19,6 +20,7 @@ class PetfinderAccessTokenAuthenticator(
      * Otherwise, give up.
      */
     override fun authenticate(route: Route?, response: Response): Request? {
+        Timber.d("Authenticate request: %s", route?.address()?.url())
         val token = tokenProvider.token() ?: return null
         return if (!hasAuthHeader(response)) {
             response.request()

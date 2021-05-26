@@ -23,6 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import laurenyew.petfindersampleapp.R
+import laurenyew.petfindersampleapp.ui.features.favorites.FavoritesViewModel
 import laurenyew.petfindersampleapp.ui.features.favorites.PetFavoritesScreen
 import laurenyew.petfindersampleapp.ui.features.home.HomeScreen
 import laurenyew.petfindersampleapp.ui.features.search.PetSearchScreen
@@ -103,7 +104,8 @@ fun PetFinderMainContent(
             )
         }
         composable(DrawerScreens.Favorites.route) {
-            PetFavoritesScreen()
+            val favoritesViewModel = hiltViewModel<FavoritesViewModel>()
+            PetFavoritesScreen(favoritesViewModel)
         }
     }
 }

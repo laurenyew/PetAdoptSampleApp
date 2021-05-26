@@ -18,6 +18,7 @@ import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConsta
 import laurenyew.petfindersampleapp.repository.networking.api.PetfinderApiConstants.Search.TYPE_PARAM
 import laurenyew.petfindersampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -27,7 +28,7 @@ interface PetfinderApi {
      */
     @Throws(RuntimeException::class)
     @GET(SEARCH_PETS_METHOD)
-    fun searchPets(
+    suspend fun searchPets(
         @Query(TYPE_PARAM) type: String? = null,
         @Query(BREED_PARAM) breed: String? = null,
         @Query(GENDER_PARAM) gender: String? = null,
@@ -43,5 +44,5 @@ interface PetfinderApi {
         @Query(DISTANCE_PARAM) distance: Int? = null,
         @Query(PAGE_PARAM) page: Int? = null,
         @Query(RESULT_NUM_LIMIT_PARAM) resultLimit: Int? = null
-    ): Call<SearchPetsNetworkResponse?>
+    ): Response<SearchPetsNetworkResponse?>
 }

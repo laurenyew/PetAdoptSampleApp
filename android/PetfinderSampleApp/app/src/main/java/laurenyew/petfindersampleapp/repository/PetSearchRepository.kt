@@ -2,6 +2,7 @@ package laurenyew.petfindersampleapp.repository
 
 import laurenyew.petfindersampleapp.repository.networking.commands.SearchPetsCommands
 import laurenyew.petfindersampleapp.repository.responses.SearchPetsRepoResponse
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,8 +15,8 @@ class PetSearchRepository @Inject constructor(
         try {
             val animals = searchPetCommand.searchForNearbyDogs(location)
             SearchPetsRepoResponse.Success(animals)
-        }catch (e: Exception){
+        } catch (e: Exception) {
+            Timber.e(e)
             SearchPetsRepoResponse.Error(e)
         }
-
 }
