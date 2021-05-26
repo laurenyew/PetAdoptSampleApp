@@ -9,7 +9,7 @@ Sample App created to practice with different iOS Tech
 
 ## Disclaimers
 
-Powered by [Petfinder](www.petfinder.com]
+Powered by [Petfinder](www.petfinder.com)
 
 Using Petfinder API v2 for sample app:
 https://www.petfinder.com/developers/v2/docs/
