@@ -7,9 +7,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import laurenyew.petadoptsampleapp.BuildConfig
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 
@@ -43,6 +45,14 @@ fun HomeScreen() {
                 .padding(8.dp)
         )
 
+        if (BuildConfig.CLIENT_ID == "null" || BuildConfig.CLIENT_SECRET == "null") {
+            Text(
+                text = "WARNING! You don't have your Petfinder client.id or client.secret set up in your local.properties. This app will not function until you do so. Please see the README.md for details. Thanks!",
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier.padding(8.dp),
+                color = Color.Red
+            )
+        }
     }
 
 }
