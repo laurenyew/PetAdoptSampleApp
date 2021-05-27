@@ -21,6 +21,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import laurenyew.petadoptsampleapp.R
@@ -82,14 +84,14 @@ fun PetListItem(
             is ImageState.Success -> Image(
                 bitmap = loadedImageState.image.asImageBitmap(),
                 contentDescription = null,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.FillBounds,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
             )
             ImageState.Failed -> Image(
                 painter = painterResource(id = R.drawable.ic_baseline_broken_image_24),
                 contentDescription = null,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.FillBounds,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
             )
@@ -100,7 +102,7 @@ fun PetListItem(
             ImageState.Empty -> Image(
                 painter = painterResource(id = R.drawable.ic_baseline_image_24),
                 contentDescription = null,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.FillBounds,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
             )
@@ -180,6 +182,9 @@ fun loadPicture(url: String?): State<ImageState> {
     url?.let {
         Picasso.get()
             .load(url)
+            .memoryPolicy(MemoryPolicy.NO_CACHE)
+            .networkPolicy(NetworkPolicy.NO_CACHE)
+            .centerInside()
             .into(object : Target {
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                     if (bitmap != null) {
@@ -196,7 +201,6 @@ fun loadPicture(url: String?): State<ImageState> {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
                     imageState.value = ImageState.Loading
                 }
-
             })
     }
     return imageState
