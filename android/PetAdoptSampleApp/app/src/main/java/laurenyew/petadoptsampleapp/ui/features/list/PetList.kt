@@ -21,18 +21,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.squareup.picasso.MemoryPolicy
-import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import laurenyew.petadoptsampleapp.R
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
 
 @Composable
 fun PetList(
-    animals: State<List<AnimalModel>>,
+    animals: State<List<Animal>>,
     onItemClicked: (id: String) -> Unit,
-    onItemFavorited: (item: AnimalModel, isFavorited: Boolean) -> Unit
+    onItemFavorited: (item: Animal, isFavorited: Boolean) -> Unit
 ) {
     val items = animals.value
     LazyColumn {
@@ -61,7 +59,7 @@ sealed class ImageState {
 
 @Composable
 fun PetListItem(
-    item: AnimalModel,
+    item: Animal,
     imageState: State<ImageState>,
     onItemClicked: (id: String) -> Unit,
     onItemFavorited: (isFavorited: Boolean) -> Unit
@@ -78,7 +76,7 @@ fun PetListItem(
     val loadedImageState = imageState.value
     Row(
         modifier = Modifier
-            .clickable(onClick = { onItemClicked(item.id) })
+            .clickable(onClick = { onItemClicked(item.animalId) })
     ) {
         when (loadedImageState) {
             is ImageState.Success -> Image(
@@ -152,8 +150,8 @@ fun PetListItem(
 @Preview
 @Composable
 fun PetListItemPreview() {
-    val animalModel = AnimalModel(
-        id = "testId", name = "Fido", type = "Dog",
+    val animalModel = Animal(
+        animalId = "testId", name = "Fido", type = "Dog",
         sex = "Male",
         age = "7 years",
         size = "Large",

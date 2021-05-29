@@ -34,7 +34,7 @@ fun HomeScreen(viewModel: HomeScreenViewModel = viewModel()) {
         if (lastSearchZipCode.value.isNotEmpty()) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Your last search zipcode: $lastSearchZipCode",
+                text = "Your last search zipcode: ${lastSearchZipCode.value}",
                 modifier = Modifier
                     .padding(8.dp)
             )

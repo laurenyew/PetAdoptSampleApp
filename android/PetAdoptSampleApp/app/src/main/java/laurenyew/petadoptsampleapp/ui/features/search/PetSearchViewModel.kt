@@ -56,7 +56,7 @@ class PetSearchViewModel @Inject constructor(
                             favoriteRepository.favoriteIds()
                         val searchedAnimals =
                             searchResponse.animals?.map {
-                                if (favorites.contains(it.id)) {
+                                if (favorites.contains(it.animalId)) {
                                     it.copy(true)
                                 } else {
                                     it

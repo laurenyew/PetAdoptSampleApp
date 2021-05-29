@@ -1,7 +1,7 @@
 package laurenyew.petadoptsampleapp.repository.networking.commands
 
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
-import laurenyew.petadoptsampleapp.repository.models.ContactModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.database.animal.Contact
 import laurenyew.petadoptsampleapp.repository.networking.api.PetFinderApi
 import laurenyew.petadoptsampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Response
@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SearchPetsCommands @Inject constructor(
     private val api: PetFinderApi
 ) {
-    suspend fun searchForNearbyDogs(location: String): List<AnimalModel> {
+    suspend fun searchForNearbyDogs(location: String): List<Animal> {
         Timber.d("Executing $SEARCH_FOR_NEARBY_DOGS_TAG")
         val response = api.searchPets(location = location)
         return parseResponse(response)
@@ -23,14 +23,14 @@ class SearchPetsCommands @Inject constructor(
     @Throws(RuntimeException::class)
     private fun parseResponse(
         networkResponse: Response<SearchPetsNetworkResponse?>?
-    ): ArrayList<AnimalModel> {
+    ): ArrayList<Animal> {
         val data = networkResponse?.body()
         if (networkResponse?.code() != 200 || data == null) {
             val error = "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
             Timber.e(error)
             throw RuntimeException(error)
         } else {
-            val animalList = ArrayList<AnimalModel>()
+            val animalList = ArrayList<Animal>()
             data.animals.forEach {
                 val photo = if (it.photos.isNotEmpty()) {
                     it.photos[0].fullUrl
@@ -40,8 +40,8 @@ class SearchPetsCommands @Inject constructor(
 
                 val description = parseDescription(it.description)
                 animalList.add(
-                    AnimalModel(
-                        id = it.id,
+                    Animal(
+                        animalId = it.id,
                         orgId = it.organizationId,
                         type = it.type,
                         name = it.name,
@@ -53,7 +53,7 @@ class SearchPetsCommands @Inject constructor(
                         breed = it.breeds.primary,
                         photoUrl = photo,
                         distance = it.distance,
-                        contact = ContactModel(
+                        contact = Contact(
                             email = it.contact.email,
                             phone = it.contact.phone,
                             address = it.contact.address.address1 + "\n"

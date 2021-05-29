@@ -1,18 +1,18 @@
 package laurenyew.petadoptsampleapp.database
 
+import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchAnimalList
-import laurenyew.petadoptsampleapp.database.search.SearchAnimalListDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
 import javax.inject.Inject
 
 class DatabaseManager @Inject constructor(
     private val database: PetAdoptDatabase
 ) : FavoriteAnimalDatabaseProvider,
-    SearchAnimalListDatabaseProvider,
+    AnimalDatabaseProvider,
     SearchTermDatabaseProvider {
     //region Favorite Animal Database
     override suspend fun getAllFavoriteAnimals(): List<FavoriteAnimal> =
@@ -34,14 +34,14 @@ class DatabaseManager @Inject constructor(
     //endregion
 
     //region Search Animal List
-    override suspend fun getSearchedAnimalList(searchId: String): List<AnimalModel>? =
+    override suspend fun getSearchedAnimalList(searchId: String): List<Animal>? =
         database.searchAnimalListDao().getSearchedAnimalList(searchId)?.animalList
 
     override suspend fun deleteSearchedAnimalList(searchId: String) {
         database.searchAnimalListDao().deleteSearchedAnimalList(searchId)
     }
 
-    override suspend fun insertSearchedAnimalList(searchId: String, list: List<AnimalModel>) {
+    override suspend fun insertSearchedAnimalList(searchId: String, list: List<Animal>) {
         database.searchAnimalListDao()
             .insert(SearchAnimalList(searchId = searchId, animalList = list))
     }

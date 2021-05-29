@@ -1,9 +1,9 @@
 package laurenyew.petadoptsampleapp.repository
 
-import laurenyew.petadoptsampleapp.database.search.SearchAnimalListDatabaseProvider
+import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
 import timber.log.Timber
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class PetSearchRepository @Inject constructor(
     private val searchPetCommand: SearchPetsCommands,
-    private val searchAnimalListDatabaseProvider: SearchAnimalListDatabaseProvider,
+    private val animalDatabaseProvider: AnimalDatabaseProvider,
     private val searchTermDatabaseProvider: SearchTermDatabaseProvider
 ) {
     suspend fun getNearbyDogs(zipcode: String): SearchPetsRepoResponse = try {
@@ -47,11 +47,11 @@ class PetSearchRepository @Inject constructor(
         return searchId
     }
 
-    suspend fun getSearchedAnimalList(searchId: String): List<AnimalModel>? =
-        searchAnimalListDatabaseProvider.getSearchedAnimalList(searchId)
+    suspend fun getSearchedAnimalList(searchId: String): List<Animal>? =
+        animalDatabaseProvider.getSearchedAnimalList(searchId)
 
-    private suspend fun saveSearchedAnimalList(searchId: String, animalList: List<AnimalModel>) {
-        searchAnimalListDatabaseProvider.insertSearchedAnimalList(searchId, animalList)
+    private suspend fun saveSearchedAnimalList(searchId: String, animalList: List<Animal>) {
+        animalDatabaseProvider.insertSearchedAnimalList(searchId, animalList)
     }
 
     companion object {

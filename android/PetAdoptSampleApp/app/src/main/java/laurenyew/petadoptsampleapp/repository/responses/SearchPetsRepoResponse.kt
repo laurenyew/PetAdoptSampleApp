@@ -1,9 +1,9 @@
 package laurenyew.petadoptsampleapp.repository.responses
 
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
 
 sealed class SearchPetsRepoResponse {
-    data class Success(val animals: List<AnimalModel>?) : SearchPetsRepoResponse()
+    data class Success(val animals: List<Animal>?) : SearchPetsRepoResponse()
 
     sealed class Error : SearchPetsRepoResponse() {
         object NoSearchTermProvided : Error()

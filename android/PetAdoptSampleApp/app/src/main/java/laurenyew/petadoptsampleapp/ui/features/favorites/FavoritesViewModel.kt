@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.ui.features.list.PetListViewModel
 import javax.inject.Inject
 
@@ -21,8 +21,8 @@ class FavoritesViewModel @Inject constructor(
         _isLoading.value = true
         viewModelScope.launch {
             val favorites = favoriteRepository.favorites().map {
-                AnimalModel(
-                    id = it.id,
+                Animal(
+                    animalId = it.id,
                     photoUrl = it.photoUrl,
                     name = it.name,
                     age = it.age,

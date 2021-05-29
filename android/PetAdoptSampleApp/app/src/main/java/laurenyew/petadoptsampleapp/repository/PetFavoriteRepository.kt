@@ -2,7 +2,7 @@ package laurenyew.petadoptsampleapp.repository
 
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,9 +18,9 @@ class PetFavoriteRepository @Inject constructor(
     suspend fun isFavorite(id: String): Boolean =
         favoriteAnimalDatabaseProvider.isAnimalFavorited(id)
 
-    suspend fun favorite(animal: AnimalModel) {
+    suspend fun favorite(animal: Animal) {
         val favoriteAnimal = FavoriteAnimal(
-            id = animal.id,
+            id = animal.animalId,
             name = animal.name,
             photoUrl = animal.photoUrl,
             age = animal.age,

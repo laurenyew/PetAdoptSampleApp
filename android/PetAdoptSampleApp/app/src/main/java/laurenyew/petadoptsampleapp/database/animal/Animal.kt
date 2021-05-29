@@ -1,7 +1,10 @@
-package laurenyew.petadoptsampleapp.repository.models
+package laurenyew.petadoptsampleapp.database.animal
 
-data class AnimalModel(
-    val id: String,
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class Animal(
+    val animalId: String,
     val orgId: String? = null,
     val type: String? = null,
     val name: String? = null,
@@ -13,12 +16,12 @@ data class AnimalModel(
     val breed: String? = null,
     val photoUrl: String? = null,
     val distance: String? = null,
-    val contact: ContactModel? = null,
+    val contact: Contact? = null,
     val isFavorite: Boolean = false
 ) {
-    fun copy(isFavorite: Boolean): AnimalModel =
-        AnimalModel(
-            id,
+    fun copy(isFavorite: Boolean): Animal =
+        Animal(
+            animalId,
             orgId,
             type,
             name,
@@ -30,7 +33,8 @@ data class AnimalModel(
         )
 }
 
-data class ContactModel(
+@JsonClass(generateAdapter = true)
+data class Contact(
     val email: String? = null,
     val phone: String? = null,
     val address: String? = null

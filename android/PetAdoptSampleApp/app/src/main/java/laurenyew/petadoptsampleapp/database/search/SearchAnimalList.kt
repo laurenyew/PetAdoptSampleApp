@@ -1,12 +1,12 @@
 package laurenyew.petadoptsampleapp.database.search
 
 import androidx.room.*
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
 
 @Entity
 data class SearchAnimalList(
     @PrimaryKey val searchId: String,
-    val animalList: List<AnimalModel>
+    val animalList: List<Animal>
 )
 
 @Dao
