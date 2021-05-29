@@ -182,9 +182,6 @@ fun loadPicture(url: String?): State<ImageState> {
     url?.let {
         Picasso.get()
             .load(url)
-            .memoryPolicy(MemoryPolicy.NO_CACHE)
-            .networkPolicy(NetworkPolicy.NO_CACHE)
-            .centerInside()
             .into(object : Target {
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                     if (bitmap != null) {

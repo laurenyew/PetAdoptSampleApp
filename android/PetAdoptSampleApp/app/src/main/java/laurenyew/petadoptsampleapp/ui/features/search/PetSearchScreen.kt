@@ -61,6 +61,18 @@ fun PetSearchScreen(
             }
         )
         Spacer(Modifier.height(10.dp))
+        if (isLoading.value) {
+            CircularProgressIndicator(
+                modifier =
+                Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
+        if (isError.value && !isLoading.value) {
+            Text(
+                text = stringResource(id = R.string.empty_results),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
         PetList(animals = animalsState,
             onItemClicked = { viewModel.openAnimalDetail(it) },
             onItemFavorited = { item, isFavorited ->
@@ -71,20 +83,6 @@ fun PetSearchScreen(
                 }
             }
         )
-        if (isLoading.value) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator()
-            }
-        }
-        if (isError.value) {
-            Text(
-                text = stringResource(id = R.string.empty_results),
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-        }
     }
 }
 
