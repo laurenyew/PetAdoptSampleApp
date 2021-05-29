@@ -41,6 +41,10 @@ class DatabaseManager @Inject constructor(
         database.searchAnimalListDao().deleteSearchedAnimalList(searchId)
     }
 
+    override suspend fun deleteAllSearchedAnimalLists() {
+        database.searchAnimalListDao().deleteAllSearchedAnimalLists()
+    }
+
     override suspend fun insertSearchedAnimalList(searchId: String, list: List<Animal>) {
         database.searchAnimalListDao()
             .insert(SearchAnimalList(searchId = searchId, animalList = list))

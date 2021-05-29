@@ -29,10 +29,12 @@ class PetSearchViewModel @Inject constructor(
         viewModelScope.launch {
             searchRepository.getLastSearchTerm()?.let { searchTerm ->
                 location.value = searchTerm.zipcode
-                searchRepository.getSearchedAnimalList(searchTerm.searchId)
-                    ?.let { lastSearchedAnimalList ->
-                        _animals.value = lastSearchedAnimalList
-                    }
+                val savedAnimalList = searchRepository.getSearchedAnimalList(searchTerm.searchId)
+                if (savedAnimalList != null) {
+                    _animals.value = savedAnimalList // use saved list
+                } else {
+                    searchAnimals() // restart search with last search term
+                }
             }
         }
     }

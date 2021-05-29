@@ -12,14 +12,16 @@ import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstant
 import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.LOCATION_PARAM
 import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.ORG_PARAM
 import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.PAGE_PARAM
+import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.PET_DETAILS_PATH
 import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.RESULT_NUM_LIMIT_PARAM
-import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.SEARCH_PETS_METHOD
+import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.SEARCH_PETS_PATH
 import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.STATUS_PARAM
 import laurenyew.petadoptsampleapp.repository.networking.api.PetAdoptApiConstants.Search.TYPE_PARAM
+import laurenyew.petadoptsampleapp.repository.networking.api.responses.PetDetailResponse
 import laurenyew.petadoptsampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PetFinderApi {
@@ -27,7 +29,7 @@ interface PetFinderApi {
      * Search pets using the given query parameters)
      */
     @Throws(RuntimeException::class)
-    @GET(SEARCH_PETS_METHOD)
+    @GET(SEARCH_PETS_PATH)
     suspend fun searchPets(
         @Query(TYPE_PARAM) type: String? = null,
         @Query(BREED_PARAM) breed: String? = null,
@@ -45,4 +47,10 @@ interface PetFinderApi {
         @Query(PAGE_PARAM) page: Int? = null,
         @Query(RESULT_NUM_LIMIT_PARAM) resultLimit: Int? = null
     ): Response<SearchPetsNetworkResponse?>
+
+    @Throws(RuntimeException::class)
+    @GET(PET_DETAILS_PATH)
+    suspend fun getPetDetail(
+        @Path(value = "id") animalId: String? = null
+    ): Response<PetDetailResponse?>
 }

@@ -1,15 +1,29 @@
 package laurenyew.petadoptsampleapp.repository
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
-import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class PetFavoriteRepository @Inject constructor(
-    private val favoriteAnimalDatabaseProvider: FavoriteAnimalDatabaseProvider
+    private val petDetailCommands: PetDetailCommands,
+    private val favoriteAnimalDatabaseProvider: FavoriteAnimalDatabaseProvider,
+    pollManager: PollManager,
+    externalScope: CoroutineScope
 ) {
+    init {
+        // When data refresh flow is required, we need to refresh the favorites data
+        pollManager.dataRefreshRequiredFlow.onEach {
+            refreshFavoritesData()
+        }.launchIn(externalScope)
+    }
+
     suspend fun favorites(): List<FavoriteAnimal> =
         favoriteAnimalDatabaseProvider.getAllFavoriteAnimals()
 
@@ -32,5 +46,9 @@ class PetFavoriteRepository @Inject constructor(
 
     suspend fun unFavorite(id: String) {
         favoriteAnimalDatabaseProvider.unFavoriteAnimal(id)
+    }
+
+    private suspend fun refreshFavoritesData() {
+
     }
 }

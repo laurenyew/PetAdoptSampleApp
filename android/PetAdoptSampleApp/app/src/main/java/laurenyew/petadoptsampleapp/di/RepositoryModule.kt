@@ -6,13 +6,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
 import laurenyew.petadoptsampleapp.database.DatabaseManager
 import laurenyew.petadoptsampleapp.database.PetAdoptDatabase
-import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetSearchRepository
+import laurenyew.petadoptsampleapp.repository.PollManager
+import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import javax.inject.Singleton
 
@@ -57,12 +60,35 @@ class RepositoryModule {
     fun providePetSearchRepository(
         searchPetsCommands: SearchPetsCommands,
         animalDatabaseProvider: AnimalDatabaseProvider,
-        searchTermDatabaseProvider: SearchTermDatabaseProvider
+        searchTermDatabaseProvider: SearchTermDatabaseProvider,
+        pollManager: PollManager,
+        externalScope: CoroutineScope,
     ): PetSearchRepository =
-        PetSearchRepository(searchPetsCommands, animalDatabaseProvider, searchTermDatabaseProvider)
+        PetSearchRepository(
+            searchPetsCommands,
+            animalDatabaseProvider,
+            searchTermDatabaseProvider,
+            pollManager,
+            externalScope
+        )
 
     @Singleton
     @Provides
-    fun providePetFavoriteRepository(favoriteAnimalDatabaseProvider: FavoriteAnimalDatabaseProvider): PetFavoriteRepository =
-        PetFavoriteRepository(favoriteAnimalDatabaseProvider)
+    fun providePetFavoriteRepository(
+        petDetailCommands: PetDetailCommands,
+        favoriteAnimalDatabaseProvider: FavoriteAnimalDatabaseProvider,
+        pollManager: PollManager,
+        externalScope: CoroutineScope,
+    ): PetFavoriteRepository =
+        PetFavoriteRepository(
+            petDetailCommands,
+            favoriteAnimalDatabaseProvider,
+            pollManager,
+            externalScope
+        )
+
+    @Singleton
+    @Provides
+    fun providePollManager(applicationScope: CoroutineScope): PollManager =
+        PollManager(applicationScope)
 }

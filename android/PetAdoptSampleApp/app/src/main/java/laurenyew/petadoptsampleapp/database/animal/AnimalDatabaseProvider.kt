@@ -5,5 +5,7 @@ interface AnimalDatabaseProvider {
 
     suspend fun deleteSearchedAnimalList(searchId: String)
 
+    suspend fun deleteAllSearchedAnimalLists()
+
     suspend fun insertSearchedAnimalList(searchId: String, list: List<Animal>)
 }

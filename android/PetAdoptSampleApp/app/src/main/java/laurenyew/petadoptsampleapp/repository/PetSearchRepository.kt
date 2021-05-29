@@ -1,9 +1,12 @@
 package laurenyew.petadoptsampleapp.repository
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
-import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
 import timber.log.Timber
@@ -15,8 +18,18 @@ import javax.inject.Singleton
 class PetSearchRepository @Inject constructor(
     private val searchPetCommand: SearchPetsCommands,
     private val animalDatabaseProvider: AnimalDatabaseProvider,
-    private val searchTermDatabaseProvider: SearchTermDatabaseProvider
+    private val searchTermDatabaseProvider: SearchTermDatabaseProvider,
+    pollManager: PollManager,
+    externalScope: CoroutineScope
 ) {
+    init {
+        // Poll flow when we need to refresh
+        pollManager.dataRefreshRequiredFlow.onEach {
+            // Clear all saved searched animal lists, we need to refresh the data.
+            animalDatabaseProvider.deleteAllSearchedAnimalLists()
+        }.launchIn(externalScope)
+    }
+
     suspend fun getNearbyDogs(zipcode: String): SearchPetsRepoResponse = try {
         val animals = searchPetCommand.searchForNearbyDogs(zipcode)
         val searchId = saveSearchTerm(zipcode)
