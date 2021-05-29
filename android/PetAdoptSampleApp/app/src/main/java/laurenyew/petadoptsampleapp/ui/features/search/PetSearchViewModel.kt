@@ -16,9 +16,10 @@ import javax.inject.Inject
 @HiltViewModel
 class PetSearchViewModel @Inject constructor(
     private val searchRepository: PetSearchRepository,
-    private val favoriteRepository: PetFavoriteRepository
+    private val favoriteRepository: PetFavoriteRepository,
 ) : PetListViewModel(favoriteRepository) {
-    val location: MutableState<String> = mutableStateOf("")
+    val location: MutableState<String> =
+        mutableStateOf(searchRepository.getLastSearchTerm())
 
     private var currentSearchLocation = ""
     private var currentSearchJob: Job? = null
@@ -51,6 +52,8 @@ class PetSearchViewModel @Inject constructor(
 
                         _animals.value = searchedAnimals ?: emptyList()
                         _isError.value = false
+
+                        searchRepository.saveSearchTerms(newLocation)
                     }
                     else -> {
                         _animals.value = emptyList()

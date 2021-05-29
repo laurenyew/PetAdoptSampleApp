@@ -11,12 +11,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import laurenyew.petadoptsampleapp.BuildConfig
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: HomeScreenViewModel = viewModel()) {
+
+    val lastSearchZipCode = viewModel.lastSearchTerm
+
     Column(Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(R.drawable.ic_logo),
@@ -26,6 +30,16 @@ fun HomeScreen() {
                 .padding(top = 16.dp, bottom = 16.dp)
         )
         Divider(color = dividerColor)
+        if (lastSearchZipCode.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Your last search zipcode: $lastSearchZipCode",
+                modifier = Modifier
+                    .padding(8.dp)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Divider(color = dividerColor)
+        }
         Text(
             text = "Welcome to the sample PetAdopt App!",
             style = MaterialTheme.typography.subtitle1,

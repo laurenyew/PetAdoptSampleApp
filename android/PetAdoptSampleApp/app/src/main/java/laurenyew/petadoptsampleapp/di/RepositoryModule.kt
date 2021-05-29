@@ -1,7 +1,7 @@
 package laurenyew.petadoptsampleapp.di
 
 import android.app.Application
-import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -15,7 +15,7 @@ import laurenyew.petadoptsampleapp.repository.PetSearchRepository
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [ContextModule::class])
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
 
@@ -42,8 +42,11 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun providePetSearchRepository(searchPetsCommands: SearchPetsCommands): PetSearchRepository =
-        PetSearchRepository(searchPetsCommands)
+    fun providePetSearchRepository(
+        searchPetsCommands: SearchPetsCommands,
+        sharedPreferences: SharedPreferences
+    ): PetSearchRepository =
+        PetSearchRepository(searchPetsCommands, sharedPreferences)
 
     @Singleton
     @Provides
