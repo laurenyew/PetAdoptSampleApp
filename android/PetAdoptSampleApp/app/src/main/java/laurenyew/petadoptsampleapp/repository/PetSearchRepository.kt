@@ -27,6 +27,8 @@ class PetSearchRepository @Inject constructor(
         SearchPetsRepoResponse.Error.Unknown(e)
     }
 
+    suspend fun getSearchTerms(): List<SearchTerm> =
+        searchTermDatabaseProvider.getAllSearchTerms()
 
     suspend fun getLastSearchTerm(): SearchTerm? =
         searchTermDatabaseProvider.getLastSearchTerm()

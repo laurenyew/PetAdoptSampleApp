@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.ui.features.list.PetList
 import laurenyew.petadoptsampleapp.ui.theme.sectionHeader
@@ -26,7 +27,7 @@ import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
 
 @Composable
 fun PetSearchScreen(
-    viewModel: PetSearchViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    viewModel: PetSearchViewModel = hiltViewModel()
 ) {
     val animalsState = viewModel.animals.collectAsStateLifecycleAware(initial = emptyList())
     val locationState = viewModel.location

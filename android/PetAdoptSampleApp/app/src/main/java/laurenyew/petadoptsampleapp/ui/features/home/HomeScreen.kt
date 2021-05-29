@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import laurenyew.petadoptsampleapp.BuildConfig
 import laurenyew.petadoptsampleapp.R
@@ -18,7 +19,7 @@ import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
 
 @Composable
-fun HomeScreen(viewModel: HomeScreenViewModel = viewModel()) {
+fun HomeScreen(viewModel: HomeScreenViewModel = hiltViewModel()) {
 
     val lastSearchZipCode = viewModel.lastSearchTerm.collectAsStateLifecycleAware(initial = "")
 

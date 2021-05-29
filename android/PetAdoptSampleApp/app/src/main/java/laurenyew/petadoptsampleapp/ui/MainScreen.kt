@@ -24,6 +24,8 @@ import laurenyew.petadoptsampleapp.ui.features.home.HomeScreen
 import laurenyew.petadoptsampleapp.ui.features.home.HomeScreenViewModel
 import laurenyew.petadoptsampleapp.ui.features.search.PetSearchScreen
 import laurenyew.petadoptsampleapp.ui.features.search.PetSearchViewModel
+import laurenyew.petadoptsampleapp.ui.features.settings.SettingsScreen
+import laurenyew.petadoptsampleapp.ui.features.settings.SettingsViewModel
 import laurenyew.petadoptsampleapp.ui.theme.PetAdoptTheme
 
 
@@ -106,6 +108,10 @@ fun MainScreenContent(
         composable(DrawerScreens.Favorites.route) {
             val favoritesViewModel = hiltViewModel<FavoritesViewModel>()
             PetFavoritesScreen(favoritesViewModel)
+        }
+        composable(DrawerScreens.Settings.route) {
+            val settingsViewModel = hiltViewModel<SettingsViewModel>()
+            SettingsScreen(settingsViewModel)
         }
     }
 }

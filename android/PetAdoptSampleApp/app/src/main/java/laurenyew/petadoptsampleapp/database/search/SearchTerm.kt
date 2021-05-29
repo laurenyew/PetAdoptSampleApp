@@ -6,7 +6,7 @@ import androidx.room.*
 data class SearchTerm(
     @PrimaryKey val searchId: String,
     val zipcode: String,
-    val timestamp: Long
+    val timestamp: Long = System.currentTimeMillis()
 )
 
 @Dao

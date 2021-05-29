@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 
 @Composable
 fun PetList(
@@ -45,7 +46,7 @@ fun PetList(
                     onItemFavorited(item, isFavorited)
                 }
             )
-            Divider(color = Color.Black)
+            Divider(color = dividerColor)
         }
     }
 }

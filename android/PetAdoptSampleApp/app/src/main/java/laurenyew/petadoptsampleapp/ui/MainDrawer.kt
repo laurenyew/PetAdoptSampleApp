@@ -28,12 +28,14 @@ sealed class DrawerScreens(val route: String) {
     object Home : DrawerScreens("Home")
     object Search : DrawerScreens("Search")
     object Favorites : DrawerScreens("Favorites")
+    object Settings : DrawerScreens("Settings")
 }
 
 private val screens = listOf(
     DrawerScreens.Home,
     DrawerScreens.Search,
-    DrawerScreens.Favorites
+    DrawerScreens.Favorites,
+    DrawerScreens.Settings
 )
 
 @Composable
