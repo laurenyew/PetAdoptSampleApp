@@ -15,11 +15,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import laurenyew.petadoptsampleapp.BuildConfig
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
+import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
 
 @Composable
 fun HomeScreen(viewModel: HomeScreenViewModel = viewModel()) {
 
-    val lastSearchZipCode = viewModel.lastSearchTerm
+    val lastSearchZipCode = viewModel.lastSearchTerm.collectAsStateLifecycleAware(initial = "")
 
     Column(Modifier.fillMaxSize()) {
         Image(
@@ -30,7 +31,7 @@ fun HomeScreen(viewModel: HomeScreenViewModel = viewModel()) {
                 .padding(top = 16.dp, bottom = 16.dp)
         )
         Divider(color = dividerColor)
-        if (lastSearchZipCode.isNotEmpty()) {
+        if (lastSearchZipCode.value.isNotEmpty()) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Your last search zipcode: $lastSearchZipCode",

@@ -19,10 +19,23 @@ class PetSearchViewModel @Inject constructor(
     private val favoriteRepository: PetFavoriteRepository,
 ) : PetListViewModel(favoriteRepository) {
     val location: MutableState<String> =
-        mutableStateOf(searchRepository.getLastSearchTerm())
+        mutableStateOf("")
 
     private var currentSearchLocation = ""
     private var currentSearchJob: Job? = null
+
+    init {
+        // Load up list with the results of the last search
+        viewModelScope.launch {
+            searchRepository.getLastSearchTerm()?.let { searchTerm ->
+                location.value = searchTerm.zipcode
+                searchRepository.getSearchedAnimalList(searchTerm.searchId)
+                    ?.let { lastSearchedAnimalList ->
+                        _animals.value = lastSearchedAnimalList
+                    }
+            }
+        }
+    }
 
     fun searchAnimals() {
         val newLocation = location.value
@@ -53,7 +66,7 @@ class PetSearchViewModel @Inject constructor(
                         _animals.value = searchedAnimals ?: emptyList()
                         _isError.value = false
 
-                        searchRepository.saveSearchTerms(newLocation)
+                        searchRepository.saveSearchTerm(newLocation)
                     }
                     else -> {
                         _animals.value = emptyList()

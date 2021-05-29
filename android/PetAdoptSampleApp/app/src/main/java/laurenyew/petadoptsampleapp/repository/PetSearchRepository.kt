@@ -1,9 +1,9 @@
 package laurenyew.petadoptsampleapp.repository
 
-import android.content.SharedPreferences
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
+import laurenyew.petadoptsampleapp.database.search.SearchAnimalListDatabaseProvider
+import laurenyew.petadoptsampleapp.database.search.SearchTerm
+import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
+import laurenyew.petadoptsampleapp.repository.models.AnimalModel
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
 import timber.log.Timber
@@ -14,27 +14,44 @@ import javax.inject.Singleton
 @Singleton
 class PetSearchRepository @Inject constructor(
     private val searchPetCommand: SearchPetsCommands,
-    private val sharedPreferences: SharedPreferences
+    private val searchAnimalListDatabaseProvider: SearchAnimalListDatabaseProvider,
+    private val searchTermDatabaseProvider: SearchTermDatabaseProvider
 ) {
-    private var lastSearchTerm = MutableStateFlow(getLastSearchTerm())
+    suspend fun getNearbyDogs(zipcode: String): SearchPetsRepoResponse = try {
+        val animals = searchPetCommand.searchForNearbyDogs(zipcode)
+        val searchId = saveSearchTerm(zipcode)
+        saveSearchedAnimalList(searchId, animals)
+        SearchPetsRepoResponse.Success(animals)
+    } catch (e: Exception) {
+        Timber.e(e)
+        SearchPetsRepoResponse.Error.Unknown(e)
+    }
 
-    suspend fun getNearbyDogs(location: String = lastSearchTerm.value): SearchPetsRepoResponse =
-        try {
-            val animals = searchPetCommand.searchForNearbyDogs(location)
-            SearchPetsRepoResponse.Success(animals)
-        } catch (e: Exception) {
-            Timber.e(e)
-            SearchPetsRepoResponse.Error(e)
-        }
 
-    fun getLastSearchTerm(): String =
-        sharedPreferences.getString(LAST_SEARCH_ZIPCODE_KEY, "") ?: ""
+    suspend fun getLastSearchTerm(): SearchTerm? =
+        searchTermDatabaseProvider.getLastSearchTerm()
 
-    fun saveSearchTerms(zipcode: String) {
-        sharedPreferences.edit()
-            .putString(LAST_SEARCH_ZIPCODE_KEY, zipcode)
-            .apply()
-        lastSearchTerm.value = zipcode
+    /**
+     * Save search term into database
+     * For now, we treat same zipcode search terms as the same search term
+     * @return searchId
+     */
+    suspend fun saveSearchTerm(zipcode: String): String {
+        val searchId = zipcode
+        val searchTerm = SearchTerm(
+            searchId = searchId,
+            zipcode = zipcode,
+            timestamp = System.currentTimeMillis()
+        )
+        searchTermDatabaseProvider.insert(searchTerm)
+        return searchId
+    }
+
+    suspend fun getSearchedAnimalList(searchId: String): List<AnimalModel>? =
+        searchAnimalListDatabaseProvider.getSearchedAnimalList(searchId)
+
+    private suspend fun saveSearchedAnimalList(searchId: String, animalList: List<AnimalModel>) {
+        searchAnimalListDatabaseProvider.insertSearchedAnimalList(searchId, animalList)
     }
 
     companion object {

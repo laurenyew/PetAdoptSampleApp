@@ -51,6 +51,15 @@ class DatabaseManager @Inject constructor(
     override suspend fun getAllSearchTerms(): List<SearchTerm> =
         database.searchTermDao().getAllSearchTerms()
 
+    override suspend fun getLastSearchTerm(): SearchTerm? {
+        val orderedSearchTerms = getAllSearchTerms()
+        return if (orderedSearchTerms.isNotEmpty()) {
+            orderedSearchTerms[0]
+        } else {
+            null
+        }
+    }
+
     override suspend fun getSearchTerm(searchId: String): SearchTerm? =
         database.searchTermDao().getSearchTerm(searchId)
 

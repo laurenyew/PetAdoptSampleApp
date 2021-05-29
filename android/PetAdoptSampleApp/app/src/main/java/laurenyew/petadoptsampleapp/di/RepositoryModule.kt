@@ -10,6 +10,8 @@ import dagger.hilt.components.SingletonComponent
 import laurenyew.petadoptsampleapp.database.DatabaseManager
 import laurenyew.petadoptsampleapp.database.PetAdoptDatabase
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.database.search.SearchAnimalListDatabaseProvider
+import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetSearchRepository
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
@@ -39,14 +41,26 @@ class RepositoryModule {
     fun provideFavoriteAnimalDatabaseProvider(databaseManager: DatabaseManager): FavoriteAnimalDatabaseProvider =
         databaseManager
 
+    @Singleton
+    @Provides
+    fun provideSearchAnimalListDatabaseProvider(databaseManager: DatabaseManager): SearchAnimalListDatabaseProvider =
+        databaseManager
+
+
+    @Singleton
+    @Provides
+    fun provideSearchTermDatabaseProvider(databaseManager: DatabaseManager): SearchTermDatabaseProvider =
+        databaseManager
+
 
     @Singleton
     @Provides
     fun providePetSearchRepository(
         searchPetsCommands: SearchPetsCommands,
-        sharedPreferences: SharedPreferences
+        searchAnimalListDatabaseProvider: SearchAnimalListDatabaseProvider,
+        searchTermDatabaseProvider: SearchTermDatabaseProvider
     ): PetSearchRepository =
-        PetSearchRepository(searchPetsCommands, sharedPreferences)
+        PetSearchRepository(searchPetsCommands, searchAnimalListDatabaseProvider, searchTermDatabaseProvider)
 
     @Singleton
     @Provides
