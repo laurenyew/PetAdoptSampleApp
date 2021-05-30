@@ -23,9 +23,12 @@ import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
 fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
     val searchTermsList =
         viewModel.searchTermsList.collectAsStateLifecycleAware(initial = emptyList())
+    val lastPollTime =
+        viewModel.lastPollTime.collectAsStateLifecycleAware(initial = "")
     Column(Modifier.fillMaxSize()) {
         SearchTermsList(searchTermsList)
         Divider(color = dividerColor)
+        PollInfoCard(lastPollTime)
     }
 }
 
@@ -62,4 +65,32 @@ fun SearchTermsListPreview() {
         )
     }
     SearchTermsList(searchTerms)
+}
+
+@Composable
+fun PollInfoCard(pollTimeState: State<String>) {
+    val pollTimeString = pollTimeState.value
+    if (pollTimeString.isEmpty()) {
+        Text(
+            text = "No last poll.",
+            modifier = Modifier
+                .padding(8.dp)
+        )
+    } else {
+        Text(
+            text = "Last poll time: $pollTimeString",
+            modifier = Modifier
+                .padding(8.dp)
+        )
+    }
+    Divider(color = dividerColor)
+}
+
+@Preview
+@Composable
+fun PollInfoCardPreview() {
+    val pollTimeState = remember {
+        mutableStateOf("")
+    }
+    PollInfoCard(pollTimeState = pollTimeState)
 }

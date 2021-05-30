@@ -1,6 +1,7 @@
 package laurenyew.petadoptsampleapp.di
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -89,6 +90,8 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun providePollManager(applicationScope: CoroutineScope): PollManager =
-        PollManager(applicationScope)
+    fun providePollManager(
+        sharedPreferences: SharedPreferences,
+                           applicationScope: CoroutineScope): PollManager =
+        PollManager(sharedPreferences, applicationScope)
 }
