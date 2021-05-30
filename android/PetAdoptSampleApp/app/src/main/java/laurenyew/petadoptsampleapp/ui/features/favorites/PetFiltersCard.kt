@@ -20,68 +20,74 @@ fun PetFiltersCard(
     onUpdateFavoritesFilter: (FavoritesFilter) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val showExpandedState = remember {
+        mutableStateOf(false)
+    }
     val favoritesFilter = favoritesFilterState.value
     val showDogs = remember {
-        mutableStateOf(favoritesFilter.typeFilter.showDogs)
+        mutableStateOf(favoritesFilter.showDogs)
     }
     val showCats = remember {
-        mutableStateOf(favoritesFilter.typeFilter.showCats)
+        mutableStateOf(favoritesFilter.showCats)
     }
     val showFemales = remember {
-        mutableStateOf(favoritesFilter.genderFilter.showFemales)
+        mutableStateOf(favoritesFilter.showFemales)
     }
     val showMales = remember {
-        mutableStateOf(favoritesFilter.genderFilter.showMales)
+        mutableStateOf(favoritesFilter.showMales)
     }
-    Column(modifier = modifier) {
-        Text(
-            text = "Filter Your Favorites",
-            modifier = Modifier.padding(8.dp)
-        )
+    Column(modifier = modifier.padding(8.dp)) {
+        Row {
+            Text(
+                text = "Filter Your Favorites",
+                modifier = Modifier.padding(8.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            //TODO
+        }
         Spacer(modifier = Modifier.height(8.dp))
-        PetFilterCheckbox(
-            text = "Show Dogs",
-            checkedState = showDogs,
-            onCheckedChange = { showDogs.value = it },
-            modifier = Modifier.padding(8.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        PetFilterCheckbox(
-            text = "Show Cats",
-            checkedState = showCats,
-            onCheckedChange = { showCats.value = it },
-            modifier = Modifier.padding(8.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        PetFilterCheckbox(
-            text = "Show Females",
-            checkedState = showFemales,
-            onCheckedChange = { showFemales.value = it },
-            modifier = Modifier.padding(8.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        PetFilterCheckbox(
-            text = "Show Males",
-            checkedState = showMales,
-            onCheckedChange = { showMales.value = it },
-            modifier = Modifier.padding(8.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = {
-            onUpdateFavoritesFilter(
-                favoritesFilter.copy(
-                    typeFilter = favoritesFilter.typeFilter.copy(
+        if (showExpandedState.value) {
+            PetFilterCheckbox(
+                text = "Show Dogs",
+                checkedState = showDogs,
+                onCheckedChange = { showDogs.value = it },
+                modifier = Modifier.padding(8.dp)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            PetFilterCheckbox(
+                text = "Show Cats",
+                checkedState = showCats,
+                onCheckedChange = { showCats.value = it },
+                modifier = Modifier.padding(8.dp)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            PetFilterCheckbox(
+                text = "Show Females",
+                checkedState = showFemales,
+                onCheckedChange = { showFemales.value = it },
+                modifier = Modifier.padding(8.dp)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            PetFilterCheckbox(
+                text = "Show Males",
+                checkedState = showMales,
+                onCheckedChange = { showMales.value = it },
+                modifier = Modifier.padding(8.dp)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = {
+                onUpdateFavoritesFilter(
+                    favoritesFilter.copy(
                         showDogs = showDogs.value,
                         showCats = showCats.value,
-                    ),
-                    genderFilter = favoritesFilter.genderFilter.copy(
                         showFemales = showFemales.value,
                         showMales = showMales.value
                     )
                 )
-            )
-        }) {
-            Text("Apply Filters")
+            }) {
+                Text("Apply Filters")
+            }
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }

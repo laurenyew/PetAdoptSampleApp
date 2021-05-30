@@ -47,13 +47,17 @@ fun PetSearchScreen(
         if (isLoading.value) {
             CircularProgressIndicator(
                 modifier =
-                Modifier.align(Alignment.CenterHorizontally)
+                Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(8.dp)
             )
         }
         if (isError.value && !isLoading.value) {
             Text(
                 text = stringResource(id = R.string.empty_results),
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(8.dp)
             )
         }
         PetList(animals = animalsState,
