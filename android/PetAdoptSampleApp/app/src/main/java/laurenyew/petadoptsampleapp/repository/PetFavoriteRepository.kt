@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.onEach
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
+import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesFilter
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,6 +17,7 @@ import javax.inject.Singleton
 class PetFavoriteRepository @Inject constructor(
     private val petDetailCommands: PetDetailCommands,
     private val favoriteAnimalDatabaseProvider: FavoriteAnimalDatabaseProvider,
+    private val favoritesFilterDatabaseProvider: FavoritesFilterDatabaseProvider,
     pollManager: PollManager,
     externalScope: CoroutineScope
 ) {
@@ -49,6 +52,13 @@ class PetFavoriteRepository @Inject constructor(
         favoriteAnimalDatabaseProvider.unFavoriteAnimal(id)
     }
 
+    suspend fun getFavoritesFilter(): FavoritesFilter =
+        favoritesFilterDatabaseProvider.getFavoritesFilter() ?: DEFAULT_FAVORITES_FILTER
+
+    suspend fun saveFavoritesFilter(favoritesFilter: FavoritesFilter) {
+        favoritesFilterDatabaseProvider.updateFavoritesFilter(favoritesFilter)
+    }
+
     private suspend fun refreshFavoritesData() {
         favorites().forEach {
             val updatedAnimal = petDetailCommands.fetchAnimalDetails(it.id)
@@ -66,5 +76,10 @@ class PetFavoriteRepository @Inject constructor(
                 Timber.e("Failed to get updated details for favorite animal. Data may be out of date")
             }
         }
+    }
+
+
+    companion object {
+        val DEFAULT_FAVORITES_FILTER = FavoritesFilter()
     }
 }

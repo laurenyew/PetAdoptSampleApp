@@ -12,6 +12,7 @@ import laurenyew.petadoptsampleapp.database.DatabaseManager
 import laurenyew.petadoptsampleapp.database.PetAdoptDatabase
 import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetSearchRepository
@@ -55,6 +56,11 @@ class RepositoryModule {
     fun provideSearchTermDatabaseProvider(databaseManager: DatabaseManager): SearchTermDatabaseProvider =
         databaseManager
 
+    @Singleton
+    @Provides
+    fun provideFavoritesFilterDatabaseProvider(databaseManager: DatabaseManager): FavoritesFilterDatabaseProvider =
+        databaseManager
+
 
     @Singleton
     @Provides
@@ -78,12 +84,14 @@ class RepositoryModule {
     fun providePetFavoriteRepository(
         petDetailCommands: PetDetailCommands,
         favoriteAnimalDatabaseProvider: FavoriteAnimalDatabaseProvider,
+        favoritesFilterDatabaseProvider: FavoritesFilterDatabaseProvider,
         pollManager: PollManager,
         externalScope: CoroutineScope,
     ): PetFavoriteRepository =
         PetFavoriteRepository(
             petDetailCommands,
             favoriteAnimalDatabaseProvider,
+            favoritesFilterDatabaseProvider,
             pollManager,
             externalScope
         )
@@ -92,6 +100,7 @@ class RepositoryModule {
     @Provides
     fun providePollManager(
         sharedPreferences: SharedPreferences,
-                           applicationScope: CoroutineScope): PollManager =
+        applicationScope: CoroutineScope
+    ): PollManager =
         PollManager(sharedPreferences, applicationScope)
 }

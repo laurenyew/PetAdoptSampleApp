@@ -4,16 +4,20 @@ import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchAnimalList
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
+import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesFilter
 import javax.inject.Inject
 
 class DatabaseManager @Inject constructor(
     private val database: PetAdoptDatabase
 ) : FavoriteAnimalDatabaseProvider,
     AnimalDatabaseProvider,
-    SearchTermDatabaseProvider {
+    SearchTermDatabaseProvider,
+    FavoritesFilterDatabaseProvider {
+
     //region Favorite Animal Database
     override suspend fun getAllFavoriteAnimals(): List<FavoriteAnimal> =
         database.favoriteAnimalDao().getFavoriteAnimals()
@@ -84,6 +88,21 @@ class DatabaseManager @Inject constructor(
         getSearchTerm(searchId)?.let {
             insert(it.copy(timestamp = System.currentTimeMillis()))
         }
+    }
+
+    //endregion
+    //region Favorites Filter
+    override suspend fun getFavoritesFilter(): FavoritesFilter? {
+        val filters = database.favoritesFilterDao().getFavoriteFilters()
+        return if (filters.isNotEmpty()) {
+            filters[0]
+        } else {
+            null
+        }
+    }
+
+    override suspend fun updateFavoritesFilter(favoritesFilter: FavoritesFilter) {
+        database.favoritesFilterDao().insert(favoritesFilter)
     }
     //endregion
 }

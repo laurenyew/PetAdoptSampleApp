@@ -10,12 +10,16 @@ import laurenyew.petadoptsampleapp.database.search.SearchAnimalListDao
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDao
 import laurenyew.petadoptsampleapp.database.util.Converters
+import laurenyew.petadoptsampleapp.ui.features.favorites.FavoriteFilterDao
+import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesFilter
 
 @Database(
     entities = [
         FavoriteAnimal::class,
         SearchAnimalList::class,
-        SearchTerm::class],
+        SearchTerm::class,
+        FavoritesFilter::class
+    ],
     version = 2
 )
 @TypeConverters(Converters::class)
@@ -23,4 +27,5 @@ abstract class PetAdoptDatabase : RoomDatabase() {
     abstract fun favoriteAnimalDao(): FavoriteAnimalDao
     abstract fun searchAnimalListDao(): SearchAnimalListDao
     abstract fun searchTermDao(): SearchTermDao
+    abstract fun favoritesFilterDao(): FavoriteFilterDao
 }
