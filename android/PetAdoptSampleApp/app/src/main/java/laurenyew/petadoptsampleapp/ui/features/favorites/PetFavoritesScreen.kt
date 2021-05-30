@@ -1,10 +1,7 @@
 package laurenyew.petadoptsampleapp.ui.features.favorites
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,13 +27,17 @@ fun PetFavoritesScreen(viewModel: FavoritesViewModel = viewModel()) {
             initial = PetFavoriteRepository.DEFAULT_FAVORITES_FILTER
         )
     Column {
-        PetFiltersCard(
-            favoritesFilterState = filterState,
-            onUpdateFavoritesFilter = {
-                viewModel.updateFilterState(it)
-            }
-        )
-        Divider(color = dividerColor)
+        Surface(
+            elevation = 8.dp,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            PetFiltersCard(
+                favoritesFilterState = filterState,
+                onUpdateFavoritesFilter = {
+                    viewModel.updateFilterState(it)
+                }
+            )
+        }
         Text(
             text = "Favorite Pets List",
             style = MaterialTheme.typography.sectionHeader(),

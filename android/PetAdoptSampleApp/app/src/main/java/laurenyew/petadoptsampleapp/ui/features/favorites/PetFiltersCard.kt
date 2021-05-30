@@ -1,18 +1,21 @@
 package laurenyew.petadoptsampleapp.ui.features.favorites
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Checkbox
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import laurenyew.petadoptsampleapp.R
+import laurenyew.petadoptsampleapp.ui.theme.sectionHeader
 
 @Composable
 fun PetFiltersCard(
@@ -40,39 +43,68 @@ fun PetFiltersCard(
         Row {
             Text(
                 text = "Filter Your Favorites",
+                style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(8.dp)
             )
-            Spacer(modifier = Modifier.width(8.dp))
-            //TODO
+            if (showExpandedState.value) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_expand_less),
+                    contentDescription = "Collapse Filters",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .clickable {
+                            showExpandedState.value = false
+                        }
+                )
+            } else {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_expand_more),
+                    contentDescription = "Expand Filters",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .clickable {
+                            showExpandedState.value = true
+                        }
+                )
+            }
         }
-        Spacer(modifier = Modifier.height(8.dp))
         if (showExpandedState.value) {
+            Text(
+                text = "Animal Type:",
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.padding(8.dp)
+            )
             PetFilterCheckbox(
                 text = "Show Dogs",
                 checkedState = showDogs,
                 onCheckedChange = { showDogs.value = it },
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
             )
-            Spacer(modifier = Modifier.height(8.dp))
             PetFilterCheckbox(
                 text = "Show Cats",
                 checkedState = showCats,
                 onCheckedChange = { showCats.value = it },
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
+            )
+            Text(
+                text = "Gender:",
+                style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(8.dp)
             )
-            Spacer(modifier = Modifier.height(8.dp))
+
             PetFilterCheckbox(
                 text = "Show Females",
                 checkedState = showFemales,
                 onCheckedChange = { showFemales.value = it },
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
             )
-            Spacer(modifier = Modifier.height(8.dp))
             PetFilterCheckbox(
                 text = "Show Males",
                 checkedState = showMales,
                 onCheckedChange = { showMales.value = it },
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Button(onClick = {
@@ -85,7 +117,10 @@ fun PetFiltersCard(
                     )
                 )
             }) {
-                Text("Apply Filters")
+                Text(
+                    "Apply Filters",
+                    style = MaterialTheme.typography.button
+                )
             }
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -106,14 +141,13 @@ fun PetFilterCheckbox(
             onCheckedChange = onCheckedChange,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(8.dp)
+                .padding(end = 8.dp)
         )
         Text(
             text = text,
             style = MaterialTheme.typography.body1,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(8.dp)
         )
     }
 }
