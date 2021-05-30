@@ -28,6 +28,11 @@ class DatabaseManager @Inject constructor(
         database.favoriteAnimalDao().insert(animal)
     }
 
+    override suspend fun updateFavoritedAnimal(animal: FavoriteAnimal) {
+        database.favoriteAnimalDao().insert(animal)
+    }
+
+
     override suspend fun unFavoriteAnimal(id: String) {
         database.favoriteAnimalDao().deleteFavoriteAnimal(id)
     }

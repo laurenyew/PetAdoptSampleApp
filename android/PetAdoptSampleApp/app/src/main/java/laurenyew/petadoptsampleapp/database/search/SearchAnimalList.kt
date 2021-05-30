@@ -17,7 +17,7 @@ interface SearchAnimalListDao {
     @Query("DELETE from searchanimallist where searchId = :searchId")
     suspend fun deleteSearchedAnimalList(searchId: String)
 
-    @Delete
+    @Query("DELETE FROM searchanimallist")
     suspend fun deleteAllSearchedAnimalLists()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -1,7 +1,6 @@
 package laurenyew.petadoptsampleapp.repository.networking.commands
 
 import laurenyew.petadoptsampleapp.database.animal.Animal
-import laurenyew.petadoptsampleapp.database.animal.Contact
 import laurenyew.petadoptsampleapp.repository.networking.api.PetFinderApi
 import laurenyew.petadoptsampleapp.repository.networking.api.responses.SearchPetsNetworkResponse
 import retrofit2.Response
@@ -32,45 +31,13 @@ class SearchPetsCommands @Inject constructor(
         } else {
             val animalList = ArrayList<Animal>()
             data.animals.forEach {
-                val photo = if (it.photos.isNotEmpty()) {
-                    it.photos[0].fullUrl
-                } else {
-                    null
-                }
-
-                val description = parseDescription(it.description)
                 animalList.add(
-                    Animal(
-                        animalId = it.id,
-                        orgId = it.organizationId,
-                        type = it.type,
-                        name = it.name,
-                        age = it.age,
-                        sex = it.gender,
-                        size = it.size,
-                        description = description,
-                        status = it.status,
-                        breed = it.breeds.primary,
-                        photoUrl = photo,
-                        distance = it.distance,
-                        contact = Contact(
-                            email = it.contact.email,
-                            phone = it.contact.phone,
-                            address = it.contact.address.address1 + "\n"
-                                    + it.contact.address.city + ", "
-                                    + it.contact.address.state + ", "
-                                    + it.contact.address.postcode
-                        )
-                    )
+                    it.toAnimal()
                 )
             }
             Timber.d("Completed command with animal list: ${animalList.size}")
             return animalList
         }
-    }
-
-    private fun parseDescription(description: String?): String? = description?.apply {
-        replace("&#039;", "'")
     }
 
     companion object {

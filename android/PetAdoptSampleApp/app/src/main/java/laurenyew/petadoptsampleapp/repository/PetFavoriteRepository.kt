@@ -7,6 +7,7 @@ import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -49,6 +50,21 @@ class PetFavoriteRepository @Inject constructor(
     }
 
     private suspend fun refreshFavoritesData() {
-
+        favorites().forEach {
+            val updatedAnimal = petDetailCommands.fetchAnimalDetails(it.id)
+            if (updatedAnimal != null) {
+                val updatedFavoritedAnimal = FavoriteAnimal(
+                    id = it.id,
+                    name = updatedAnimal.name,
+                    photoUrl = updatedAnimal.photoUrl,
+                    age = updatedAnimal.age,
+                    sex = updatedAnimal.sex,
+                    size = updatedAnimal.size
+                )
+                favoriteAnimalDatabaseProvider.updateFavoritedAnimal(updatedFavoritedAnimal)
+            } else {
+                Timber.e("Failed to get updated details for favorite animal. Data may be out of date")
+            }
+        }
     }
 }
