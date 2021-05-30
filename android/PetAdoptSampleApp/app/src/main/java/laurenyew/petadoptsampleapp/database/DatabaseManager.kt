@@ -79,5 +79,11 @@ class DatabaseManager @Inject constructor(
     override suspend fun insert(searchTerm: SearchTerm) {
         database.searchTermDao().insert(searchTerm)
     }
+
+    override suspend fun updateSearchTermTimeStamp(searchId: String) {
+        getSearchTerm(searchId)?.let {
+            insert(it.copy(timestamp = System.currentTimeMillis()))
+        }
+    }
     //endregion
 }

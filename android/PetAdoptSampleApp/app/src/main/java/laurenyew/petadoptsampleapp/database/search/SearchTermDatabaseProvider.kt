@@ -6,4 +6,5 @@ interface SearchTermDatabaseProvider {
     suspend fun getSearchTerm(searchId: String): SearchTerm?
     suspend fun deleteSearchTerm(searchId: String)
     suspend fun insert(searchTerm: SearchTerm)
+    suspend fun updateSearchTermTimeStamp(searchId: String)
 }

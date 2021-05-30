@@ -18,6 +18,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
@@ -35,6 +37,9 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
 @Composable
 fun SearchTermsList(searchTerms: State<List<SearchTerm>>) {
     val searchTermItems = searchTerms.value
+    val dateFormat = remember {
+        SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US)
+    }
     Text(
         text = "Searches so far:",
         style = MaterialTheme.typography.body1,
@@ -45,7 +50,7 @@ fun SearchTermsList(searchTerms: State<List<SearchTerm>>) {
         items(searchTermItems.size) { index ->
             val item = searchTermItems[index]
             Text(
-                text = "- ${item.zipcode}",
+                text = "- ${item.zipcode}, lastSearch: ${dateFormat.format(Date(item.timestamp))} ",
                 modifier = Modifier
                     .padding(start = 16.dp, bottom = 8.dp)
             )

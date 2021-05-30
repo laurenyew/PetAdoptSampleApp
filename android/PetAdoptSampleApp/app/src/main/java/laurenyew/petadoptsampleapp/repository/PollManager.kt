@@ -17,14 +17,15 @@ class PollManager @Inject constructor(
     externalScope: CoroutineScope,
     private val pollIntervalMillis: Long = DEFAULT_POLL_INTERVAL_MILLIS,
 ) {
-    private val _pollFlow = MutableSharedFlow<Unit>(replay = 0) // only update once, no replay
-    val dataRefreshRequiredFlow: SharedFlow<Unit> = _pollFlow
+    private val _pollFlow = MutableSharedFlow<Long>(replay = 0) // only update once, no replay
+    val dataRefreshRequiredFlow: SharedFlow<Long> = _pollFlow
 
     init {
         externalScope.launch {
             while (true) {
-                if (isPastLastPollTime()) {
-                    _pollFlow.emit(Unit)
+                val currentTime = System.currentTimeMillis()
+                if (isPastLastPollTime(currentTime)) {
+                    _pollFlow.emit(currentTime)
                     onPoll()
                 }
                 delay(pollIntervalMillis)
@@ -34,10 +35,15 @@ class PollManager @Inject constructor(
 
     fun lastPollTime(): Long = sharedPreferences.getLong(LAST_POLL_KEY, -1L)
 
-    private fun isPastLastPollTime(): Boolean {
+    fun isPastInterval(newPollTime: Long, oldPollTime: Long): Boolean {
+        val diffPollTimes = newPollTime - oldPollTime
+        return diffPollTimes > pollIntervalMillis
+    }
+
+
+    private fun isPastLastPollTime(currentTime: Long): Boolean {
         val lastPollTime = lastPollTime()
-        val diffBetweenLastPollTimeAndNow = System.currentTimeMillis() - lastPollTime
-        return lastPollTime == -1L || (diffBetweenLastPollTimeAndNow > pollIntervalMillis)
+        return lastPollTime == -1L || isPastInterval(currentTime, lastPollTime)
     }
 
     private fun onPoll() {
