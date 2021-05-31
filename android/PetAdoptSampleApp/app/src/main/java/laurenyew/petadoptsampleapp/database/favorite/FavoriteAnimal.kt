@@ -11,6 +11,7 @@ data class FavoriteAnimal(
     val age: String?,
     val sex: String?,
     val size: String?,
+    val type: String?
 )
 
 @Dao

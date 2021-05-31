@@ -14,6 +14,9 @@ data class FavoritesFilter(
     var showDogs: Boolean = true,
     var showCats: Boolean = false
 ) {
+    fun isFiltering(): Boolean =
+        !showFemales || !showMales || !showDogs || !showCats
+
     override fun toString(): String {
         return "FavoritesFilter{ " +
                 "showFemales: $showFemales, showMales: $showMales," +

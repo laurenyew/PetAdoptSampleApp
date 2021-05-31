@@ -2,11 +2,10 @@ package laurenyew.petadoptsampleapp.ui.features.favorites
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository.Companion.DEFAULT_FAVORITES_FILTER
 import laurenyew.petadoptsampleapp.ui.features.list.PetListViewModel
 import timber.log.Timber
@@ -18,6 +17,17 @@ class FavoritesViewModel @Inject constructor(
 ) : PetListViewModel(favoriteRepository) {
     private val _filterState = MutableStateFlow(DEFAULT_FAVORITES_FILTER)
     val filterState: StateFlow<FavoritesFilter> = _filterState
+
+    override val animals: StateFlow<List<Animal>>
+        get() = super.animals
+            .combine(
+                filterState,
+                ::applyFilterState
+            ).stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(),
+                initialValue = emptyList()
+            )
 
     init {
         fetchFilterState()
@@ -35,12 +45,12 @@ class FavoritesViewModel @Inject constructor(
                     age = it.age,
                     sex = it.sex,
                     size = it.size,
+                    type = it.type,
                     isFavorite = true
                 )
             }
             _isLoading.value = false
             _animals.value = favorites
-
         }
     }
 
@@ -49,6 +59,7 @@ class FavoritesViewModel @Inject constructor(
         viewModelScope.launch {
             favoriteRepository.saveFavoritesFilter(filterState)
             _filterState.value = filterState
+            refreshFavorites()
         }
     }
 
@@ -57,4 +68,19 @@ class FavoritesViewModel @Inject constructor(
             _filterState.value = favoriteRepository.getFavoritesFilter()
         }
     }
+
+    private fun applyFilterState(
+        animalList: List<Animal>,
+        filter: FavoritesFilter
+    ): List<Animal> =
+        animalList.filter { animal ->
+            passesTypeFilterState(animal, filter)
+                    && passesGenderFilterState(animal, filter)
+        }
+
+    private fun passesTypeFilterState(animal: Animal, filter: FavoritesFilter): Boolean =
+        (filter.showDogs && animal.isDog()) || (filter.showCats && animal.isCat())
+
+    private fun passesGenderFilterState(animal: Animal, filter: FavoritesFilter): Boolean =
+        (filter.showFemales && animal.isFemale()) || (filter.showMales && animal.isMale())
 }

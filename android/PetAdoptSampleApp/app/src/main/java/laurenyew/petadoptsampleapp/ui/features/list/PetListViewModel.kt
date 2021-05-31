@@ -18,7 +18,7 @@ open class PetListViewModel @Inject constructor(
     protected val _animals = MutableStateFlow<List<Animal>>(emptyList())
     protected val _isLoading = MutableStateFlow(false)
     protected val _isError = MutableStateFlow(false)
-    val animals: StateFlow<List<Animal>> = _animals
+    open val animals: StateFlow<List<Animal>> = _animals
     val isLoading: StateFlow<Boolean> = _isLoading
     val isError: StateFlow<Boolean> = _isError
 

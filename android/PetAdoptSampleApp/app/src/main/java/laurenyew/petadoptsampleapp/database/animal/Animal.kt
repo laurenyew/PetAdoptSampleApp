@@ -31,6 +31,11 @@ data class Animal(
             description,
             status, breed, photoUrl, distance, contact, isFavorite
         )
+
+    fun isDog(): Boolean = type.equals("Dog", true)
+    fun isCat(): Boolean = type.equals("Cat", true)
+    fun isFemale(): Boolean = sex.equals("Female", true)
+    fun isMale(): Boolean = sex.equals("Male", true)
 }
 
 @JsonClass(generateAdapter = true)

@@ -43,7 +43,8 @@ class PetFavoriteRepository @Inject constructor(
             photoUrl = animal.photoUrl,
             age = animal.age,
             sex = animal.sex,
-            size = animal.size
+            size = animal.size,
+            type = animal.type
         )
         favoriteAnimalDatabaseProvider.favoriteAnimal(favoriteAnimal)
     }
@@ -69,7 +70,8 @@ class PetFavoriteRepository @Inject constructor(
                     photoUrl = updatedAnimal.photoUrl,
                     age = updatedAnimal.age,
                     sex = updatedAnimal.sex,
-                    size = updatedAnimal.size
+                    size = updatedAnimal.size,
+                    type = updatedAnimal.type
                 )
                 favoriteAnimalDatabaseProvider.updateFavoritedAnimal(updatedFavoritedAnimal)
             } else {

@@ -5,6 +5,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -64,10 +65,20 @@ fun PetFavoritesScreen(viewModel: FavoritesViewModel = viewModel()) {
                 CircularProgressIndicator()
             }
         }
+        if (animalsState.value.isEmpty() && filterState.value.isFiltering()) {
+            Text(
+                "Filters are applied. You may have filtered out all your data!",
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(8.dp)
+            )
+        }
         if (isError.value) {
             Text(
                 text = stringResource(id = R.string.empty_results),
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(8.dp)
             )
         }
     }
