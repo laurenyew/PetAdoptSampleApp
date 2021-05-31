@@ -1,7 +1,7 @@
 # Android PetAdoptSampleApp
 Sample App created to practice with different Android Tech
 
-<img src="./Screenshots/drawer.png" width="200"/> <img src="./Screenshots/home.png" width="200"/> <img src="./Screenshots/search_favorite.png" width="200"/> <img src="./Screenshots/favorites.png" width="200"/>
+<img src="./Screenshots/drawer.png" width="200"/> <img src="./Screenshots/home.png" width="200"/> <img src="./Screenshots/search_favorite.png" width="200"/> <img src="./Screenshots/favorites.png" width="200"/> <img src="./Screenshots/all_filters.png" width="200"/> <img src="./Screenshots/organizations.png" width="200"/> <img src="./Screenshots/settings.png" width="200"/>
 
 ## Android Tech
 * Kotlin :heavy_check_mark:
@@ -14,9 +14,6 @@ Sample App created to practice with different Android Tech
 * Hilt :heavy_check_mark:
 
 ## TODO Next
-* Fix placeholder image
-* Fix images on list
-* Fix card look / feel
 * Make keyboard hide on search
 
 ## TODO (Tech)
@@ -24,7 +21,7 @@ Sample App created to practice with different Android Tech
 
 ## TODO (Features)
 * Details Screen
-* More Filters (Animal type, etc)
+* More Search Query Filters (Animal type, etc)
 * Profile
 * Share Animal w/ others
 * Dark Mode
