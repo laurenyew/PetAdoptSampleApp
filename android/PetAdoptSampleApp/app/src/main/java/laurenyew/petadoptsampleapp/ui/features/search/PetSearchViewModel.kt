@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetSearchRepository
 import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
@@ -30,8 +31,9 @@ class PetSearchViewModel @Inject constructor(
             searchRepository.getLastSearchTerm()?.let { searchTerm ->
                 location.value = searchTerm.zipcode
                 val savedAnimalList = searchRepository.getSearchedAnimalList(searchTerm.searchId)
-                if (savedAnimalList != null) {
-                    _animals.value = savedAnimalList // use saved list
+                val updatedSavedAnimalListWithFavorites = parseWithFavorites(savedAnimalList)
+                if (updatedSavedAnimalListWithFavorites != null) {
+                    _animals.value = updatedSavedAnimalListWithFavorites // use saved list
                 } else {
                     searchAnimals() // restart search with last search term
                 }
@@ -54,17 +56,7 @@ class PetSearchViewModel @Inject constructor(
             currentSearchJob = viewModelScope.launch {
                 when (val searchResponse = searchRepository.getNearbyPets(newLocation)) {
                     is SearchPetsRepoResponse.Success -> {
-                        val favorites =
-                            favoriteRepository.favoriteIds()
-                        val searchedAnimals =
-                            searchResponse.animals?.map {
-                                if (favorites.contains(it.animalId)) {
-                                    it.copy(true)
-                                } else {
-                                    it
-                                }
-                            }
-
+                        val searchedAnimals = parseWithFavorites(searchResponse.animals)
                         _animals.value = searchedAnimals ?: emptyList()
                         _isError.value = false
 
@@ -79,4 +71,17 @@ class PetSearchViewModel @Inject constructor(
             }
         }
     }
+
+    private suspend fun parseWithFavorites(animals: List<Animal>?): List<Animal>? {
+        val favorites =
+            favoriteRepository.favoriteIds()
+        return animals?.map {
+            if (favorites.contains(it.animalId)) {
+                it.copy(true)
+            } else {
+                it
+            }
+        }
+    }
+
 }

@@ -12,7 +12,7 @@ data class FavoritesFilter(
     var showFemales: Boolean = true,
     var showMales: Boolean = true,
     var showDogs: Boolean = true,
-    var showCats: Boolean = false
+    var showCats: Boolean = true
 ) {
     fun isFiltering(): Boolean =
         !showFemales || !showMales || !showDogs || !showCats
