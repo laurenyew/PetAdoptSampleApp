@@ -10,7 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
@@ -29,16 +28,20 @@ sealed class DrawerScreens(val route: String) {
     object Home : DrawerScreens("Home")
     object Search : DrawerScreens("Search")
     object Favorites : DrawerScreens("Favorites")
+    object Organizations: DrawerScreens("Organizations")
+    object Settings : DrawerScreens("Settings")
 }
 
 private val screens = listOf(
     DrawerScreens.Home,
     DrawerScreens.Search,
-    DrawerScreens.Favorites
+    DrawerScreens.Favorites,
+    DrawerScreens.Organizations,
+    DrawerScreens.Settings
 )
 
 @Composable
-fun PetAdoptDrawer(
+fun MainDrawer(
     onScreenSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -76,20 +79,20 @@ fun PetAdoptDrawer(
             )
         }
         Spacer(modifier = Modifier.weight(1f))
-        PetfinderCaptionText()
+        DrawerCaptionText()
     }
 }
 
 @Preview
 @Composable
-fun PetAdoptDrawerPreview() {
-    PetAdoptDrawer(onScreenSelected = {
+fun MainDrawerPreview() {
+    MainDrawer(onScreenSelected = {
         // Do nothing
     })
 }
 
 @Composable
-fun PetfinderCaptionText(modifier: Modifier = Modifier) {
+fun DrawerCaptionText(modifier: Modifier = Modifier) {
     val annotatedLinkString: AnnotatedString = buildAnnotatedString {
 
         val str = "Powered by Petfinder"
@@ -135,6 +138,6 @@ fun PetfinderCaptionText(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun PetfinderCaptionTextPreview() {
-    PetfinderCaptionText()
+fun DrawerCaptionTextPreview() {
+    DrawerCaptionText()
 }

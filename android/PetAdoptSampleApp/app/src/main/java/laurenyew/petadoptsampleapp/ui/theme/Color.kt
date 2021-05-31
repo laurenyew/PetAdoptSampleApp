@@ -4,8 +4,9 @@ import androidx.compose.ui.graphics.Color
 
 val logoColor = Color(0xFF650ED7)
 val purple200 = Color(0xFF9969C5)
+val purple100 = Color(0xFFE2D1F1)
 val purple500 = Color(0xFF5100A6)
 val purple700 = Color(0xFF220041)
 val teal200 = Color(0xFF23C1F6)
 
-val dividerColor = Color(0xFF3C3640)
+val dividerColor = Color(0xFF6D6A6F)

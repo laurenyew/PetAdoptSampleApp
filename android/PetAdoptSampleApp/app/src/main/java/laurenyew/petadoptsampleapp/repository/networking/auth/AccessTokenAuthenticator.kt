@@ -9,7 +9,7 @@ import timber.log.Timber
 /**
  * OKHTTP Authenticator for PetAdopt Access token
  */
-class PetAdoptAccessTokenAuthenticator(
+class AccessTokenAuthenticator(
     private val tokenProvider: AccessTokenProvider
 ) : Authenticator {
     /**
