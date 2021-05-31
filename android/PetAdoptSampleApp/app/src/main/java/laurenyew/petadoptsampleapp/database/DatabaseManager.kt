@@ -5,6 +5,8 @@ import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProvider
+import laurenyew.petadoptsampleapp.database.organization.Organization
+import laurenyew.petadoptsampleapp.database.organization.OrganizationDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchAnimalList
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
@@ -16,7 +18,8 @@ class DatabaseManager @Inject constructor(
 ) : FavoriteAnimalDatabaseProvider,
     AnimalDatabaseProvider,
     SearchTermDatabaseProvider,
-    FavoritesFilterDatabaseProvider {
+    FavoritesFilterDatabaseProvider,
+    OrganizationDatabaseProvider {
 
     //region Favorite Animal Database
     override suspend fun getAllFavoriteAnimals(): List<FavoriteAnimal> =
@@ -103,6 +106,22 @@ class DatabaseManager @Inject constructor(
 
     override suspend fun updateFavoritesFilter(favoritesFilter: FavoritesFilter) {
         database.favoritesFilterDao().insert(favoritesFilter)
+    }
+    //endregion
+
+    //region Organizations
+    override suspend fun getOrganizations(searchId: String): List<Organization> =
+        database.organizationDao().getOrganizations(searchId)
+
+    override suspend fun deleteOrganizations() {
+        database.organizationDao().deleteAllOrganizations()
+    }
+
+    override suspend fun insertOrganizations(organizations: List<Organization>) {
+        deleteOrganizations()
+        organizations.forEach {
+            database.organizationDao().insert(it)
+        }
     }
     //endregion
 }

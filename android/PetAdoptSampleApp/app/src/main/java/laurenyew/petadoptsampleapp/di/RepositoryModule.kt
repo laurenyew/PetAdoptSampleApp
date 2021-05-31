@@ -13,12 +13,15 @@ import laurenyew.petadoptsampleapp.database.PetAdoptDatabase
 import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProvider
+import laurenyew.petadoptsampleapp.database.organization.OrganizationDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
+import laurenyew.petadoptsampleapp.repository.OrganizationSearchRepository
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetSearchRepository
-import laurenyew.petadoptsampleapp.repository.poll.PollManager
 import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
+import laurenyew.petadoptsampleapp.repository.networking.commands.SearchOrganizationsCommands
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
+import laurenyew.petadoptsampleapp.repository.poll.PollManager
 import javax.inject.Singleton
 
 @Module(includes = [ContextModule::class])
@@ -59,6 +62,11 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideFavoritesFilterDatabaseProvider(databaseManager: DatabaseManager): FavoritesFilterDatabaseProvider =
+        databaseManager
+
+    @Singleton
+    @Provides
+    fun provideOrganizationDatabaseProvider(databaseManager: DatabaseManager): OrganizationDatabaseProvider =
         databaseManager
 
 
@@ -103,4 +111,22 @@ class RepositoryModule {
         applicationScope: CoroutineScope
     ): PollManager =
         PollManager(sharedPreferences, applicationScope)
+
+
+    @Singleton
+    @Provides
+    fun providOrganizationSearchRepository(
+        searchOrganizationsCommands: SearchOrganizationsCommands,
+        organizationDatabaseProvider: OrganizationDatabaseProvider,
+        petSearchRepository: PetSearchRepository,
+        pollManager: PollManager,
+        externalScope: CoroutineScope,
+    ): OrganizationSearchRepository =
+        OrganizationSearchRepository(
+            searchOrganizationsCommands,
+            organizationDatabaseProvider,
+            petSearchRepository,
+            pollManager,
+            externalScope
+        )
 }

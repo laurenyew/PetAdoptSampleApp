@@ -15,7 +15,6 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
-//TODO: Filters on pet search --> location, type, gender, etc. Save in Room DB (filter name?)
 @Singleton
 class PetSearchRepository @Inject constructor(
     private val searchPetCommand: SearchPetsCommands,
@@ -45,8 +44,8 @@ class PetSearchRepository @Inject constructor(
             }.launchIn(externalScope)
     }
 
-    suspend fun getNearbyDogs(zipcode: String): SearchPetsRepoResponse = try {
-        val animals = searchPetCommand.searchForNearbyDogs(zipcode)
+    suspend fun getNearbyPets(zipcode: String): SearchPetsRepoResponse = try {
+        val animals = searchPetCommand.searchForNearbyPets(zipcode)
         val searchId = saveSearchTerm(zipcode)
         saveSearchedAnimalList(searchId, animals)
         SearchPetsRepoResponse.Success(animals)

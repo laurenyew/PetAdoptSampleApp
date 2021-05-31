@@ -16,6 +16,7 @@ import laurenyew.petadoptsampleapp.repository.networking.auth.AccessTokenAuthent
 import laurenyew.petadoptsampleapp.repository.networking.auth.TokenRepository
 import laurenyew.petadoptsampleapp.repository.networking.commands.AuthCommands
 import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
+import laurenyew.petadoptsampleapp.repository.networking.commands.SearchOrganizationsCommands
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -86,4 +87,8 @@ class NetworkModule {
 
     @Provides
     fun provideAuthCommands(api: TokenApi): AuthCommands = AuthCommands(api)
+
+    @Provides
+    fun provideSearchOrganizationsCommands(api: PetFinderApi): SearchOrganizationsCommands =
+        SearchOrganizationsCommands(api)
 }

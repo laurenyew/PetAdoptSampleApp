@@ -10,8 +10,8 @@ import javax.inject.Inject
 class SearchPetsCommands @Inject constructor(
     private val api: PetFinderApi
 ) {
-    suspend fun searchForNearbyDogs(location: String): List<Animal> {
-        Timber.d("Executing $SEARCH_FOR_NEARBY_DOGS_TAG")
+    suspend fun searchForNearbyPets(location: String): List<Animal> {
+        Timber.d("Executing Search for Nearby Pets: $location")
         val response = api.searchPets(location = location)
         return parseResponse(response)
     }
@@ -22,7 +22,7 @@ class SearchPetsCommands @Inject constructor(
     @Throws(RuntimeException::class)
     private fun parseResponse(
         networkResponse: Response<SearchPetsNetworkResponse?>?
-    ): ArrayList<Animal> {
+    ): List<Animal> {
         val data = networkResponse?.body()
         if (networkResponse?.code() != 200 || data == null) {
             val error = "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
@@ -38,9 +38,5 @@ class SearchPetsCommands @Inject constructor(
             Timber.d("Completed command with animal list: ${animalList.size}")
             return animalList
         }
-    }
-
-    companion object {
-        const val SEARCH_FOR_NEARBY_DOGS_TAG: String = "search_for_nearby_dogs"
     }
 }

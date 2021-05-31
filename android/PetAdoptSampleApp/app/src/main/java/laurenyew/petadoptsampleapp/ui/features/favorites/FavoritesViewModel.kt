@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository.Companion.DEFAULT_FAVORITES_FILTER
-import laurenyew.petadoptsampleapp.ui.features.list.PetListViewModel
+import laurenyew.petadoptsampleapp.ui.features.petList.PetListViewModel
 import timber.log.Timber
 import javax.inject.Inject
 

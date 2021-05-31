@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import laurenyew.petadoptsampleapp.R
-import laurenyew.petadoptsampleapp.ui.features.list.PetList
+import laurenyew.petadoptsampleapp.ui.features.petList.PetList
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 import laurenyew.petadoptsampleapp.ui.theme.sectionHeader
 import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
