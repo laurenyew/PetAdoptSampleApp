@@ -2,7 +2,7 @@ package laurenyew.petadoptsampleapp.repository.networking.commands
 
 import laurenyew.petadoptsampleapp.repository.networking.api.TokenApi
 import laurenyew.petadoptsampleapp.repository.networking.api.requests.AuthTokenRequestBody
-import laurenyew.petadoptsampleapp.repository.networking.api.responses.RefreshApiTokenNetworkResponse
+import laurenyew.petadoptsampleapp.repository.networking.api.responses.RefreshApiTokenResponse
 import laurenyew.petadoptsampleapp.repository.responses.RefreshTokenRepoResponse
 import laurenyew.petadoptsampleapp.utils.ControlledRunner
 import retrofit2.Response
@@ -31,12 +31,12 @@ class AuthCommands @Inject constructor(
      * Parse the response from the network call
      */
     private fun parseResponse(
-        networkResponse: Response<RefreshApiTokenNetworkResponse?>?
+        response: Response<RefreshApiTokenResponse?>?
     ): RefreshTokenRepoResponse {
-        val data = networkResponse?.body()
-        return if (networkResponse?.code() != 200 || data == null) {
+        val data = response?.body()
+        return if (response?.code() != 200 || data == null) {
             val error = RuntimeException(
-                "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
+                "API call failed. Response error: ${response?.errorBody()?.string()}"
             )
             RefreshTokenRepoResponse.Error(error)
         } else {

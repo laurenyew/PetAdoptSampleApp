@@ -5,7 +5,9 @@ object PetAdoptApiConstants {
 
     object Search {
         //Paths
-        const val SEARCH_PETS_METHOD = "animals"
+        const val SEARCH_PETS_PATH = "animals"
+        const val PET_DETAILS_PATH = "$SEARCH_PETS_PATH/{id}"
+        const val ORGANIZATIONS_PATH = "organizations"
 
         //Query Params
         const val TYPE_PARAM = "type"

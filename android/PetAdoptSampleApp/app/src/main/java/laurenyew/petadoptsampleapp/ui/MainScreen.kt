@@ -21,8 +21,13 @@ import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesViewModel
 import laurenyew.petadoptsampleapp.ui.features.favorites.PetFavoritesScreen
 import laurenyew.petadoptsampleapp.ui.features.home.HomeScreen
+import laurenyew.petadoptsampleapp.ui.features.home.HomeScreenViewModel
+import laurenyew.petadoptsampleapp.ui.features.organizations.OrganizationsScreen
+import laurenyew.petadoptsampleapp.ui.features.organizations.OrganizationsViewModel
 import laurenyew.petadoptsampleapp.ui.features.search.PetSearchScreen
 import laurenyew.petadoptsampleapp.ui.features.search.PetSearchViewModel
+import laurenyew.petadoptsampleapp.ui.features.settings.SettingsScreen
+import laurenyew.petadoptsampleapp.ui.features.settings.SettingsViewModel
 import laurenyew.petadoptsampleapp.ui.theme.PetAdoptTheme
 
 
@@ -93,7 +98,8 @@ fun MainScreenContent(
         startDestination = DrawerScreens.Home.route
     ) {
         composable(DrawerScreens.Home.route) {
-            HomeScreen()
+            val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
+            HomeScreen(viewModel = homeScreenViewModel)
         }
         composable(DrawerScreens.Search.route) {
             val searchViewModel = hiltViewModel<PetSearchViewModel>()
@@ -104,6 +110,14 @@ fun MainScreenContent(
         composable(DrawerScreens.Favorites.route) {
             val favoritesViewModel = hiltViewModel<FavoritesViewModel>()
             PetFavoritesScreen(favoritesViewModel)
+        }
+        composable(DrawerScreens.Organizations.route) {
+            val organizationsViewModel = hiltViewModel<OrganizationsViewModel>()
+            OrganizationsScreen(organizationsViewModel)
+        }
+        composable(DrawerScreens.Settings.route) {
+            val settingsViewModel = hiltViewModel<SettingsViewModel>()
+            SettingsScreen(settingsViewModel)
         }
     }
 }

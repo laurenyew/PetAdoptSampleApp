@@ -1,4 +1,4 @@
-package laurenyew.petadoptsampleapp.ui.features.list
+package laurenyew.petadoptsampleapp.ui.features.petList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
-import laurenyew.petadoptsampleapp.repository.models.AnimalModel
+import laurenyew.petadoptsampleapp.database.animal.Animal
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,19 +15,19 @@ import javax.inject.Inject
 open class PetListViewModel @Inject constructor(
     private val favoriteRepository: PetFavoriteRepository
 ) : ViewModel() {
-    protected val _animals = MutableStateFlow<List<AnimalModel>>(emptyList())
+    protected val _animals = MutableStateFlow<List<Animal>>(emptyList())
     protected val _isLoading = MutableStateFlow(false)
     protected val _isError = MutableStateFlow(false)
-    val animals: StateFlow<List<AnimalModel>> = _animals
+    open val animals: StateFlow<List<Animal>> = _animals
     val isLoading: StateFlow<Boolean> = _isLoading
     val isError: StateFlow<Boolean> = _isError
 
-    fun favorite(animalModel: AnimalModel) {
-        Timber.d("Favorite: ${animalModel.id}")
+    fun favorite(animal: Animal) {
+        Timber.d("Favorite: ${animal.animalId}")
         viewModelScope.launch {
-            favoriteRepository.favorite(animalModel)
+            favoriteRepository.favorite(animal)
 
-            val favoriteId = animalModel.id
+            val favoriteId = animal.animalId
             updateAnimalsForFavorite(favoriteId, true)
         }
     }
@@ -47,7 +47,7 @@ open class PetListViewModel @Inject constructor(
 
     private fun updateAnimalsForFavorite(id: String, favorite: Boolean) {
         val updatedAnimals = _animals.value.map {
-            if (it.id == id) {
+            if (it.animalId == id) {
                 it.copy(favorite)
             } else {
                 it

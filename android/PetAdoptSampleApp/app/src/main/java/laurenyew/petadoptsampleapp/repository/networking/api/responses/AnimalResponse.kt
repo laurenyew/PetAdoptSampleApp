@@ -1,14 +1,9 @@
 package laurenyew.petadoptsampleapp.repository.networking.api.responses
 
 import com.squareup.moshi.Json
+import laurenyew.petadoptsampleapp.database.animal.Animal
 
-//TODO: Use Jetpack Compose Pages
-data class SearchPetsNetworkResponse(
-    @Json(name = "animals") val animals: List<Animal>,
-    @Json(name = "pagination") val pagination: Pagination
-)
-
-data class Animal(
+data class AnimalResponse(
     @Json(name = "id") val id: String,
     @Json(name = "organization_id") val organizationId: String?,
     @Json(name = "url") val url: String?,
@@ -30,7 +25,44 @@ data class Animal(
     @Json(name = "contact") val contact: Contact,
     @Json(name = "publishDate") val publishDate: String?,
     @Json(name = "distance") val distance: String?
-)
+) {
+    fun toAnimal(): Animal {
+        val photo = if (photos.isNotEmpty()) {
+            photos[0].fullUrl
+        } else {
+            null
+        }
+
+        val description = parseDescription(description)
+
+        return Animal(
+            animalId = id,
+            orgId = organizationId,
+            species = species,
+            name = name,
+            age = age,
+            sex = gender,
+            size = size,
+            description = description,
+            status = status,
+            breed = breeds.primary,
+            photoUrl = photo,
+            distance = distance,
+            contact = laurenyew.petadoptsampleapp.database.animal.Contact(
+                email = contact.email,
+                phone = contact.phone,
+                address = contact.address.address1 + "\n"
+                        + contact.address.city + ", "
+                        + contact.address.state + ", "
+                        + contact.address.postcode
+            )
+        )
+    }
+
+    private fun parseDescription(description: String?): String? = description?.apply {
+        replace("&#039;", "'")
+    }
+}
 
 data class Breeds(
     @Json(name = "primary") val primary: String?,
