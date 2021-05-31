@@ -27,18 +27,19 @@ fun PetFiltersCard(
         mutableStateOf(false)
     }
     val favoritesFilter = favoritesFilterState.value
-    val showDogs = remember {
+    var showDogs = remember(favoritesFilter) {
         mutableStateOf(favoritesFilter.showDogs)
     }
-    val showCats = remember {
+    var showCats = remember(favoritesFilter) {
         mutableStateOf(favoritesFilter.showCats)
     }
-    val showFemales = remember {
+    var showFemales = remember(favoritesFilter) {
         mutableStateOf(favoritesFilter.showFemales)
     }
-    val showMales = remember {
+    var showMales = remember(favoritesFilter) {
         mutableStateOf(favoritesFilter.showMales)
     }
+
     Column(modifier = modifier.padding(8.dp)) {
         Row {
             Text(
@@ -78,13 +79,13 @@ fun PetFiltersCard(
             )
             PetFilterCheckbox(
                 text = "Show Dogs",
-                checkedState = showDogs,
+                checkedState = showDogs.value,
                 onCheckedChange = { showDogs.value = it },
                 modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
             )
             PetFilterCheckbox(
                 text = "Show Cats",
-                checkedState = showCats,
+                checkedState = showCats.value,
                 onCheckedChange = { showCats.value = it },
                 modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
             )
@@ -96,13 +97,13 @@ fun PetFiltersCard(
 
             PetFilterCheckbox(
                 text = "Show Females",
-                checkedState = showFemales,
+                checkedState = showFemales.value,
                 onCheckedChange = { showFemales.value = it },
                 modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
             )
             PetFilterCheckbox(
                 text = "Show Males",
-                checkedState = showMales,
+                checkedState = showMales.value,
                 onCheckedChange = { showMales.value = it },
                 modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
             )
@@ -131,13 +132,13 @@ fun PetFiltersCard(
 @Composable
 fun PetFilterCheckbox(
     text: String,
-    checkedState: State<Boolean>,
+    checkedState: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(modifier) {
         Checkbox(
-            checked = checkedState.value,
+            checked = checkedState,
             onCheckedChange = onCheckedChange,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
@@ -160,7 +161,7 @@ fun PetFilterCheckboxPreview() {
     }
     PetFilterCheckbox(
         text = "Show Test",
-        checkedState = checkedState,
+        checkedState = checkedState.value,
         onCheckedChange = {
             checkedState.value = it
         })
