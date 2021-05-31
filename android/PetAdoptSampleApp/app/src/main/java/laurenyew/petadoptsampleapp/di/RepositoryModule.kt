@@ -16,7 +16,7 @@ import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProv
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetSearchRepository
-import laurenyew.petadoptsampleapp.repository.PollManager
+import laurenyew.petadoptsampleapp.repository.poll.PollManager
 import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import javax.inject.Singleton

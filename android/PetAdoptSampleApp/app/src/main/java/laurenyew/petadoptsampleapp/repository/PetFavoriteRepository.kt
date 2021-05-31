@@ -8,6 +8,7 @@ import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
+import laurenyew.petadoptsampleapp.repository.poll.PollManager
 import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesFilter
 import timber.log.Timber
 import javax.inject.Inject

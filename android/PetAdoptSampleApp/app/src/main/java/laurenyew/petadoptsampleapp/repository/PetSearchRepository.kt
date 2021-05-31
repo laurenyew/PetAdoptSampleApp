@@ -9,6 +9,7 @@ import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
+import laurenyew.petadoptsampleapp.repository.poll.PollManager
 import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
 import timber.log.Timber
 import javax.inject.Inject
