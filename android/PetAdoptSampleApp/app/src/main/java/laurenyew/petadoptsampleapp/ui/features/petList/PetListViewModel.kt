@@ -1,4 +1,4 @@
-package laurenyew.petadoptsampleapp.ui.features.list
+package laurenyew.petadoptsampleapp.ui.features.petList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

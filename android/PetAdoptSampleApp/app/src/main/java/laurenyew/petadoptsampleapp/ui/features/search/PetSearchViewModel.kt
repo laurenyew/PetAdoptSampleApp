@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.repository.PetSearchRepository
 import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
-import laurenyew.petadoptsampleapp.ui.features.list.PetListViewModel
+import laurenyew.petadoptsampleapp.ui.features.petList.PetListViewModel
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
 
@@ -52,7 +52,7 @@ class PetSearchViewModel @Inject constructor(
             _isLoading.value = true
             currentSearchLocation = newLocation
             currentSearchJob = viewModelScope.launch {
-                when (val searchResponse = searchRepository.getNearbyDogs(newLocation)) {
+                when (val searchResponse = searchRepository.getNearbyPets(newLocation)) {
                     is SearchPetsRepoResponse.Success -> {
                         val favorites =
                             favoriteRepository.favoriteIds()

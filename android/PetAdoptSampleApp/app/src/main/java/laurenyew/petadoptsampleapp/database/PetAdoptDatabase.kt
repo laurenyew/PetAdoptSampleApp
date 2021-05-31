@@ -5,6 +5,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDao
+import laurenyew.petadoptsampleapp.database.organization.Organization
+import laurenyew.petadoptsampleapp.database.organization.OrganizationDao
 import laurenyew.petadoptsampleapp.database.search.SearchAnimalList
 import laurenyew.petadoptsampleapp.database.search.SearchAnimalListDao
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
@@ -18,9 +20,10 @@ import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesFilter
         FavoriteAnimal::class,
         SearchAnimalList::class,
         SearchTerm::class,
-        FavoritesFilter::class
+        FavoritesFilter::class,
+        Organization::class
     ],
-    version = 2
+    version = 3
 )
 @TypeConverters(Converters::class)
 abstract class PetAdoptDatabase : RoomDatabase() {
@@ -28,4 +31,5 @@ abstract class PetAdoptDatabase : RoomDatabase() {
     abstract fun searchAnimalListDao(): SearchAnimalListDao
     abstract fun searchTermDao(): SearchTermDao
     abstract fun favoritesFilterDao(): FavoriteFilterDao
+    abstract fun organizationDao(): OrganizationDao
 }
