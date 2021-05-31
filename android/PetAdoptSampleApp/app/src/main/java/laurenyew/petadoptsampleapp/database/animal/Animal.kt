@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 data class Animal(
     val animalId: String,
     val orgId: String? = null,
-    val type: String? = null,
+    val species: String? = null,
     val name: String? = null,
     val sex: String? = null,
     val age: String? = null,
@@ -23,7 +23,7 @@ data class Animal(
         Animal(
             animalId,
             orgId,
-            type,
+            species,
             name,
             sex,
             age,
@@ -32,8 +32,8 @@ data class Animal(
             status, breed, photoUrl, distance, contact, isFavorite
         )
 
-    fun isDog(): Boolean = type.equals("Dog", true)
-    fun isCat(): Boolean = type.equals("Cat", true)
+    fun isDog(): Boolean = species.equals("Dog", true)
+    fun isCat(): Boolean = species.equals("Cat", true)
     fun isFemale(): Boolean = sex.equals("Female", true)
     fun isMale(): Boolean = sex.equals("Male", true)
 }

@@ -45,7 +45,7 @@ class FavoritesViewModel @Inject constructor(
                     age = it.age,
                     sex = it.sex,
                     size = it.size,
-                    type = it.type,
+                    species = it.species,
                     isFavorite = true
                 )
             }

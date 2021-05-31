@@ -73,7 +73,7 @@ fun PetFiltersCard(
         }
         if (showExpandedState.value) {
             Text(
-                text = "Animal Type:",
+                text = "Animal Species:",
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(8.dp)
             )

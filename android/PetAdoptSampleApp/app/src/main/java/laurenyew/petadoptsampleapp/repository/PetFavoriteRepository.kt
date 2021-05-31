@@ -44,7 +44,7 @@ class PetFavoriteRepository @Inject constructor(
             age = animal.age,
             sex = animal.sex,
             size = animal.size,
-            type = animal.type
+            species = animal.species
         )
         favoriteAnimalDatabaseProvider.favoriteAnimal(favoriteAnimal)
     }
@@ -71,7 +71,7 @@ class PetFavoriteRepository @Inject constructor(
                     age = updatedAnimal.age,
                     sex = updatedAnimal.sex,
                     size = updatedAnimal.size,
-                    type = updatedAnimal.type
+                    species = updatedAnimal.species
                 )
                 favoriteAnimalDatabaseProvider.updateFavoritedAnimal(updatedFavoritedAnimal)
             } else {

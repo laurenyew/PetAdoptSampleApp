@@ -38,7 +38,7 @@ data class AnimalResponse(
         return Animal(
             animalId = id,
             orgId = organizationId,
-            type = species,
+            species = species,
             name = name,
             age = age,
             sex = gender,
