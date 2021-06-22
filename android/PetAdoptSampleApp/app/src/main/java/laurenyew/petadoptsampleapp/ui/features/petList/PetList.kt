@@ -16,6 +16,7 @@ import laurenyew.petadoptsampleapp.ui.features.list.ListItem
 import laurenyew.petadoptsampleapp.ui.images.ImageState
 import laurenyew.petadoptsampleapp.ui.images.loadPicture
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
+import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
 
 @Composable
 fun PetList(
@@ -30,7 +31,7 @@ fun PetList(
             val animalImageState = loadPicture(url = item.photoUrl)
             PetListItem(
                 item = item,
-                imageState = animalImageState,
+                imageState = animalImageState.collectAsStateLifecycleAware(initial = ImageState.Empty),
                 onItemClicked = { id -> onItemClicked(id) },
                 onItemFavorited = { isFavorited ->
                     onItemFavorited(item, isFavorited)
