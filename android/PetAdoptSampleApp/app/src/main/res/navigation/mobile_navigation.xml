@@ -9,11 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="laurenyew.petadoptsampleapp.ui.search.PetSearchFragment"
         android:label="@string/title_pet_search_page"
-        tools:layout="@layout/fragment_pet_search" />
+        tools:layout="@layout/pet_search" />
 
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="laurenyew.petadoptsampleapp.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/favorites" />
 </navigation>

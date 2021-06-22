@@ -1,5 +1,6 @@
 package laurenyew.petadoptsampleapp.ui.features.settings
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
@@ -10,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
+import laurenyew.petadoptsampleapp.ui.features.search.oldviewexample.PetSearchActivity
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
 import java.text.SimpleDateFormat
@@ -25,6 +28,7 @@ import java.util.*
 
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
+    val context = LocalContext.current
     val searchTermsList =
         viewModel.searchTermsList.collectAsStateLifecycleAware(initial = emptyList())
     val lastPollTime =
@@ -40,6 +44,19 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
                 viewModel.updatePollIntervalTime(newPollInterval)
             }
         )
+        Divider(color = dividerColor)
+        Button(
+            onClick = {
+                val activityIntent = Intent(context, PetSearchActivity::class.java)
+                context.startActivity(activityIntent)
+            },
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Text(
+                text = "Open Example Search Pets with Traditional Fragment / Activity",
+                style = MaterialTheme.typography.button
+            )
+        }
     }
 }
 
