@@ -72,7 +72,7 @@ fun OrganizationList(
             val imageState = loadPicture(url = item.photo)
             OrganizationListItem(
                 item = item,
-                imageState = imageState,
+                imageState = imageState.collectAsStateLifecycleAware(initial = ImageState.Empty),
                 onItemClicked = { id -> onItemClicked(id) },
             )
             Divider(color = dividerColor)

@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -20,7 +19,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * use resources unnecessarily
  */
 @Composable
-fun <T> StateFlow<T>.collectAsStateLifecycleAware(
+fun <T> Flow<T>.collectAsStateLifecycleAware(
     initial: T,
     coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): State<T> {

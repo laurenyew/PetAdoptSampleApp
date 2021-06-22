@@ -13,7 +13,7 @@ class PetSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pet_search)
         val toolbar = findViewById<Toolbar>(R.id.pet_search_toolbar)
-        toolbar.setTitle(R.string.title_pet_search_page)
+        toolbar.title = "Pet Search on a Fragment"
         toolbar.setTitleTextColor(Color.WHITE)
         setSupportActionBar(toolbar)
         supportActionBar?.setHomeButtonEnabled(true)
