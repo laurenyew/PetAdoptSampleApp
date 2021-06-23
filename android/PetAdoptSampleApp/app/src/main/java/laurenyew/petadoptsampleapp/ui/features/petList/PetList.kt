@@ -3,13 +3,12 @@ package laurenyew.petadoptsampleapp.ui.features.petList
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.ui.features.list.ListItem
@@ -28,7 +27,7 @@ fun PetList(
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
-            val animalImageState = loadPicture(url = item.photoUrl)
+            val animalImageState = loadPicture(item.photoUrl)
             PetListItem(
                 item = item,
                 imageState = animalImageState.collectAsStateLifecycleAware(initial = ImageState.Empty),
