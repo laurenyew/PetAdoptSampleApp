@@ -3,7 +3,7 @@ package laurenyew.petadoptsampleapp.ui.features.search.oldviewexample
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.databinding.AnimalPreviewBinding
@@ -37,13 +37,11 @@ class PetSearchListAdapter(private val animals: MutableList<Animal> = arrayListO
             itemBinding.nameTextView.text = animal.name
             itemBinding.infoTextView.text = animal.sex
             itemBinding.descriptionTextView.text = animal.description
-            animal.photoUrl?.let {
-                Picasso.get().load(it)
-                    .fit()
-                    .placeholder(R.drawable.ic_baseline_image_24)
-                    .error(R.drawable.ic_baseline_broken_image_24)
-                    .into(itemBinding.animalImageView)
-            }
+            Glide.with(itemBinding.animalImageView)
+                .load(animal.photoUrl)
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .error(R.drawable.ic_baseline_broken_image_24)
+                .into(itemBinding.animalImageView)
         }
     }
 }

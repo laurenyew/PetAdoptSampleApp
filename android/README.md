@@ -16,9 +16,6 @@ Sample App created to practice with different Android Tech
 
 ## TODO Next
 * Make keyboard hide on search
-* There's a known issue where if you scroll quickly on the list that Picasso will crash the app with "2021-06-23 00:20:27.367 6599-6599/laurenyew.petadoptsampleapp E/AndroidRuntime: FATAL EXCEPTION: main
-    Process: laurenyew.petadoptsampleapp, PID: 6599
-    kotlinx.coroutines.JobCancellationException: StandaloneCoroutine was cancelled; job=StandaloneCoroutine{Cancelled}@bf62df7". Tried to upgrade to Glide / Coil (https://google.github.io/accompanist/glide/) but the libraries are breaking currently with version of Jetpack Compose. Logged an [issue](https://github.com/google/accompanist/issues/515)
 
 ## TODO (Tech)
 * Add Jetpack Pages

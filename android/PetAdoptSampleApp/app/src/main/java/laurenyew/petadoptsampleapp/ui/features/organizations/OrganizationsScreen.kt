@@ -6,16 +6,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import laurenyew.petadoptsampleapp.database.organization.Organization
-import laurenyew.petadoptsampleapp.ui.features.favorites.PetFiltersCard
 import laurenyew.petadoptsampleapp.ui.features.list.ListItem
-import laurenyew.petadoptsampleapp.ui.images.ImageState
-import laurenyew.petadoptsampleapp.ui.images.loadPicture
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 import laurenyew.petadoptsampleapp.ui.theme.sectionHeader
 import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
@@ -70,12 +66,8 @@ fun OrganizationList(
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
-            val imageState = remember(item.photo) {
-                loadPicture(url = item.photo)
-            }
             OrganizationListItem(
                 item = item,
-                imageState = imageState.collectAsStateLifecycleAware(initial = ImageState.Empty),
                 onItemClicked = { id -> onItemClicked(id) },
             )
             Divider(color = dividerColor)
@@ -86,7 +78,6 @@ fun OrganizationList(
 @Composable
 fun OrganizationListItem(
     item: Organization,
-    imageState: State<ImageState>,
     onItemClicked: (id: String) -> Unit,
 ) {
     val title = item.name
@@ -99,7 +90,7 @@ fun OrganizationListItem(
     }
     val description = stringBuilder.toString()
     ListItem(
-        imageState = imageState,
+        imageUrl = item.photo,
         title = title,
         description = description,
         modifier = Modifier.clickable { onItemClicked(item.orgId) }
