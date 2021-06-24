@@ -11,49 +11,50 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.glide.rememberGlidePainter
+import com.google.accompanist.imageloading.ImageLoadState
 import laurenyew.petadoptsampleapp.R
-import laurenyew.petadoptsampleapp.ui.images.ImageState
 
 @Composable
 fun ListItem(
-    imageState: State<ImageState>,
+    imageUrl: String?,
     title: String,
     description: String,
     isFavorite: State<Boolean>? = null,
     onItemFavorited: ((Boolean) -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
-    val loadedImageState = imageState.value
     val imageModifier = Modifier
         .size(72.dp)
         .padding(2.dp)
         .fillMaxSize()
 
+    val painter = rememberGlidePainter(imageUrl)
+
     Row(modifier = modifier) {
-        when (loadedImageState) {
-            is ImageState.Success -> Image(
-                bitmap = loadedImageState.image.asImageBitmap(),
+        when (painter.loadState) {
+            is ImageLoadState.Success -> Image(
+                painter = painter,
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
             )
-            ImageState.Failed -> Image(
+            is ImageLoadState.Error -> Image(
                 painter = painterResource(id = R.drawable.ic_baseline_broken_image_24),
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds,
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
             )
-            ImageState.Loading -> CircularProgressIndicator(
+            is ImageLoadState.Loading -> CircularProgressIndicator(
                 modifier = imageModifier
                     .align(Alignment.CenterVertically)
             )
-            ImageState.Empty -> Image(
+            is ImageLoadState.Empty -> Image(
                 painter = painterResource(id = R.drawable.ic_baseline_image_24),
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds,

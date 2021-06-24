@@ -3,19 +3,17 @@ package laurenyew.petadoptsampleapp.ui.features.petList
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.ui.features.list.ListItem
-import laurenyew.petadoptsampleapp.ui.images.ImageState
-import laurenyew.petadoptsampleapp.ui.images.loadPicture
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
-import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware
 
 @Composable
 fun PetList(
@@ -27,10 +25,8 @@ fun PetList(
     LazyColumn {
         items(items.size) { index ->
             val item = items[index]
-            val animalImageState = loadPicture(item.photoUrl)
             PetListItem(
                 item = item,
-                imageState = animalImageState.collectAsStateLifecycleAware(initial = ImageState.Empty),
                 onItemClicked = { id -> onItemClicked(id) },
                 onItemFavorited = { isFavorited ->
                     onItemFavorited(item, isFavorited)
@@ -45,7 +41,6 @@ fun PetList(
 @Composable
 fun PetListItem(
     item: Animal,
-    imageState: State<ImageState>,
     onItemClicked: (String) -> Unit,
     onItemFavorited: (Boolean) -> Unit
 ) {
@@ -60,8 +55,9 @@ fun PetListItem(
     }
 
     ListItem(
-        imageState = imageState,
-        title = title, description = description,
+        imageUrl = item.photoUrl,
+        title = title,
+        description = description,
         isFavorite = isFavorite,
         onItemFavorited = onItemFavorited,
         modifier = Modifier
@@ -86,12 +82,9 @@ fun PetListItemPreview() {
         contact = null,
         orgId = null
     )
-    val imageState: State<ImageState> =
-        remember { mutableStateOf(ImageState.Loading) }
 
     PetListItem(
         item = animalModel,
-        imageState = imageState,
         onItemClicked = { },
         onItemFavorited = {}
     )
