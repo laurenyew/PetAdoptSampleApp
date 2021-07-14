@@ -29,6 +29,7 @@
 		B9E3F9F72692998A0057743C /* PetFinderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F62692998A0057743C /* PetFinderAPI.swift */; };
 		B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9FC269E84480057743C /* SearchBarView.swift */; };
 		B9E3FA03269E8B7D0057743C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3FA02269E8B7D0057743C /* HomeView.swift */; };
+		B9E3FA08269E8C460057743C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3FA07269E8C460057743C /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		B9E3F9F62692998A0057743C /* PetFinderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetFinderAPI.swift; sourceTree = "<group>"; };
 		B9E3F9FC269E84480057743C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B9E3FA02269E8B7D0057743C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B9E3FA07269E8C460057743C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				B9E3FA01269E8B6D0057743C /* Home */,
 				B929573623F0F7CF008F4FE4 /* Favorites */,
 				B929573323F0F73B008F4FE4 /* PetSearch */,
+				B9E3FA04269E8C290057743C /* Settings */,
 				B999C4F323F75AC80077465F /* Networking */,
 				B915CDCE23F0EAAD00F7AED1 /* AppDelegate.swift */,
 				B915CDD023F0EAAD00F7AED1 /* SceneDelegate.swift */,
@@ -264,6 +267,14 @@
 				B9E3FA02269E8B7D0057743C /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		B9E3FA04269E8C290057743C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B9E3FA07269E8C460057743C /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -423,6 +434,7 @@
 				B915CDD423F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld in Sources */,
 				B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */,
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
+				B9E3FA08269E8C460057743C /* SettingsView.swift in Sources */,
 				B915CDD623F0EAAD00F7AED1 /* ContentView.swift in Sources */,
 				B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */,
 				B9E3FA03269E8B7D0057743C /* HomeView.swift in Sources */,
