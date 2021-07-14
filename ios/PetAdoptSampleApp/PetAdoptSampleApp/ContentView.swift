@@ -19,7 +19,7 @@ struct ContentView: View {
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("circle")
+                        Image(systemName: "house")
                         Text("Home")
                     }
                 }
@@ -28,7 +28,7 @@ struct ContentView: View {
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("square")
+                        Image(systemName: "heart.fill")
                         Text("Favorites")
                     }
                 }
