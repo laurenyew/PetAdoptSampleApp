@@ -26,6 +26,11 @@ struct PetSearchView: View {
                 }
                 Spacer()
             }
+            .alert(isPresented: $viewModel.showError, content: {
+                Alert(title: Text("Search Failed"),
+                      message: Text(viewModel.errorText),
+                      dismissButton: .default(Text("OK")))
+            })
             .navigationBarTitle("Search Pets")
         }
         

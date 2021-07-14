@@ -14,6 +14,9 @@ class PetSearchViewModel: ObservableObject, Identifiable {
     
     @Published var dataSource: [AnimalRowViewModel] = []
     
+    @Published var showError: Bool = false
+    @Published var errorText: String = ""
+    
     private let PetAdoptSearchAPI: PetAdoptSearchAPI
     
     private var disposables = Set<AnyCancellable>()
@@ -37,13 +40,17 @@ class PetSearchViewModel: ObservableObject, Identifiable {
         .sink(receiveCompletion: { [weak self] value in
             guard let self = self else { return }
             switch value {
-            case .failure:
+            case .failure(let error):
+                self.errorText = error.localizedDescription
+                self.showError = true
                 self.dataSource = [] // Clear out data on failure
             case .finished:
                 break
             }
         }) { [weak self] animalViewModels in
             guard let self = self else { return }
+            self.errorText = ""
+            self.showError = false
             self.dataSource = animalViewModels// Success: Update data source
         }
         .store(in: &disposables)
