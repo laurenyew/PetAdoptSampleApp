@@ -23,6 +23,7 @@ struct SearchBarView: View {
                 .padding(.horizontal, 10)
                 .overlay(Button("Search") {
                     action(titleText)
+                    self.hideKeyboard()
                 }.padding(7)
                 .padding(.horizontal, 10), alignment: .trailing)
                 .keyboardType(.numberPad)
@@ -37,3 +38,11 @@ struct SearchBarView_Preview: PreviewProvider {
         }
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
