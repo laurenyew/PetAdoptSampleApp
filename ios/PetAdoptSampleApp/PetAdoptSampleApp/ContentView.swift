@@ -15,24 +15,42 @@ struct ContentView: View {
     
     var body: some View {
         TabView(){
-            PetSearchView(viewModel: self.petSearchViewModel)
+            HomeView()
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("circle")
+                        Image(systemName: "house")
                         Text("Home")
                     }
                 }
                 .tag(0)
+            PetSearchView(viewModel: self.petSearchViewModel)
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "magnifyingglass")
+                        Text("search")
+                    }
+                }
+                .tag(1)
             FavoritePetsView()
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("square")
+                        Image(systemName: "heart.fill")
                         Text("Favorites")
                     }
                 }
-                .tag(1)
+                .tag(2)
+            SettingsView()
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "gear")
+                        Text("Settings")
+                    }
+                }
+                .tag(3)
         }
     }
 }

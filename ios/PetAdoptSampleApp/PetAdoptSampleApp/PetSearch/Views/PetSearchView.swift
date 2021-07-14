@@ -16,39 +16,42 @@ struct PetSearchView: View {
     }
     
     var body: some View {
-      NavigationView {
-        List {
-          searchField
-
-          if viewModel.dataSource.isEmpty {
-            emptySection
-          } else {
-            animalSection
-          }
+        NavigationView {
+            VStack{
+                searchField
+                if(viewModel.dataSource.isEmpty){
+                    emptySection
+                } else {
+                    animalSection
+                }
+                Spacer()
+            }
+            .alert(isPresented: $viewModel.showError, content: {
+                Alert(title: Text("Search Failed"),
+                      message: Text(viewModel.errorText),
+                      dismissButton: .default(Text("OK")))
+            })
+            .navigationBarTitle("Search Pets")
         }
-          .listStyle(GroupedListStyle())
-          .navigationBarTitle("Dog Search 🐶")
-      }
+        
     }
 }
 
 private extension PetSearchView {
-  var searchField: some View {
-    HStack(alignment: .center) {
-        TextField("e.g. 78759", text: $viewModel.location)
+    var searchField: some View {
+        SearchBarView(titleText: "Zipcode:", searchText: $viewModel.location) { _ in
+            viewModel.executeSearch()
+        }
     }
-  }
-
-  var animalSection: some View {
-    Section {
-      ForEach(viewModel.dataSource, content: AnimalPreviewRow.init(viewModel:))
+    
+    var animalSection: some View {
+        List{
+            ForEach(viewModel.dataSource, content: AnimalPreviewRow.init(viewModel:))
+        }.listStyle(PlainListStyle())
     }
-  }
-
-  var emptySection: some View {
-    Section {
-      Text("No results")
-        .foregroundColor(.gray)
+    
+    var emptySection: some View {
+        Text("No results")
+            .foregroundColor(.gray)
     }
-  }
 }

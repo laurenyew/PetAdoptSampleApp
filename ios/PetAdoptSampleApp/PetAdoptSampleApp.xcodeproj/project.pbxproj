@@ -27,6 +27,9 @@
 		B9E3F9F3269299770057743C /* PetFinderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F2269299770057743C /* PetFinderError.swift */; };
 		B9E3F9F5269299810057743C /* GetAnimalsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F4269299810057743C /* GetAnimalsResponse.swift */; };
 		B9E3F9F72692998A0057743C /* PetFinderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F62692998A0057743C /* PetFinderAPI.swift */; };
+		B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9FC269E84480057743C /* SearchBarView.swift */; };
+		B9E3FA03269E8B7D0057743C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3FA02269E8B7D0057743C /* HomeView.swift */; };
+		B9E3FA08269E8C460057743C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3FA07269E8C460057743C /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		B9E3F9F2269299770057743C /* PetFinderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetFinderError.swift; sourceTree = "<group>"; };
 		B9E3F9F4269299810057743C /* GetAnimalsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAnimalsResponse.swift; sourceTree = "<group>"; };
 		B9E3F9F62692998A0057743C /* PetFinderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetFinderAPI.swift; sourceTree = "<group>"; };
+		B9E3F9FC269E84480057743C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		B9E3FA02269E8B7D0057743C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B9E3FA07269E8C460057743C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +130,10 @@
 			isa = PBXGroup;
 			children = (
 				B999C50923FB387D0077465F /* Common */,
+				B9E3FA01269E8B6D0057743C /* Home */,
 				B929573623F0F7CF008F4FE4 /* Favorites */,
 				B929573323F0F73B008F4FE4 /* PetSearch */,
+				B9E3FA04269E8C290057743C /* Settings */,
 				B999C4F323F75AC80077465F /* Networking */,
 				B915CDCE23F0EAAD00F7AED1 /* AppDelegate.swift */,
 				B915CDD023F0EAAD00F7AED1 /* SceneDelegate.swift */,
@@ -232,6 +240,7 @@
 			children = (
 				B9BDAED7265DE3F100E97173 /* PetSearchView.swift */,
 				B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */,
+				B9E3F9FC269E84480057743C /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -250,6 +259,22 @@
 				B9E3F9EC269299160057743C /* ImageView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B9E3FA01269E8B6D0057743C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B9E3FA02269E8B7D0057743C /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B9E3FA04269E8C290057743C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B9E3FA07269E8C460057743C /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,7 +434,10 @@
 				B915CDD423F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld in Sources */,
 				B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */,
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
+				B9E3FA08269E8C460057743C /* SettingsView.swift in Sources */,
 				B915CDD623F0EAAD00F7AED1 /* ContentView.swift in Sources */,
+				B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */,
+				B9E3FA03269E8B7D0057743C /* HomeView.swift in Sources */,
 				B9BDAEDA265DE40800E97173 /* ImageLoader.swift in Sources */,
 				B9BDAED8265DE3F100E97173 /* PetSearchView.swift in Sources */,
 				B9E3F9F5269299810057743C /* GetAnimalsResponse.swift in Sources */,
