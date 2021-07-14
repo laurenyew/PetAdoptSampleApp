@@ -39,13 +39,8 @@ struct PetSearchView: View {
 
 private extension PetSearchView {
     var searchField: some View {
-        HStack(alignment: .center) {
-            TextField("Zipcode:", text: $viewModel.location)
-                .padding(7)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .padding(.horizontal, 15)
-                .keyboardType(.numberPad)
+        SearchBarView(titleText: "Zipcode:", searchText: $viewModel.location) { _ in
+            viewModel.executeSearch()
         }
     }
     

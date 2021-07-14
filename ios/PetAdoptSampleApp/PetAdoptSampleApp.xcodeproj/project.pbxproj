@@ -27,6 +27,7 @@
 		B9E3F9F3269299770057743C /* PetFinderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F2269299770057743C /* PetFinderError.swift */; };
 		B9E3F9F5269299810057743C /* GetAnimalsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F4269299810057743C /* GetAnimalsResponse.swift */; };
 		B9E3F9F72692998A0057743C /* PetFinderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F62692998A0057743C /* PetFinderAPI.swift */; };
+		B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9FC269E84480057743C /* SearchBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		B9E3F9F2269299770057743C /* PetFinderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetFinderError.swift; sourceTree = "<group>"; };
 		B9E3F9F4269299810057743C /* GetAnimalsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAnimalsResponse.swift; sourceTree = "<group>"; };
 		B9E3F9F62692998A0057743C /* PetFinderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetFinderAPI.swift; sourceTree = "<group>"; };
+		B9E3F9FC269E84480057743C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 			children = (
 				B9BDAED7265DE3F100E97173 /* PetSearchView.swift */,
 				B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */,
+				B9E3F9FC269E84480057743C /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */,
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
 				B915CDD623F0EAAD00F7AED1 /* ContentView.swift in Sources */,
+				B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */,
 				B9BDAEDA265DE40800E97173 /* ImageLoader.swift in Sources */,
 				B9BDAED8265DE3F100E97173 /* PetSearchView.swift in Sources */,
 				B9E3F9F5269299810057743C /* GetAnimalsResponse.swift in Sources */,
