@@ -40,7 +40,7 @@ private extension PetSearchView {
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                 .padding(.horizontal, 15)
-            
+                .keyboardType(.numberPad)
         }
     }
     
