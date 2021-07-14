@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// SearchBar generic w/ title & search text + button
 struct SearchBarView: View {
     var titleText: String
     @Binding var searchText: String
@@ -19,20 +20,19 @@ struct SearchBarView: View {
                 .padding(7)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
-                .padding(.horizontal, 15)
+                .padding(.horizontal, 10)
+                .overlay(Button("Search") {
+                    action(titleText)
+                }.padding(7)
+                .padding(.horizontal, 10), alignment: .trailing)
                 .keyboardType(.numberPad)
-            Button("Search") {
-                action(titleText)
-            }
-            .padding(.init(top: 7, leading: 0, bottom: 7, trailing: 7))
-            .padding(.horizontal, 15)
         }
     }
 }
 
 struct SearchBarView_Preview: PreviewProvider {
     static var previews: some View {
-        SearchBarView(titleText: "Zipcode:", searchText: .constant("78759")) { text in
+        SearchBarView(titleText: "Zipcode:", searchText: .constant("")) { text in
             print(text)
         }
     }

@@ -47,7 +47,7 @@ private extension PetSearchView {
     var animalSection: some View {
         List{
             ForEach(viewModel.dataSource, content: AnimalPreviewRow.init(viewModel:))
-        }
+        }.listStyle(PlainListStyle())
     }
     
     var emptySection: some View {
