@@ -15,6 +15,8 @@ struct ContentView: View {
     
     let homeViewModel = HomeViewModel()
     
+    let settingsViewModel = SettingsViewModel()
+    
     var body: some View {
         TabView(){
             HomeView(viewModel: homeViewModel)
@@ -44,7 +46,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(2)
-            SettingsView()
+            SettingsView(viewModel: settingsViewModel)
                 .font(.title)
                 .tabItem {
                     VStack {
