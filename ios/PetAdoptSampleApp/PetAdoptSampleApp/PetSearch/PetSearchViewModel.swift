@@ -24,6 +24,7 @@ class PetSearchViewModel: ObservableObject, Identifiable {
     init(PetAdoptSearchAPI: PetAdoptSearchAPI,
          scheduler: DispatchQueue = DispatchQueue(label: "PetSearchViewModel")) {
         self.PetAdoptSearchAPI = PetAdoptSearchAPI
+        location = getLastSearchTerm() ?? ""
 //        $location
 //            .dropFirst(1)
 //            .debounce(for: .seconds(0.5), scheduler: scheduler)
@@ -36,6 +37,7 @@ class PetSearchViewModel: ObservableObject, Identifiable {
             errorText = "Invalid Zipcode. Needs at least 5 digits."
         }else{
             searchForNearbyDogs(forLocation: location)
+            saveLastSearchTerm(forLocation: location)
         }
     }
     
@@ -62,5 +64,15 @@ class PetSearchViewModel: ObservableObject, Identifiable {
                 self.dataSource = animalViewModels// Success: Update data source
             }
             .store(in: &disposables)
+    }
+    
+    private func saveLastSearchTerm(forLocation location: String){
+        let userDefaults = UserDefaults.standard
+        userDefaults.setValue(location, forKey: "lastLocation")
+    }
+    
+    private func getLastSearchTerm() -> String? {
+        let userDefaults = UserDefaults.standard
+        return userDefaults.value(forKey: "lastLocation") as? String
     }
 }

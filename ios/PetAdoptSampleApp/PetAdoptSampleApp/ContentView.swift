@@ -13,9 +13,13 @@ struct ContentView: View {
  
     let petSearchViewModel = PetSearchViewModel(PetAdoptSearchAPI: PetAdoptAPI)
     
+    let homeViewModel = HomeViewModel()
+    
+    let settingsViewModel = SettingsViewModel()
+    
     var body: some View {
         TabView(){
-            HomeView()
+            HomeView(viewModel: homeViewModel)
                 .font(.title)
                 .tabItem {
                     VStack {
@@ -42,7 +46,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(2)
-            SettingsView()
+            SettingsView(viewModel: settingsViewModel)
                 .font(.title)
                 .tabItem {
                     VStack {
