@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import YapDatabase
 
 class AnimalRowViewModel: Identifiable {
     private let animal: GetAnimalsResponse.Animal
