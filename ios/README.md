@@ -7,6 +7,18 @@ Sample App created to practice with different iOS Tech
 * SwiftUI
 * Combine
 
+## TODO
+* Setup cocoapods for YapDatabase
+* Use YapDatabase to make favorites feature
+* Clean up list UI
+* Make favorites feature
+* Separate out a framework
+
+## Future
+* Setup similar feature to Android to auto curl the token key
+* CoreData
+* Async/Await
+
 ## Disclaimers
 
 Powered by [Petfinder](www.petfinder.com)
