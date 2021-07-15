@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		356D3B0D5EB4DFF5C79E7529 /* Pods_PetAdoptSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B18835A492CE93063B342A6 /* Pods_PetAdoptSampleApp.framework */; };
 		B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B915CDCE23F0EAAD00F7AED1 /* AppDelegate.swift */; };
 		B915CDD123F0EAAD00F7AED1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B915CDD023F0EAAD00F7AED1 /* SceneDelegate.swift */; };
 		B915CDD423F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B915CDD223F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld */; };
@@ -54,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3867F83DAF854AB3B62A19B1 /* Pods-PetAdoptSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetAdoptSampleApp.release.xcconfig"; path = "Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		8670762322E5F5B32E08A3F4 /* Pods-PetAdoptSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetAdoptSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9B18835A492CE93063B342A6 /* Pods_PetAdoptSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetAdoptSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B915CDCB23F0EAAD00F7AED1 /* PetAdoptSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetAdoptSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B915CDCE23F0EAAD00F7AED1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B915CDD023F0EAAD00F7AED1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356D3B0D5EB4DFF5C79E7529 /* Pods_PetAdoptSampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		164DE6EF10DBEAD932B9EB0E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8670762322E5F5B32E08A3F4 /* Pods-PetAdoptSampleApp.debug.xcconfig */,
+				3867F83DAF854AB3B62A19B1 /* Pods-PetAdoptSampleApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B915CDC223F0EAAD00F7AED1 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +134,8 @@
 				B915CDE723F0EAB300F7AED1 /* PetAdoptSampleAppTests */,
 				B915CDF223F0EAB300F7AED1 /* PetAdoptSampleAppUITests */,
 				B915CDCC23F0EAAD00F7AED1 /* Products */,
+				164DE6EF10DBEAD932B9EB0E /* Pods */,
+				DC09BAD510AD280A47DD26B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,6 +302,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		DC09BAD510AD280A47DD26B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B18835A492CE93063B342A6 /* Pods_PetAdoptSampleApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,10 +317,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B915CDF823F0EAB300F7AED1 /* Build configuration list for PBXNativeTarget "PetAdoptSampleApp" */;
 			buildPhases = (
+				DE949957D41A6A313C2BD9D5 /* [CP] Check Pods Manifest.lock */,
 				B915CDC723F0EAAD00F7AED1 /* Sources */,
 				B915CDC823F0EAAD00F7AED1 /* Frameworks */,
 				B915CDC923F0EAAD00F7AED1 /* Resources */,
 				B929573123F0ED75008F4FE4 /* ShellScript */,
+				CBCF344CD40C2CBE4C104A4E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -431,6 +458,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Look for a global file named 'petfinderAccessToken' within the home directory\ntoken_file=~/accessTokens/petfinderAccessToken\ntoken=\"$(cat $token_file 2>/dev/null)\"\nif [ \"$token\" ]; then\n  plutil -replace PetfinderAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n  echo 'warning: Missing Petfinder access token'\n  open 'https://www.petfinder.com/developers/v2/docs/'\n  echo \"warning: Get an access token from <https://www.petfinder.com/developers/v2/docs/>, then create a new file at $token_file that contains the access token.\"\nfi\n";
+		};
+		CBCF344CD40C2CBE4C104A4E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE949957D41A6A313C2BD9D5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PetAdoptSampleApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -625,6 +691,7 @@
 		};
 		B915CDF923F0EAB300F7AED1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8670762322E5F5B32E08A3F4 /* Pods-PetAdoptSampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -645,6 +712,7 @@
 		};
 		B915CDFA23F0EAB300F7AED1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3867F83DAF854AB3B62A19B1 /* Pods-PetAdoptSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

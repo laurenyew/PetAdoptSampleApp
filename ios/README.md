@@ -18,6 +18,7 @@ Sample App created to practice with different iOS Tech
 * Setup similar feature to Android to auto curl the token key
 * CoreData
 * Async/Await
+* AFNetworking
 
 ## Disclaimers
 
