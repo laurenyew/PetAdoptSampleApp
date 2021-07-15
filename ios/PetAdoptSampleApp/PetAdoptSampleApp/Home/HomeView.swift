@@ -34,6 +34,14 @@ struct HomeView: View {
                     .padding(7)
             }
             Spacer()
+            HStack {
+                Text("Powered by")
+                if #available(iOS 14.0, *) {
+                    Link("Petfinder", destination: URL(string: "https://www.petfinder.com/")!)
+                } else {
+                    Text("Petfinder(https://www.petfinder.com/")
+                }
+            }
         }
     }
 }
