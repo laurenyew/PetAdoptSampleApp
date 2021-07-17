@@ -9,22 +9,30 @@
 import SwiftUI
 
 struct AnimalPreviewRow: View {
-    private let viewModel: AnimalRowViewModel
+    private let name: String
+    private let gender: String
+    private let photoUrl: URL?
+    private let isFavorite: Bool
+    private let updateFavoriteStatus: () -> Void
     
-    init(viewModel: AnimalRowViewModel) {
-        self.viewModel = viewModel
+    init(name: String, gender: String, photoUrl: URL?, isFavorite: Bool, updateFavoriteStatus: @escaping () -> Void) {
+        self.name = name
+        self.gender = gender
+        self.photoUrl = photoUrl
+        self.isFavorite = isFavorite
+        self.updateFavoriteStatus = updateFavoriteStatus
     }
     
     var body: some View {
         HStack {
             VStack {
-                ImageView(withURL: viewModel.photoUrl)
+                ImageView(withURL: self.photoUrl)
                 .aspectRatio(contentMode: .fit)
             }
             VStack(alignment: .leading) {
-                Text("\(viewModel.name)")
+                Text("\(self.name)")
                     .font(.body)
-                Text("\(viewModel.gender)")
+                Text("\(self.gender)")
                     .font(.footnote)
             }
             .padding(.leading, 8)
@@ -35,7 +43,8 @@ struct AnimalPreviewRow: View {
 
 struct AnimalPreviewRow_Preview: PreviewProvider {
     static var previews: some View {
-        let animal = GetAnimalsResponse.Animal(id: 1, organizationId: "testOrg", url: nil, type: "dog", species: "dog", breeds: nil, colors: nil, age: "2", gender: "female", size: "large", coat: "shiny", name: "Lucy", description: "A very nice dog", photos: nil, status: "adoptable", attributes: nil, environment: nil, tags: [], contact: GetAnimalsResponse.Contact(email: nil, phone: nil, address: nil), publishDate: nil, distance: 50.0)
-        AnimalPreviewRow(viewModel: AnimalRowViewModel(animal:animal))
+        AnimalPreviewRow(name: "Happy", gender: "Male", photoUrl: nil, isFavorite: true) { 
+            print("favorited")
+        }
     }
 }

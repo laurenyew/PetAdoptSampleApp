@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct AnimalListView: View {
-    let dataSource: [AnimalRowViewModel]
-    let onFavoriteClicked: (AnimalRowViewModel) -> Void
+    private let dataSource: [AnimalRowViewModel]
+    private let onFavoriteClicked: (AnimalRowViewModel) -> Void
     
     init(dataSource: [AnimalRowViewModel],
          onFavoriteClicked: @escaping (AnimalRowViewModel) -> Void
@@ -29,7 +29,17 @@ struct AnimalListView: View {
     
     var animalSection: some View {
         List{
-            ForEach(dataSource, content: AnimalPreviewRow.init(viewModel:))
+            ForEach(dataSource){ animal in
+                AnimalPreviewRow.init(
+                    name: animal.name,
+                    gender: animal.gender,
+                    photoUrl: animal.photoUrl,
+                    isFavorite: animal.isFavorite,
+                    updateFavoriteStatus: {
+                        self.onFavoriteClicked(animal)
+                    }
+                )
+            }
         }.listStyle(PlainListStyle())
     }
     

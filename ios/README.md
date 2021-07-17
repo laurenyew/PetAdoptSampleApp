@@ -19,6 +19,7 @@ Sample App created to practice with different iOS Tech
 * CoreData
 * Async/Await
 * AFNetworking
+* Resolver (Dependency Injection)
 
 ## Disclaimers
 
