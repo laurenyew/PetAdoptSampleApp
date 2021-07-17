@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol PetAdoptSearchAPI {
-    func getDogsNearMe(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetAdoptError>
+    func getAnimals(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetAdoptError>
     
     func getAnimals(
         forType type: String?,
@@ -44,8 +44,8 @@ class PetAdopt {
 
 // MARK: - PetAdoptSearchAPI
 extension PetAdopt: PetAdoptSearchAPI {
-    func getDogsNearMe(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetAdoptError> {
-        return getAnimals(forType: "Dog", location: location, distance: 50)
+    func getAnimals(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetAdoptError> {
+        return getAnimals(location: location, distance: 50)
     }
     
     func getAnimals(forType type: String? = nil, breed: String? = nil, size: String? = nil, gender: String? = nil, age: String? = nil, color: String? = nil, coat: String? = nil, status: String? = nil, name: String? = nil, organization: String? = nil, goodWithChildren: Bool? = nil, goodWithDogs: Bool? = nil, goodWithCats: Bool? = nil, location: String? = nil, distance: Int? = nil, page: Int? = nil, limit: Int? = nil) -> AnyPublisher<GetAnimalsResponse, PetAdoptError> {

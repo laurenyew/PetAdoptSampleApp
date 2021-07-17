@@ -11,7 +11,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var selection = 0
  
-    let petSearchViewModel = PetSearchViewModel(PetAdoptSearchAPI: PetAdoptAPI)
+    let petSearchViewModel = PetSearchViewModel(petSearchRepository: PetSearchRepository())
+    let favoritesViewModel = FavoritePetsViewModel()
     
     let homeViewModel = HomeViewModel()
     
@@ -28,7 +29,9 @@ struct ContentView: View {
                     }
                 }
                 .tag(0)
-            PetSearchView(viewModel: self.petSearchViewModel)
+            PetSearchView(
+                searchViewModel: petSearchViewModel, favoritesViewModel: favoritesViewModel
+            )
                 .font(.title)
                 .tabItem {
                     VStack {
