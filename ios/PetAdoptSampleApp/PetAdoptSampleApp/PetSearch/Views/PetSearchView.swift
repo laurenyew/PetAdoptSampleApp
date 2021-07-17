@@ -9,22 +9,26 @@
 import SwiftUI
 
 struct PetSearchView: View {
-    @ObservedObject var viewModel: PetSearchViewModel
+    @ObservedObject var searchViewModel: PetSearchViewModel
+    @ObservedObject var favoritesViewModel: FavoritePetsViewModel
     
-    init(viewModel: PetSearchViewModel){
-        self.viewModel = viewModel
+    init(searchViewModel: PetSearchViewModel, favoritesViewModel: FavoritePetsViewModel){
+        self.searchViewModel = searchViewModel
+        self.favoritesViewModel = favoritesViewModel
     }
     
     var body: some View {
         NavigationView {
             VStack{
                 searchField
-                AnimalListView(dataSource: viewModel.dataSource)
+                AnimalListView(dataSource: searchViewModel.dataSource) { animalRowViewModel in
+                    favoritesViewModel.onFavoriteClicked(animal: animalRowViewModel)
+                }
                 Spacer()
             }
-            .alert(isPresented: $viewModel.showError, content: {
+            .alert(isPresented: $searchViewModel.showError, content: {
                 Alert(title: Text("Search Failed"),
-                      message: Text(viewModel.errorText),
+                      message: Text(searchViewModel.errorText),
                       dismissButton: .default(Text("OK")))
             })
             .navigationBarTitle("Search Pets")
@@ -35,8 +39,8 @@ struct PetSearchView: View {
 
 private extension PetSearchView {
     var searchField: some View {
-        SearchBarView(titleText: "Zipcode:", searchText: $viewModel.location) { _ in
-            viewModel.executeSearch()
+        SearchBarView(titleText: "Zipcode:", searchText: $searchViewModel.location) { _ in
+            searchViewModel.executeSearch()
         }
     }
 }

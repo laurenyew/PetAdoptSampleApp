@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+class FavoritePetsViewModel: ObservableObject, Identifiable {
+    
+    func onFavoriteClicked(animal: AnimalRowViewModel){
+        print("Favorite clicked")
+    }
+}

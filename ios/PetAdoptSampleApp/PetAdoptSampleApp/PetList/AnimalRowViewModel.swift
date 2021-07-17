@@ -9,7 +9,7 @@
 import Foundation
 import YapDatabase
 
-class AnimalRowViewModel: Identifiable {
+class AnimalRowViewModel: Identifiable, ObservableObject {
     private let animal: GetAnimalsResponse.Animal
     
     var id: Int {
@@ -27,6 +27,8 @@ class AnimalRowViewModel: Identifiable {
     var photoUrl: URL? {
         return animal.photos?.first?.full
     }
+    
+    var isFavorite: Bool = false
     
     init(animal: GetAnimalsResponse.Animal) {
         self.animal = animal

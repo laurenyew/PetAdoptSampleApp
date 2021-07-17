@@ -61,6 +61,9 @@ class PetSearchViewModel: ObservableObject, Identifiable {
                 guard let self = self else { return }
                 self.errorText = ""
                 self.showError = false
+               
+                //TODO: Do some database work on animal view models to mark them as favorites or not...
+                
                 self.dataSource = animalViewModels// Success: Update data source
             }
             .store(in: &disposables)
