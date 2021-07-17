@@ -19,11 +19,7 @@ struct PetSearchView: View {
         NavigationView {
             VStack{
                 searchField
-                if(viewModel.dataSource.isEmpty){
-                    emptySection
-                } else {
-                    animalSection
-                }
+                AnimalListView(dataSource: viewModel.dataSource)
                 Spacer()
             }
             .alert(isPresented: $viewModel.showError, content: {
@@ -42,16 +38,5 @@ private extension PetSearchView {
         SearchBarView(titleText: "Zipcode:", searchText: $viewModel.location) { _ in
             viewModel.executeSearch()
         }
-    }
-    
-    var animalSection: some View {
-        List{
-            ForEach(viewModel.dataSource, content: AnimalPreviewRow.init(viewModel:))
-        }.listStyle(PlainListStyle())
-    }
-    
-    var emptySection: some View {
-        Text("No results")
-            .foregroundColor(.gray)
     }
 }
