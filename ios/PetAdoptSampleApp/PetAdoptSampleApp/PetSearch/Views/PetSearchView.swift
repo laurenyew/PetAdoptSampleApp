@@ -10,11 +10,9 @@ import SwiftUI
 
 struct PetSearchView: View {
     @ObservedObject var searchViewModel: PetSearchViewModel
-    @ObservedObject var favoritesViewModel: FavoritePetsViewModel
     
-    init(searchViewModel: PetSearchViewModel, favoritesViewModel: FavoritePetsViewModel){
+    init(searchViewModel: PetSearchViewModel){
         self.searchViewModel = searchViewModel
-        self.favoritesViewModel = favoritesViewModel
     }
     
     var body: some View {
@@ -22,7 +20,7 @@ struct PetSearchView: View {
             VStack{
                 searchField
                 AnimalListView(dataSource: searchViewModel.dataSource) { animalRowViewModel in
-                    favoritesViewModel.onFavoriteClicked(animal: animalRowViewModel)
+                    searchViewModel.onFavoriteClicked(animal: animalRowViewModel)
                 }
                 Spacer()
             }

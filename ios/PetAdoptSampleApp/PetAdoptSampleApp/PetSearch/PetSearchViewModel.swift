@@ -18,10 +18,12 @@ class PetSearchViewModel: ObservableObject, Identifiable {
     @Published var errorText: String = ""
     
     private let petSearchRepository: PetSearchRepository
+    private let favoritePetsRepository: FavoritePetsRepository
     private var disposables = Set<AnyCancellable>()
     
-    init(petSearchRepository: PetSearchRepository) {
+    init(petSearchRepository: PetSearchRepository, favoritePetsRepository: FavoritePetsRepository) {
         self.petSearchRepository = petSearchRepository
+        self.favoritePetsRepository = favoritePetsRepository
         self.location = petSearchRepository.getLastSearchTerm() ?? ""
     }
     
@@ -56,5 +58,11 @@ class PetSearchViewModel: ObservableObject, Identifiable {
             
             petSearchRepository.saveLastSearchTerm(forLocation: location)
         }
+    }
+    
+    func onFavoriteClicked(animal: AnimalRowViewModel){
+        self.dataSource.first(where: { $0.id == animal.id })?.isFavorite = !animal.isFavorite
+        // Tell SwiftUI to update the list
+        objectWillChange.send()
     }
 }

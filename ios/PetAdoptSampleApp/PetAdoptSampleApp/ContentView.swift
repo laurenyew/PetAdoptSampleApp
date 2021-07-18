@@ -11,7 +11,10 @@ import SwiftUI
 struct ContentView: View {
     @State private var selection = 0
  
-    let petSearchViewModel = PetSearchViewModel(petSearchRepository: PetSearchRepository())
+    let petSearchViewModel = PetSearchViewModel(
+        petSearchRepository: PetSearchRepository(),
+        favoritePetsRepository: FavoritePetsRepository()
+    )
     let favoritesViewModel = FavoritePetsViewModel()
     
     let homeViewModel = HomeViewModel()
@@ -30,7 +33,7 @@ struct ContentView: View {
                 }
                 .tag(0)
             PetSearchView(
-                searchViewModel: petSearchViewModel, favoritesViewModel: favoritesViewModel
+                searchViewModel: petSearchViewModel
             )
                 .font(.title)
                 .tabItem {
