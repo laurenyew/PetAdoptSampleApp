@@ -15,6 +15,7 @@ struct AnimalPreviewRow: View {
     private let species: String
     private let photoUrl: URL?
     private let isFavorite: Bool
+    private let favoriteImage: String
     private let updateFavoriteStatus: () -> Void
     
     init(name: String, gender: String, species: String, photoUrl: URL?, isFavorite: Bool, updateFavoriteStatus: @escaping () -> Void) {
@@ -38,6 +39,11 @@ struct AnimalPreviewRow: View {
         }
         self.photoUrl = photoUrl
         self.isFavorite = isFavorite
+        if isFavorite {
+            favoriteImage = "heart.fill"
+        } else {
+            favoriteImage = "heart"
+        }
         self.updateFavoriteStatus = updateFavoriteStatus
     }
     
@@ -54,6 +60,14 @@ struct AnimalPreviewRow: View {
             }
             .padding(.leading, 8)
             Spacer()
+            Button(action: self.updateFavoriteStatus) {
+                Image(systemName: self.favoriteImage)
+                    .resizable()
+                    .frame(minWidth: 10, idealWidth: 15, maxWidth: 25, minHeight: 10, idealHeight: 15, maxHeight: 20, alignment: .center)
+                    .padding(15)
+                    .foregroundColor(.red)
+            }
+            
         }
         .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: 60.0, alignment: Alignment.leading)
     }
