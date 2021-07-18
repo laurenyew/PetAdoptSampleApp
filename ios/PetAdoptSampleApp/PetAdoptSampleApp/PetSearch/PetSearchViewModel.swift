@@ -9,70 +9,72 @@
 import SwiftUI
 import Combine
 
-class PetSearchViewModel: ObservableObject, Identifiable {
+class PetSearchViewModel: AnimalListViewModel {
     @Published var location: String = ""
     
-    @Published var dataSource: [AnimalRowViewModel] = []
-    
-    @Published var showError: Bool = false
-    @Published var errorText: String = ""
-    
-    private let PetAdoptSearchAPI: PetAdoptSearchAPI
-    
+    private let petSearchRepository: PetSearchRepository
     private var disposables = Set<AnyCancellable>()
     
-    init(PetAdoptSearchAPI: PetAdoptSearchAPI,
-         scheduler: DispatchQueue = DispatchQueue(label: "PetSearchViewModel")) {
-        self.PetAdoptSearchAPI = PetAdoptSearchAPI
-        location = getLastSearchTerm() ?? ""
-//        $location
-//            .dropFirst(1)
-//            .debounce(for: .seconds(0.5), scheduler: scheduler)
-//            .sink(receiveValue: searchForNearbyDogs(forLocation:))
-//            .store(in: &disposables)
+    init(petSearchRepository: PetSearchRepository, favoritePetsRepository: FavoritePetsRepository) {
+        self.petSearchRepository = petSearchRepository
+        super.init(favoritePetsRepository: favoritePetsRepository)
+        
+        self.location = petSearchRepository.getLastSearchTerm() ?? ""
+        // Auto execute search for last search term
+        if !self.location.isEmpty {
+            executeSearch()
+        }
     }
     
     func executeSearch(){
         if(location.count < 5){
             errorText = "Invalid Zipcode. Needs at least 5 digits."
         }else{
-            searchForNearbyDogs(forLocation: location)
-            saveLastSearchTerm(forLocation: location)
+            petSearchRepository.searchForNearbyAnimals(forLocation: location)
+                .eraseToAnyPublisher()
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { [weak self] (value) in
+                    guard let self = self else { return }
+                    switch(value){
+                    case .failure(let petAdoptError):
+                        print("Search request failed: \(String(describing: petAdoptError))")
+                        self.showError = true
+                        switch petAdoptError {
+                        case .network(let description):
+                            self.errorText = "Network error: \(description)"
+                        case .parsing(let description):
+                            self.errorText = "Parsing error: \(description)"
+                        }
+                    case .finished: break
+                    }
+                }, receiveValue: { [weak self] (result) in
+                    guard let self = self else { return }
+                    self.handleSearchResult(animals: result)
+                })
+                .store(in: &disposables)
+            
+            petSearchRepository.saveLastSearchTerm(forLocation: location)
         }
     }
     
-    private func searchForNearbyDogs(forLocation location:String) {
-        PetAdoptSearchAPI.getDogsNearMe(forLocation: location)
-            .map { response in
-                response.animals.map(AnimalRowViewModel.init)
+    /**
+     Update state for search result
+     Also update search results for favorite status
+     */
+    private func handleSearchResult(animals: [AnimalRowViewModel]) {
+        self.showError = false
+        self.errorText = ""
+        let favoriteIds = favoritePetsRepository.getFavorites().map { animal in
+            animal.id
+        }
+        let result: [AnimalRowViewModel] = animals.map { animal in
+            if favoriteIds.contains(animal.id) {
+                animal.isFavorite = true
+            } else {
+                animal.isFavorite = false
             }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] value in
-                guard let self = self else { return }
-                switch value {
-                case .failure(let error):
-                    self.errorText = error.localizedDescription
-                    self.showError = true
-                    self.dataSource = [] // Clear out data on failure
-                case .finished:
-                    break
-                }
-            }) { [weak self] animalViewModels in
-                guard let self = self else { return }
-                self.errorText = ""
-                self.showError = false
-                self.dataSource = animalViewModels// Success: Update data source
-            }
-            .store(in: &disposables)
-    }
-    
-    private func saveLastSearchTerm(forLocation location: String){
-        let userDefaults = UserDefaults.standard
-        userDefaults.setValue(location, forKey: "lastLocation")
-    }
-    
-    private func getLastSearchTerm() -> String? {
-        let userDefaults = UserDefaults.standard
-        return userDefaults.value(forKey: "lastLocation") as? String
+            return animal
+        }
+        self.dataSource = result
     }
 }

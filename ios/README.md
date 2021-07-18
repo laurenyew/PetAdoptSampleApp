@@ -1,23 +1,30 @@
 # iOS PetAdoptSampleApp
 Sample App created to practice with different iOS Tech
 
-<img src="./Screenshots/search.png" width="200"/>
+<img src="./Screenshots/home.png" width="200"/> <img src="./Screenshots/search.png" width="200"/> <img src="./Screenshots/favorites.png" width="200"/> <img src="./Screenshots/settings.png" width="200"/>
 
 ## iOS Tech
 * SwiftUI
 * Combine
+* Cocoapods
+* YapDatabase
+
+## Features
+* Search by zipcode
+* Favorites Feature
+* Settings
+* Home Page
 
 ## TODO
-* Setup cocoapods for YapDatabase
-* Use YapDatabase to make favorites feature
-* Clean up list UI
-* Make favorites feature
 * Separate out a framework
 
 ## Future
 * Setup similar feature to Android to auto curl the token key
+* Poll every hour (Petfinder Terms of Service)
 * CoreData
 * Async/Await
+* AFNetworking
+* Resolver (Dependency Injection)
 
 ## Disclaimers
 
