@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:PetAdoptCommonViewsFramework/PetAdoptCommonViewsFramework.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:PetAdoptSampleApp.xcodeproj">
    </FileRef>
    <FileRef

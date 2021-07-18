@@ -7,26 +7,16 @@
 //
 
 import SwiftUI
+import Resolver
 
 struct ContentView: View {
     @State private var selection = 0
+    @Injected private var petSearchViewModel: PetSearchViewModel
+    @Injected private var favoritesViewModel: FavoritePetsViewModel
+    @Injected private var homeViewModel: HomeViewModel
+    @Injected private var settingsViewModel: SettingsViewModel
     
     var body: some View {
-        let petSearchRepository = PetSearchRepository()
-        let favoritePetsRepository = FavoritePetsRepository()
-        
-        let petSearchViewModel = PetSearchViewModel(
-            petSearchRepository: petSearchRepository,
-            favoritePetsRepository: favoritePetsRepository
-        )
-        let favoritesViewModel = FavoritePetsViewModel(
-            favoritePetsRepository: favoritePetsRepository
-        )
-        
-        let homeViewModel = HomeViewModel()
-        
-        let settingsViewModel = SettingsViewModel()
-        
         TabView(){
             HomeView(viewModel: homeViewModel)
                 .font(.title)

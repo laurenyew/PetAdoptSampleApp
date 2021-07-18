@@ -8,11 +8,7 @@
 
 import Foundation
 
-class FavoritePetsViewModel: AnimalListViewModel {
-    override init(favoritePetsRepository: FavoritePetsRepository) {
-        super.init(favoritePetsRepository: favoritePetsRepository)
-    }
-    
+class FavoritePetsViewModel: AnimalListViewModel {    
     func refreshFavorites(){
         let favorites = favoritePetsRepository.getFavorites()
         self.dataSource = favorites

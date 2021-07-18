@@ -29,6 +29,8 @@ Sample App created to practice with different Android Tech
 * Tablet
 * Map? w/ directions
 * Onboarding
+* Dark Mode
+* Accessibility
 
 ## Disclaimers
 

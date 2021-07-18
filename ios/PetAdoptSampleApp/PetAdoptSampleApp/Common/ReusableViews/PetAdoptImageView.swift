@@ -5,15 +5,15 @@
 import Combine
 import SwiftUI
 
-struct ImageView: View {
+public struct PetAdoptImageView: View {
     @ObservedObject var imageLoader:ImageLoader
     @State var image:UIImage = UIImage(systemName: "photo.fill") ?? UIImage()
     
-    init(withURL url:URL?) {
+    public init(withURL url:URL?) {
         imageLoader = ImageLoader(url: url)
     }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Image(uiImage: image)
                 .resizable()
@@ -23,8 +23,8 @@ struct ImageView: View {
     }
 }
 
-struct ImageView_Previews: PreviewProvider {
+struct PetAdoptImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageView(withURL: nil)
+        PetAdoptImageView(withURL: nil)
     }
 }

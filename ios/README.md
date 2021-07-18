@@ -8,6 +8,9 @@ Sample App created to practice with different iOS Tech
 * Combine
 * Cocoapods
 * YapDatabase
+* Swift Package
+* Framework
+* Resolver (Dependency Injection)
 
 ## Features
 * Search by zipcode
@@ -16,15 +19,13 @@ Sample App created to practice with different iOS Tech
 * Home Page
 
 ## TODO
-* Separate out a framework
-
-## Future
 * Setup similar feature to Android to auto curl the token key
 * Poll every hour (Petfinder Terms of Service)
+* Dark Mode
+* Accessibility
 * CoreData
 * Async/Await
 * AFNetworking
-* Resolver (Dependency Injection)
 
 ## Disclaimers
 
