@@ -21,6 +21,8 @@ Sample App created to practice with different iOS Tech
 ## Future
 * Setup similar feature to Android to auto curl the token key
 * Poll every hour (Petfinder Terms of Service)
+* Dark Mode
+* Accessibility
 * CoreData
 * Async/Await
 * AFNetworking
