@@ -9,12 +9,18 @@
 import SwiftUI
 
 /// SearchBar generic w/ title & search text + button
-struct SearchBarView: View {
-    var titleText: String
-    @Binding var searchText: String
-    var action: (String) -> Void
+public struct PetAdoptSearchBarView: View {
+    public let titleText: String
+    @Binding public var searchText: String
+    public let action: (String) -> Void
     
-    var body: some View {
+    public init(titleText: String, searchText: Binding<String>, action: @escaping (String) -> Void) {
+        self.titleText = titleText
+        self._searchText = searchText
+        self.action = action
+    }
+
+    public var body: some View {
         HStack {
             TextField(titleText, text: $searchText)
                 .padding(7)
@@ -31,9 +37,9 @@ struct SearchBarView: View {
     }
 }
 
-struct SearchBarView_Preview: PreviewProvider {
+struct PetAdoptSearchBarView_Preview: PreviewProvider {
     static var previews: some View {
-        SearchBarView(titleText: "Zipcode:", searchText: .constant("")) { text in
+        PetAdoptSearchBarView(titleText: "Zipcode:", searchText: .constant("")) { text in
             print(text)
         }
     }

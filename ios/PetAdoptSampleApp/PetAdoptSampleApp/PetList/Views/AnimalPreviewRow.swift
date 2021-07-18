@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PetAdoptCommonViewsFramework
 
 struct AnimalPreviewRow: View {
     private let name: String
@@ -49,7 +50,7 @@ struct AnimalPreviewRow: View {
     
     var body: some View {
         HStack {
-            ImageView(withURL: self.photoUrl)
+            PetAdoptImageView(withURL: self.photoUrl)
                 .frame(minWidth: 10, idealWidth: 50, maxWidth: 60, minHeight: 10, idealHeight: 50, maxHeight: 60, alignment: .center)
             VStack(alignment: .leading) {
                 Text("\(self.name)")
