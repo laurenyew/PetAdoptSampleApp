@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import PetAdoptNetworkingFramework
 
 class PetSearchViewModel: AnimalListViewModel {
     @Published var location: String = ""

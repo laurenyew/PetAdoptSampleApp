@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-protocol PetAdoptSearchAPI {
+public protocol PetAdoptSearchAPI {
     func getAnimals(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetAdoptError>
     
     func getAnimals(
@@ -32,9 +32,9 @@ protocol PetAdoptSearchAPI {
         limit: Int?) -> AnyPublisher<GetAnimalsResponse, PetAdoptError>
 }
 
-let PetAdoptAPI = PetAdopt()
+public let PetAdoptAPI = PetAdopt()
 
-class PetAdopt {
+public class PetAdopt {
     private let session: URLSession
     
     init(session: URLSession = .shared) {
@@ -44,11 +44,11 @@ class PetAdopt {
 
 // MARK: - PetAdoptSearchAPI
 extension PetAdopt: PetAdoptSearchAPI {
-    func getAnimals(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetAdoptError> {
+    public func getAnimals(forLocation location: String) -> AnyPublisher<GetAnimalsResponse, PetAdoptError> {
         return getAnimals(location: location, distance: 50)
     }
     
-    func getAnimals(forType type: String? = nil, breed: String? = nil, size: String? = nil, gender: String? = nil, age: String? = nil, color: String? = nil, coat: String? = nil, status: String? = nil, name: String? = nil, organization: String? = nil, goodWithChildren: Bool? = nil, goodWithDogs: Bool? = nil, goodWithCats: Bool? = nil, location: String? = nil, distance: Int? = nil, page: Int? = nil, limit: Int? = nil) -> AnyPublisher<GetAnimalsResponse, PetAdoptError> {
+    public func getAnimals(forType type: String? = nil, breed: String? = nil, size: String? = nil, gender: String? = nil, age: String? = nil, color: String? = nil, coat: String? = nil, status: String? = nil, name: String? = nil, organization: String? = nil, goodWithChildren: Bool? = nil, goodWithDogs: Bool? = nil, goodWithCats: Bool? = nil, location: String? = nil, distance: Int? = nil, page: Int? = nil, limit: Int? = nil) -> AnyPublisher<GetAnimalsResponse, PetAdoptError> {
         let components = makeGetAnimalsComponents(type: type, breed: breed, size: size, gender: gender, age: age, color: color, coat: coat, status: status, name: name, organization: organization, goodWithChildren: goodWithChildren, goodWithDogs: goodWithDogs, goodWithCats: goodWithCats, location: location, distance: distance, page: page, limit: limit)
         return searchPets(withComponents: components)
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PetAdoptError: Error {
+public enum PetAdoptError: Error {
   case parsing(description: String)
   case network(description: String)
 }

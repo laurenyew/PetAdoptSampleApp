@@ -8,6 +8,7 @@
 
 import Foundation
 import YapDatabase
+import PetAdoptNetworkingFramework
 
 class AnimalRowViewModel: Identifiable, ObservableObject, Codable {
     let id: Int
