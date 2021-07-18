@@ -6,11 +6,10 @@ Sample App created to practice with different iOS Tech
 ## iOS Tech
 * SwiftUI
 * Combine
+* Cocoapods
 
 ## TODO
-* Setup cocoapods for YapDatabase
 * Use YapDatabase to make favorites feature
-* Clean up list UI
 * Make favorites feature
 * Separate out a framework
 
