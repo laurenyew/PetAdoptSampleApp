@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PetAdoptCommonViewsFramework
 
 struct PetSearchView: View {
     @ObservedObject var searchViewModel: PetSearchViewModel
@@ -36,7 +37,7 @@ struct PetSearchView: View {
 
 private extension PetSearchView {
     var searchField: some View {
-        SearchBarView(titleText: "Zipcode:", searchText: $searchViewModel.location) { _ in
+        PetAdoptSearchBarView(titleText: "Zipcode:", searchText: $searchViewModel.location) { _ in
             searchViewModel.executeSearch()
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Resolver
 
 struct FavoritePetsView: View {
     @ObservedObject var favoritesViewModel: FavoritePetsViewModel
@@ -38,6 +39,6 @@ struct FavoritePetsView: View {
 
 struct FavoritePetsView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritePetsView(favoritesViewModel: FavoritePetsViewModel(favoritePetsRepository: FavoritePetsRepository()))
+        FavoritePetsView(favoritesViewModel: FavoritePetsViewModel())
     }
 }
