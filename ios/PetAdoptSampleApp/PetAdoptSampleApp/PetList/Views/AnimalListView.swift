@@ -31,11 +31,7 @@ struct AnimalListView: View {
         List{
             ForEach(dataSource){ animal in
                 AnimalPreviewRow.init(
-                    name: animal.name,
-                    gender: animal.gender,
-                    species: animal.species,
-                    photoUrl: animal.photoUrl,
-                    isFavorite: animal.isFavorite,
+                    viewModel: animal,
                     updateFavoriteStatus: {
                         self.onFavoriteClicked(animal)
                     }

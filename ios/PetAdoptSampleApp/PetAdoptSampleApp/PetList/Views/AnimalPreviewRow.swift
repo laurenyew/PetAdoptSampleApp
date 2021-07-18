@@ -14,14 +14,14 @@ struct AnimalPreviewRow: View {
     private let genderColor: Color
     private let species: String
     private let photoUrl: URL?
-    private let isFavorite: Bool
+    private var isFavorite: Bool
     private let favoriteImage: String
     private let updateFavoriteStatus: () -> Void
     
-    init(name: String, gender: String, species: String, photoUrl: URL?, isFavorite: Bool, updateFavoriteStatus: @escaping () -> Void) {
-        self.name = name
-        self.gender = gender
-        switch gender {
+    init(viewModel: AnimalRowViewModel, updateFavoriteStatus: @escaping () -> Void) {
+        self.name = viewModel.name
+        self.gender = viewModel.gender
+        switch viewModel.gender {
         case "Male":
             self.genderColor = .blue
         case "Female":
@@ -29,16 +29,16 @@ struct AnimalPreviewRow: View {
         default:
             self.genderColor = .black
         }
-        switch species {
+        switch viewModel.species {
         case "Dog":
             self.species = "🐶"
         case "Cat":
             self.species = "🐱"
         default:
-            self.species = species
+            self.species = viewModel.species
         }
-        self.photoUrl = photoUrl
-        self.isFavorite = isFavorite
+        self.photoUrl = viewModel.photoUrl
+        self.isFavorite = viewModel.isFavorite
         if isFavorite {
             favoriteImage = "heart.fill"
         } else {
@@ -76,11 +76,13 @@ struct AnimalPreviewRow: View {
 struct AnimalPreviewRow_Preview: PreviewProvider {
     static var previews: some View {
         AnimalPreviewRow(
-            name: "Happy",
-            gender: "Male",
-            species: "Dog",
-            photoUrl: nil,
-            isFavorite: true) {
+            viewModel: AnimalRowViewModel(
+                id: 1,
+                name: "Happy",
+                gender: "Male",
+                species: "Dog",
+                photoUrl: nil,
+                isFavorite: true)) {
             print("favorited")
         }
     }

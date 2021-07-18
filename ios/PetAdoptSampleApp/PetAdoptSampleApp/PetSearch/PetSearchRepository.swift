@@ -38,7 +38,9 @@ class PetSearchRepository {
             guard let self = self else { return }
             self.searchAPI.getAnimals(forLocation: location)
                 .map { response in
-                    response.animals.map(AnimalRowViewModel.init)
+                    response.animals.map { animal in
+                        AnimalRowViewModel(animal: animal, isFavorite: false) //TODO
+                    }
                 }
                 .receive(on: self.scheduler)
                 .sink(receiveCompletion: { value in

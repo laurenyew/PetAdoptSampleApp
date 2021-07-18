@@ -9,33 +9,30 @@
 import Foundation
 import YapDatabase
 
-class AnimalRowViewModel: Identifiable, ObservableObject {
-    private let animal: GetAnimalsResponse.Animal
+class AnimalRowViewModel: Identifiable, ObservableObject, Codable {
+    let id: Int
+    let name: String
+    let gender: String
+    let species: String
+    let photoUrl: URL?
+    var isFavorite: Bool
     
-    var id: Int {
-        return animal.id
+    init(id: Int, name: String, gender: String, species: String, photoUrl: URL?, isFavorite: Bool) {
+        self.id = id
+        self.name = name
+        self.gender = gender
+        self.species = gender
+        self.photoUrl = photoUrl
+        self.isFavorite = isFavorite
     }
     
-    var name: String {
-        return animal.name ?? "Unknown"
-    }
-    
-    var gender: String {
-        return animal.gender
-    }
-    
-    var species: String {
-        return animal.species
-    }
-    
-    var photoUrl: URL? {
-        return animal.photos?.first?.full
-    }
-    
-    var isFavorite: Bool = false
-    
-    init(animal: GetAnimalsResponse.Animal) {
-        self.animal = animal
+    init(animal: GetAnimalsResponse.Animal, isFavorite: Bool){
+        self.id = animal.id
+        self.name = animal.name ?? "Unknown"
+        self.gender = animal.gender
+        self.species = animal.species
+        self.photoUrl = animal.photos?.first?.full
+        self.isFavorite = isFavorite
     }
 }
 
