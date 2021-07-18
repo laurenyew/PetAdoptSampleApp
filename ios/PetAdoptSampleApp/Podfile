@@ -2,6 +2,7 @@ platform :ios, '13.2'
 
 target 'PetAdoptSampleApp' do
   use_frameworks!
+  pod 'Resolver', '1.4.3' #Dependency Injection
   pod 'AFNetworking', '4.0.1' #Networking
   pod 'YapDatabase', '4.0.1' #Sqlite Database
 end

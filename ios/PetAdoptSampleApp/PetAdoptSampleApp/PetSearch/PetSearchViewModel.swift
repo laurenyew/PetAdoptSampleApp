@@ -9,17 +9,16 @@
 import SwiftUI
 import Combine
 import PetAdoptNetworkingFramework
+import Resolver
 
 class PetSearchViewModel: AnimalListViewModel {
     @Published var location: String = ""
     
-    private let petSearchRepository: PetSearchRepository
+    @Injected private var petSearchRepository: PetSearchRepository
     private var disposables = Set<AnyCancellable>()
     
-    init(petSearchRepository: PetSearchRepository, favoritePetsRepository: FavoritePetsRepository) {
-        self.petSearchRepository = petSearchRepository
-        super.init(favoritePetsRepository: favoritePetsRepository)
-        
+    override init() {
+        super.init()
         self.location = petSearchRepository.getLastSearchTerm() ?? ""
         // Auto execute search for last search term
         if !self.location.isEmpty {

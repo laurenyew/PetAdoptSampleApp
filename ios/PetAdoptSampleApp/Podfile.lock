@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - Resolver (1.4.3)
   - YapDatabase (4.0.1):
     - YapDatabase/Standard (= 4.0.1)
   - YapDatabase/Standard (4.0.1):
@@ -123,17 +124,20 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 4.0.1)
+  - Resolver (= 1.4.3)
   - YapDatabase (= 4.0.1)
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - Resolver
     - YapDatabase
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Resolver: c0956ef605a64f63458166653fa4ef71df5acd98
   YapDatabase: 350ab72b61f9dcc32504594da1a52a93f5ef1476
 
-PODFILE CHECKSUM: 85367182f425bb5e191b339e85a740c93b2fa9e3
+PODFILE CHECKSUM: 550599ce464331c082926d2bb0acae8170b7c8e1
 
 COCOAPODS: 1.10.1

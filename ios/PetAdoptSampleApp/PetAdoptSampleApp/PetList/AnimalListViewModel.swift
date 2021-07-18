@@ -7,17 +7,14 @@
 //
 
 import Foundation
+import Resolver
 
 class AnimalListViewModel: ObservableObject, Identifiable {
     @Published var dataSource: [AnimalRowViewModel] = []
     @Published var showError: Bool = false
     @Published var errorText: String = ""
     
-    internal let favoritePetsRepository: FavoritePetsRepository
-    
-    init(favoritePetsRepository: FavoritePetsRepository) {
-        self.favoritePetsRepository = favoritePetsRepository
-    }
+    @Injected internal var favoritePetsRepository: FavoritePetsRepository
     
     func onFavoriteClicked(animal: AnimalRowViewModel){
         let isFavorite = !animal.isFavorite
