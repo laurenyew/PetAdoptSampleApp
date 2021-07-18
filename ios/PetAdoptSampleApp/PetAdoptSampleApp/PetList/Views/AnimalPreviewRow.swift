@@ -11,13 +11,31 @@ import SwiftUI
 struct AnimalPreviewRow: View {
     private let name: String
     private let gender: String
+    private let genderColor: Color
+    private let species: String
     private let photoUrl: URL?
     private let isFavorite: Bool
     private let updateFavoriteStatus: () -> Void
     
-    init(name: String, gender: String, photoUrl: URL?, isFavorite: Bool, updateFavoriteStatus: @escaping () -> Void) {
+    init(name: String, gender: String, species: String, photoUrl: URL?, isFavorite: Bool, updateFavoriteStatus: @escaping () -> Void) {
         self.name = name
         self.gender = gender
+        switch gender {
+        case "Male":
+            self.genderColor = .blue
+        case "Female":
+            self.genderColor = .pink
+        default:
+            self.genderColor = .black
+        }
+        switch species {
+        case "Dog":
+            self.species = "🐶"
+        case "Cat":
+            self.species = "🐱"
+        default:
+            self.species = species
+        }
         self.photoUrl = photoUrl
         self.isFavorite = isFavorite
         self.updateFavoriteStatus = updateFavoriteStatus
@@ -25,17 +43,17 @@ struct AnimalPreviewRow: View {
     
     var body: some View {
         HStack {
-            VStack {
-                ImageView(withURL: self.photoUrl)
-                .aspectRatio(contentMode: .fit)
-            }
+            ImageView(withURL: self.photoUrl)
+                .frame(minWidth: 10, idealWidth: 50, maxWidth: 60, minHeight: 10, idealHeight: 50, maxHeight: 60, alignment: .center)
             VStack(alignment: .leading) {
                 Text("\(self.name)")
                     .font(.body)
-                Text("\(self.gender)")
+                Text("\(self.gender) \(self.species)")
                     .font(.footnote)
+                    .foregroundColor(self.genderColor)
             }
             .padding(.leading, 8)
+            Spacer()
         }
         .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: 60.0, alignment: Alignment.leading)
     }
@@ -43,7 +61,12 @@ struct AnimalPreviewRow: View {
 
 struct AnimalPreviewRow_Preview: PreviewProvider {
     static var previews: some View {
-        AnimalPreviewRow(name: "Happy", gender: "Male", photoUrl: nil, isFavorite: true) { 
+        AnimalPreviewRow(
+            name: "Happy",
+            gender: "Male",
+            species: "Dog",
+            photoUrl: nil,
+            isFavorite: true) {
             print("favorited")
         }
     }

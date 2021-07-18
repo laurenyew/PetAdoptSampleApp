@@ -24,6 +24,10 @@ class AnimalRowViewModel: Identifiable, ObservableObject {
         return animal.gender
     }
     
+    var species: String {
+        return animal.species
+    }
+    
     var photoUrl: URL? {
         return animal.photos?.first?.full
     }

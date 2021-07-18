@@ -7,8 +7,7 @@ import SwiftUI
 
 struct ImageView: View {
     @ObservedObject var imageLoader:ImageLoader
-    
-    @State var image:UIImage = UIImage()
+    @State var image:UIImage = UIImage(systemName: "photo.fill") ?? UIImage()
     
     init(withURL url:URL?) {
         imageLoader = ImageLoader(url: url)
@@ -18,9 +17,8 @@ struct ImageView: View {
         VStack {
             Image(uiImage: image)
                 .resizable()
-            
         }.onReceive(imageLoader.didChange) { data in
-            self.image = UIImage(data: data) ?? UIImage()
+            self.image = UIImage(data: data) ?? UIImage(systemName: "photo.fill")!
         }
     }
 }

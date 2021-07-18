@@ -33,6 +33,7 @@ struct AnimalListView: View {
                 AnimalPreviewRow.init(
                     name: animal.name,
                     gender: animal.gender,
+                    species: animal.species,
                     photoUrl: animal.photoUrl,
                     isFavorite: animal.isFavorite,
                     updateFavoriteStatus: {

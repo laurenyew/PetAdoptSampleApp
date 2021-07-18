@@ -86,7 +86,7 @@
 		B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalRowViewModel.swift; sourceTree = "<group>"; };
 		B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimalPreviewRow.swift; path = PetAdoptSampleApp/PetList/Views/AnimalPreviewRow.swift; sourceTree = SOURCE_ROOT; };
 		B9BDAED7265DE3F100E97173 /* PetSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetSearchView.swift; sourceTree = "<group>"; };
-		B9BDAED9265DE40800E97173 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageLoader.swift; path = PetAdoptSampleApp/PetSearch/ImageLoader.swift; sourceTree = SOURCE_ROOT; };
+		B9BDAED9265DE40800E97173 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageLoader.swift; path = PetAdoptSampleApp/Common/Views/ImageLoader.swift; sourceTree = SOURCE_ROOT; };
 		B9E3F9EC269299160057743C /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		B9E3F9F02692996D0057743C /* Parsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
 		B9E3F9F2269299770057743C /* PetFinderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetFinderError.swift; sourceTree = "<group>"; };
@@ -238,7 +238,6 @@
 				B999C4F723F760120077465F /* Errors */,
 				B999C4F623F760060077465F /* Responses */,
 				B9E3F9F62692998A0057743C /* PetFinderAPI.swift */,
-				B9BDAED9265DE40800E97173 /* ImageLoader.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -287,6 +286,7 @@
 		B999C50A23FB38820077465F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B9BDAED9265DE40800E97173 /* ImageLoader.swift */,
 				B9E3F9EC269299160057743C /* ImageView.swift */,
 			);
 			path = Views;
