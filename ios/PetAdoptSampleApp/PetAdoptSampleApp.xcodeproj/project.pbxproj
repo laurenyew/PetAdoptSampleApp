@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		356D3B0D5EB4DFF5C79E7529 /* Pods_PetAdoptSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B18835A492CE93063B342A6 /* Pods_PetAdoptSampleApp.framework */; };
 		B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B915CDCE23F0EAAD00F7AED1 /* AppDelegate.swift */; };
 		B915CDD123F0EAAD00F7AED1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B915CDD023F0EAAD00F7AED1 /* SceneDelegate.swift */; };
 		B915CDD423F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B915CDD223F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld */; };
@@ -21,11 +22,18 @@
 		B9530B66269FD54B00FE16E9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9530B64269FD54B00FE16E9 /* HomeViewModel.swift */; };
 		B9530B68269FD9D900FE16E9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9530B67269FD9D900FE16E9 /* SettingsViewModel.swift */; };
 		B9530B69269FD9D900FE16E9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9530B67269FD9D900FE16E9 /* SettingsViewModel.swift */; };
+		B960DABA26A3CA1400B5B20F /* FavoritePetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DAB926A3CA1400B5B20F /* FavoritePetsRepository.swift */; };
+		B960DABB26A3CA1400B5B20F /* FavoritePetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DAB926A3CA1400B5B20F /* FavoritePetsRepository.swift */; };
+		B960DABD26A3CA6900B5B20F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABC26A3CA6900B5B20F /* ImageLoader.swift */; };
+		B960DABE26A3CA6900B5B20F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABC26A3CA6900B5B20F /* ImageLoader.swift */; };
+		B960DAC026A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */; };
+		B960DAC126A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */; };
+		B9722D3D26A39096007FAE86 /* PetSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9722D3C26A39096007FAE86 /* PetSearchRepository.swift */; };
+		B9722D3E26A39096007FAE86 /* PetSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9722D3C26A39096007FAE86 /* PetSearchRepository.swift */; };
 		B999C50023FAF9DB0077465F /* PetSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */; };
 		B999C50223FB24DD0077465F /* AnimalRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */; };
 		B9BDAED2265DE35600E97173 /* AnimalPreviewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */; };
 		B9BDAED8265DE3F100E97173 /* PetSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BDAED7265DE3F100E97173 /* PetSearchView.swift */; };
-		B9BDAEDA265DE40800E97173 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BDAED9265DE40800E97173 /* ImageLoader.swift */; };
 		B9E3F9ED269299160057743C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9EC269299160057743C /* ImageView.swift */; };
 		B9E3F9F12692996D0057743C /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F02692996D0057743C /* Parsing.swift */; };
 		B9E3F9F3269299770057743C /* PetFinderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9F2269299770057743C /* PetFinderError.swift */; };
@@ -34,6 +42,9 @@
 		B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3F9FC269E84480057743C /* SearchBarView.swift */; };
 		B9E3FA03269E8B7D0057743C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3FA02269E8B7D0057743C /* HomeView.swift */; };
 		B9E3FA08269E8C460057743C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3FA07269E8C460057743C /* SettingsView.swift */; };
+		B9F956F026A2829400F0DF01 /* FavoritePetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F956EF26A2829400F0DF01 /* FavoritePetsViewModel.swift */; };
+		B9F956F126A2829400F0DF01 /* FavoritePetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F956EF26A2829400F0DF01 /* FavoritePetsViewModel.swift */; };
+		B9F956F526A282CD00F0DF01 /* AnimalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F956F426A282CD00F0DF01 /* AnimalListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3867F83DAF854AB3B62A19B1 /* Pods-PetAdoptSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetAdoptSampleApp.release.xcconfig"; path = "Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		8670762322E5F5B32E08A3F4 /* Pods-PetAdoptSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetAdoptSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9B18835A492CE93063B342A6 /* Pods_PetAdoptSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetAdoptSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B915CDCB23F0EAAD00F7AED1 /* PetAdoptSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetAdoptSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B915CDCE23F0EAAD00F7AED1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B915CDD023F0EAAD00F7AED1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,11 +86,14 @@
 		B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePetsView.swift; sourceTree = "<group>"; };
 		B9530B64269FD54B00FE16E9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B9530B67269FD9D900FE16E9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		B960DAB926A3CA1400B5B20F /* FavoritePetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePetsRepository.swift; sourceTree = "<group>"; };
+		B960DABC26A3CA6900B5B20F /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewModel.swift; sourceTree = "<group>"; };
+		B9722D3C26A39096007FAE86 /* PetSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSearchRepository.swift; sourceTree = "<group>"; };
 		B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSearchViewModel.swift; sourceTree = "<group>"; };
 		B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalRowViewModel.swift; sourceTree = "<group>"; };
-		B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimalPreviewRow.swift; path = PetAdoptSampleApp/PetSearch/AnimalPreviewRow.swift; sourceTree = SOURCE_ROOT; };
+		B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimalPreviewRow.swift; path = PetAdoptSampleApp/PetList/Views/AnimalPreviewRow.swift; sourceTree = SOURCE_ROOT; };
 		B9BDAED7265DE3F100E97173 /* PetSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetSearchView.swift; sourceTree = "<group>"; };
-		B9BDAED9265DE40800E97173 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageLoader.swift; path = PetAdoptSampleApp/PetSearch/ImageLoader.swift; sourceTree = SOURCE_ROOT; };
 		B9E3F9EC269299160057743C /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		B9E3F9F02692996D0057743C /* Parsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
 		B9E3F9F2269299770057743C /* PetFinderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetFinderError.swift; sourceTree = "<group>"; };
@@ -85,6 +102,8 @@
 		B9E3F9FC269E84480057743C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B9E3FA02269E8B7D0057743C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B9E3FA07269E8C460057743C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B9F956EF26A2829400F0DF01 /* FavoritePetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePetsViewModel.swift; sourceTree = "<group>"; };
+		B9F956F426A282CD00F0DF01 /* AnimalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356D3B0D5EB4DFF5C79E7529 /* Pods_PetAdoptSampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +132,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		164DE6EF10DBEAD932B9EB0E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8670762322E5F5B32E08A3F4 /* Pods-PetAdoptSampleApp.debug.xcconfig */,
+				3867F83DAF854AB3B62A19B1 /* Pods-PetAdoptSampleApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B915CDC223F0EAAD00F7AED1 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +148,8 @@
 				B915CDE723F0EAB300F7AED1 /* PetAdoptSampleAppTests */,
 				B915CDF223F0EAB300F7AED1 /* PetAdoptSampleAppUITests */,
 				B915CDCC23F0EAAD00F7AED1 /* Products */,
+				164DE6EF10DBEAD932B9EB0E /* Pods */,
+				DC09BAD510AD280A47DD26B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,6 +168,7 @@
 			children = (
 				B999C50923FB387D0077465F /* Common */,
 				B9E3FA01269E8B6D0057743C /* Home */,
+				B9F956F226A282A100F0DF01 /* PetList */,
 				B929573623F0F7CF008F4FE4 /* Favorites */,
 				B929573323F0F73B008F4FE4 /* PetSearch */,
 				B9E3FA04269E8C290057743C /* Settings */,
@@ -181,7 +213,7 @@
 			children = (
 				B999C50623FB37340077465F /* Views */,
 				B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */,
-				B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */,
+				B9722D3C26A39096007FAE86 /* PetSearchRepository.swift */,
 			);
 			path = PetSearch;
 			sourceTree = "<group>";
@@ -190,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				B929573923F0F87F008F4FE4 /* FavoritePetsView.swift */,
+				B9F956EF26A2829400F0DF01 /* FavoritePetsViewModel.swift */,
+				B960DAB926A3CA1400B5B20F /* FavoritePetsRepository.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -212,7 +246,6 @@
 				B999C4F723F760120077465F /* Errors */,
 				B999C4F623F760060077465F /* Responses */,
 				B9E3F9F62692998A0057743C /* PetFinderAPI.swift */,
-				B9BDAED9265DE40800E97173 /* ImageLoader.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -245,8 +278,6 @@
 			isa = PBXGroup;
 			children = (
 				B9BDAED7265DE3F100E97173 /* PetSearchView.swift */,
-				B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */,
-				B9E3F9FC269E84480057743C /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,17 +285,19 @@
 		B999C50923FB387D0077465F /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				B999C50A23FB38820077465F /* Views */,
+				B999C50A23FB38820077465F /* ReusableViews */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		B999C50A23FB38820077465F /* Views */ = {
+		B999C50A23FB38820077465F /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				B9E3F9FC269E84480057743C /* SearchBarView.swift */,
+				B960DABC26A3CA6900B5B20F /* ImageLoader.swift */,
 				B9E3F9EC269299160057743C /* ImageView.swift */,
 			);
-			path = Views;
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 		B9E3FA01269E8B6D0057743C /* Home */ = {
@@ -285,6 +318,33 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		B9F956F226A282A100F0DF01 /* PetList */ = {
+			isa = PBXGroup;
+			children = (
+				B9F956F326A282AF00F0DF01 /* Views */,
+				B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */,
+				B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */,
+			);
+			path = PetList;
+			sourceTree = "<group>";
+		};
+		B9F956F326A282AF00F0DF01 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9BDAED1265DE35600E97173 /* AnimalPreviewRow.swift */,
+				B9F956F426A282CD00F0DF01 /* AnimalListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DC09BAD510AD280A47DD26B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B18835A492CE93063B342A6 /* Pods_PetAdoptSampleApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,10 +352,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B915CDF823F0EAB300F7AED1 /* Build configuration list for PBXNativeTarget "PetAdoptSampleApp" */;
 			buildPhases = (
+				DE949957D41A6A313C2BD9D5 /* [CP] Check Pods Manifest.lock */,
 				B915CDC723F0EAAD00F7AED1 /* Sources */,
 				B915CDC823F0EAAD00F7AED1 /* Frameworks */,
 				B915CDC923F0EAAD00F7AED1 /* Resources */,
 				B929573123F0ED75008F4FE4 /* ShellScript */,
+				CBCF344CD40C2CBE4C104A4E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -432,6 +494,45 @@
 			shellPath = /bin/sh;
 			shellScript = "# Look for a global file named 'petfinderAccessToken' within the home directory\ntoken_file=~/accessTokens/petfinderAccessToken\ntoken=\"$(cat $token_file 2>/dev/null)\"\nif [ \"$token\" ]; then\n  plutil -replace PetfinderAccessToken -string $token \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\nelse\n  echo 'warning: Missing Petfinder access token'\n  open 'https://www.petfinder.com/developers/v2/docs/'\n  echo \"warning: Get an access token from <https://www.petfinder.com/developers/v2/docs/>, then create a new file at $token_file that contains the access token.\"\nfi\n";
 		};
+		CBCF344CD40C2CBE4C104A4E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PetAdoptSampleApp/Pods-PetAdoptSampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE949957D41A6A313C2BD9D5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PetAdoptSampleApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -439,22 +540,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F956F026A2829400F0DF01 /* FavoritePetsViewModel.swift in Sources */,
 				B9530B65269FD54B00FE16E9 /* HomeViewModel.swift in Sources */,
 				B915CDD423F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld in Sources */,
 				B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */,
+				B960DAC026A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */,
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
+				B9722D3D26A39096007FAE86 /* PetSearchRepository.swift in Sources */,
 				B9E3FA08269E8C460057743C /* SettingsView.swift in Sources */,
 				B915CDD623F0EAAD00F7AED1 /* ContentView.swift in Sources */,
 				B9E3F9FD269E84480057743C /* SearchBarView.swift in Sources */,
 				B9E3FA03269E8B7D0057743C /* HomeView.swift in Sources */,
-				B9BDAEDA265DE40800E97173 /* ImageLoader.swift in Sources */,
 				B9BDAED8265DE3F100E97173 /* PetSearchView.swift in Sources */,
 				B9E3F9F5269299810057743C /* GetAnimalsResponse.swift in Sources */,
+				B9F956F526A282CD00F0DF01 /* AnimalListView.swift in Sources */,
 				B9E3F9F72692998A0057743C /* PetFinderAPI.swift in Sources */,
 				B9E3F9ED269299160057743C /* ImageView.swift in Sources */,
 				B915CDD123F0EAAD00F7AED1 /* SceneDelegate.swift in Sources */,
+				B960DABD26A3CA6900B5B20F /* ImageLoader.swift in Sources */,
 				B9E3F9F3269299770057743C /* PetFinderError.swift in Sources */,
 				B9530B68269FD9D900FE16E9 /* SettingsViewModel.swift in Sources */,
+				B960DABA26A3CA1400B5B20F /* FavoritePetsRepository.swift in Sources */,
 				B999C50223FB24DD0077465F /* AnimalRowViewModel.swift in Sources */,
 				B9E3F9F12692996D0057743C /* Parsing.swift in Sources */,
 				B9BDAED2265DE35600E97173 /* AnimalPreviewRow.swift in Sources */,
@@ -466,8 +572,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B960DABE26A3CA6900B5B20F /* ImageLoader.swift in Sources */,
 				B915CDE923F0EAB300F7AED1 /* PetAdoptSampleAppTests.swift in Sources */,
+				B960DAC126A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */,
+				B960DABB26A3CA1400B5B20F /* FavoritePetsRepository.swift in Sources */,
+				B9722D3E26A39096007FAE86 /* PetSearchRepository.swift in Sources */,
 				B9530B66269FD54B00FE16E9 /* HomeViewModel.swift in Sources */,
+				B9F956F126A2829400F0DF01 /* FavoritePetsViewModel.swift in Sources */,
 				B9530B69269FD9D900FE16E9 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,6 +736,7 @@
 		};
 		B915CDF923F0EAB300F7AED1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8670762322E5F5B32E08A3F4 /* Pods-PetAdoptSampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -645,6 +757,7 @@
 		};
 		B915CDFA23F0EAB300F7AED1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3867F83DAF854AB3B62A19B1 /* Pods-PetAdoptSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

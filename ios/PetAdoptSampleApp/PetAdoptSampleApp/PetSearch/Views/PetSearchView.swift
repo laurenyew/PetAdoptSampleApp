@@ -9,49 +9,35 @@
 import SwiftUI
 
 struct PetSearchView: View {
-    @ObservedObject var viewModel: PetSearchViewModel
+    @ObservedObject var searchViewModel: PetSearchViewModel
     
-    init(viewModel: PetSearchViewModel){
-        self.viewModel = viewModel
+    init(searchViewModel: PetSearchViewModel){
+        self.searchViewModel = searchViewModel
     }
     
     var body: some View {
         NavigationView {
             VStack{
                 searchField
-                if(viewModel.dataSource.isEmpty){
-                    emptySection
-                } else {
-                    animalSection
+                AnimalListView(dataSource: searchViewModel.dataSource) { animalRowViewModel in
+                    searchViewModel.onFavoriteClicked(animal: animalRowViewModel)
                 }
                 Spacer()
             }
-            .alert(isPresented: $viewModel.showError, content: {
+            .alert(isPresented: $searchViewModel.showError, content: {
                 Alert(title: Text("Search Failed"),
-                      message: Text(viewModel.errorText),
+                      message: Text(searchViewModel.errorText),
                       dismissButton: .default(Text("OK")))
             })
             .navigationBarTitle("Search Pets")
         }
-        
     }
 }
 
 private extension PetSearchView {
     var searchField: some View {
-        SearchBarView(titleText: "Zipcode:", searchText: $viewModel.location) { _ in
-            viewModel.executeSearch()
+        SearchBarView(titleText: "Zipcode:", searchText: $searchViewModel.location) { _ in
+            searchViewModel.executeSearch()
         }
-    }
-    
-    var animalSection: some View {
-        List{
-            ForEach(viewModel.dataSource, content: AnimalPreviewRow.init(viewModel:))
-        }.listStyle(PlainListStyle())
-    }
-    
-    var emptySection: some View {
-        Text("No results")
-            .foregroundColor(.gray)
     }
 }

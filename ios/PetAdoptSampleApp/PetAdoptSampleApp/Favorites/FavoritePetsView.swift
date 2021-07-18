@@ -9,13 +9,35 @@
 import SwiftUI
 
 struct FavoritePetsView: View {
+    @ObservedObject var favoritesViewModel: FavoritePetsViewModel
+    
+    init(favoritesViewModel: FavoritePetsViewModel){
+        self.favoritesViewModel = favoritesViewModel
+    }
+    
     var body: some View {
-        Text("Favorite Pets")
+        NavigationView {
+            VStack{
+                AnimalListView(dataSource: favoritesViewModel.dataSource) { animalRowViewModel in
+                    favoritesViewModel.onFavoriteClicked(animal: animalRowViewModel)
+                }
+                Spacer()
+            }
+            .onAppear(perform: {
+                favoritesViewModel.refreshFavorites()
+            })
+            .alert(isPresented: $favoritesViewModel.showError, content: {
+                Alert(title: Text("Get Favorites Failed"),
+                      message: Text(favoritesViewModel.errorText),
+                      dismissButton: .default(Text("OK")))
+            })
+            .navigationBarTitle("Favorite Pets")
+        }
     }
 }
 
 struct FavoritePetsView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritePetsView()
+        FavoritePetsView(favoritesViewModel: FavoritePetsViewModel(favoritePetsRepository: FavoritePetsRepository()))
     }
 }
