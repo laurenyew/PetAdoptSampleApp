@@ -50,9 +50,7 @@ class PetSearchViewModel: ObservableObject, Identifiable {
                     }
                 }, receiveValue: { [weak self] (result) in
                     guard let self = self else { return }
-                    self.showError = false
-                    self.errorText = ""
-                    self.dataSource = result
+                    self.handleSearchResult(animals: result)
                 })
                 .store(in: &disposables)
             
@@ -60,8 +58,37 @@ class PetSearchViewModel: ObservableObject, Identifiable {
         }
     }
     
+    /**
+     Update state for search result
+     Also update search results for favorite status
+     */
+    private func handleSearchResult(animals: [AnimalRowViewModel]) {
+        self.showError = false
+        self.errorText = ""
+        let favoriteIds = self.favoritePetsRepository.getFavorites().map { animal in
+            animal.id
+        }
+        let result: [AnimalRowViewModel] = animals.map { animal in
+            if favoriteIds.contains(animal.id) {
+                animal.isFavorite = true
+            } else {
+                animal.isFavorite = false
+            }
+            return animal
+        }
+        self.dataSource = result
+    }
+    
     func onFavoriteClicked(animal: AnimalRowViewModel){
-        self.dataSource.first(where: { $0.id == animal.id })?.isFavorite = !animal.isFavorite
+        let isFavorite = !animal.isFavorite
+        self.dataSource.first(where: { $0.id == animal.id })?.isFavorite = isFavorite
+        
+        if isFavorite {
+            self.favoritePetsRepository.saveAnimalToFavorites(animal: animal)
+        } else {
+            self.favoritePetsRepository.removeAnimalFromFavorites(animalId: String(animal.id))
+        }
+        
         // Tell SwiftUI to update the list
         objectWillChange.send()
     }
