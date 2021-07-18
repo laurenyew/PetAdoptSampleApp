@@ -8,7 +8,7 @@ These apps were built to have similar feature sets but to be use Android/iOS tec
 
 ## iOS
 
-<img src="./ios/Screenshots/search.png" width="200"/>
+<img src="./ios/Screenshots/home.png" width="200"/> <img src="./ios/Screenshots/search.png" width="200"/> <img src="./ios/Screenshots/favorites.png" width="200"/> <img src="./ios/Screenshots/settings.png" width="200"/>
 
 ## Disclaimers
 

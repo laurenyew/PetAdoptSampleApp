@@ -1,7 +1,7 @@
 # iOS PetAdoptSampleApp
 Sample App created to practice with different iOS Tech
 
-<img src="./Screenshots/search.png" width="200"/>
+<img src="./Screenshots/home.png" width="200"/> <img src="./Screenshots/search.png" width="200"/> <img src="./Screenshots/favorites.png" width="200"/> <img src="./Screenshots/settings.png" width="200"/>
 
 ## iOS Tech
 * SwiftUI
