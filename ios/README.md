@@ -10,6 +10,7 @@ Sample App created to practice with different iOS Tech
 * YapDatabase
 * Swift Package
 * Framework
+* Resolver (Dependency Injection)
 
 ## Features
 * Search by zipcode
@@ -25,7 +26,6 @@ Sample App created to practice with different iOS Tech
 * CoreData
 * Async/Await
 * AFNetworking
-* Resolver (Dependency Injection)
 
 ## Disclaimers
 
