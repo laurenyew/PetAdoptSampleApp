@@ -9,12 +9,18 @@ Sample App created to practice with different iOS Tech
 * Cocoapods
 * YapDatabase
 
+## Features
+* Search by zipcode
+* Favorites Feature
+* Settings
+* Home Page
+
 ## TODO
-* Make favorites feature
 * Separate out a framework
 
 ## Future
 * Setup similar feature to Android to auto curl the token key
+* Poll every hour (Petfinder Terms of Service)
 * CoreData
 * Async/Await
 * AFNetworking
