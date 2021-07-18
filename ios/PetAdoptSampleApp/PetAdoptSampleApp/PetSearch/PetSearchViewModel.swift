@@ -9,22 +9,21 @@
 import SwiftUI
 import Combine
 
-class PetSearchViewModel: ObservableObject, Identifiable {
+class PetSearchViewModel: AnimalListViewModel {
     @Published var location: String = ""
     
-    @Published var dataSource: [AnimalRowViewModel] = []
-    
-    @Published var showError: Bool = false
-    @Published var errorText: String = ""
-    
     private let petSearchRepository: PetSearchRepository
-    private let favoritePetsRepository: FavoritePetsRepository
     private var disposables = Set<AnyCancellable>()
     
     init(petSearchRepository: PetSearchRepository, favoritePetsRepository: FavoritePetsRepository) {
         self.petSearchRepository = petSearchRepository
-        self.favoritePetsRepository = favoritePetsRepository
+        super.init(favoritePetsRepository: favoritePetsRepository)
+        
         self.location = petSearchRepository.getLastSearchTerm() ?? ""
+        // Auto execute search for last search term
+        if !self.location.isEmpty {
+            executeSearch()
+        }
     }
     
     func executeSearch(){
@@ -65,7 +64,7 @@ class PetSearchViewModel: ObservableObject, Identifiable {
     private func handleSearchResult(animals: [AnimalRowViewModel]) {
         self.showError = false
         self.errorText = ""
-        let favoriteIds = self.favoritePetsRepository.getFavorites().map { animal in
+        let favoriteIds = favoritePetsRepository.getFavorites().map { animal in
             animal.id
         }
         let result: [AnimalRowViewModel] = animals.map { animal in
@@ -77,19 +76,5 @@ class PetSearchViewModel: ObservableObject, Identifiable {
             return animal
         }
         self.dataSource = result
-    }
-    
-    func onFavoriteClicked(animal: AnimalRowViewModel){
-        let isFavorite = !animal.isFavorite
-        self.dataSource.first(where: { $0.id == animal.id })?.isFavorite = isFavorite
-        
-        if isFavorite {
-            self.favoritePetsRepository.saveAnimalToFavorites(animal: animal)
-        } else {
-            self.favoritePetsRepository.removeAnimalFromFavorites(animalId: String(animal.id))
-        }
-        
-        // Tell SwiftUI to update the list
-        objectWillChange.send()
     }
 }

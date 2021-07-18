@@ -26,6 +26,8 @@
 		B960DABB26A3CA1400B5B20F /* FavoritePetsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DAB926A3CA1400B5B20F /* FavoritePetsRepository.swift */; };
 		B960DABD26A3CA6900B5B20F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABC26A3CA6900B5B20F /* ImageLoader.swift */; };
 		B960DABE26A3CA6900B5B20F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABC26A3CA6900B5B20F /* ImageLoader.swift */; };
+		B960DAC026A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */; };
+		B960DAC126A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */; };
 		B9722D3D26A39096007FAE86 /* PetSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9722D3C26A39096007FAE86 /* PetSearchRepository.swift */; };
 		B9722D3E26A39096007FAE86 /* PetSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9722D3C26A39096007FAE86 /* PetSearchRepository.swift */; };
 		B999C50023FAF9DB0077465F /* PetSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */; };
@@ -86,6 +88,7 @@
 		B9530B67269FD9D900FE16E9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B960DAB926A3CA1400B5B20F /* FavoritePetsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePetsRepository.swift; sourceTree = "<group>"; };
 		B960DABC26A3CA6900B5B20F /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListViewModel.swift; sourceTree = "<group>"; };
 		B9722D3C26A39096007FAE86 /* PetSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSearchRepository.swift; sourceTree = "<group>"; };
 		B999C4FF23FAF9DB0077465F /* PetSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSearchViewModel.swift; sourceTree = "<group>"; };
 		B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalRowViewModel.swift; sourceTree = "<group>"; };
@@ -320,6 +323,7 @@
 			children = (
 				B9F956F326A282AF00F0DF01 /* Views */,
 				B999C50123FB24DD0077465F /* AnimalRowViewModel.swift */,
+				B960DABF26A3DA4900B5B20F /* AnimalListViewModel.swift */,
 			);
 			path = PetList;
 			sourceTree = "<group>";
@@ -540,6 +544,7 @@
 				B9530B65269FD54B00FE16E9 /* HomeViewModel.swift in Sources */,
 				B915CDD423F0EAAD00F7AED1 /* PetAdoptSampleApp.xcdatamodeld in Sources */,
 				B929573A23F0F87F008F4FE4 /* FavoritePetsView.swift in Sources */,
+				B960DAC026A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */,
 				B915CDCF23F0EAAD00F7AED1 /* AppDelegate.swift in Sources */,
 				B9722D3D26A39096007FAE86 /* PetSearchRepository.swift in Sources */,
 				B9E3FA08269E8C460057743C /* SettingsView.swift in Sources */,
@@ -569,6 +574,7 @@
 			files = (
 				B960DABE26A3CA6900B5B20F /* ImageLoader.swift in Sources */,
 				B915CDE923F0EAB300F7AED1 /* PetAdoptSampleAppTests.swift in Sources */,
+				B960DAC126A3DA4900B5B20F /* AnimalListViewModel.swift in Sources */,
 				B960DABB26A3CA1400B5B20F /* FavoritePetsRepository.swift in Sources */,
 				B9722D3E26A39096007FAE86 /* PetSearchRepository.swift in Sources */,
 				B9530B66269FD54B00FE16E9 /* HomeViewModel.swift in Sources */,

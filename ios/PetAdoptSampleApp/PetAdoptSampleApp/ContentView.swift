@@ -10,18 +10,23 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
- 
-    let petSearchViewModel = PetSearchViewModel(
-        petSearchRepository: PetSearchRepository(),
-        favoritePetsRepository: FavoritePetsRepository()
-    )
-    let favoritesViewModel = FavoritePetsViewModel()
-    
-    let homeViewModel = HomeViewModel()
-    
-    let settingsViewModel = SettingsViewModel()
     
     var body: some View {
+        let petSearchRepository = PetSearchRepository()
+        let favoritePetsRepository = FavoritePetsRepository()
+        
+        let petSearchViewModel = PetSearchViewModel(
+            petSearchRepository: petSearchRepository,
+            favoritePetsRepository: favoritePetsRepository
+        )
+        let favoritesViewModel = FavoritePetsViewModel(
+            favoritePetsRepository: favoritePetsRepository
+        )
+        
+        let homeViewModel = HomeViewModel()
+        
+        let settingsViewModel = SettingsViewModel()
+        
         TabView(){
             HomeView(viewModel: homeViewModel)
                 .font(.title)
@@ -35,15 +40,15 @@ struct ContentView: View {
             PetSearchView(
                 searchViewModel: petSearchViewModel
             )
-                .font(.title)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "magnifyingglass")
-                        Text("search")
-                    }
+            .font(.title)
+            .tabItem {
+                VStack {
+                    Image(systemName: "magnifyingglass")
+                    Text("search")
                 }
-                .tag(1)
-            FavoritePetsView()
+            }
+            .tag(1)
+            FavoritePetsView(favoritesViewModel: favoritesViewModel)
                 .font(.title)
                 .tabItem {
                     VStack {

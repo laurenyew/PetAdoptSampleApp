@@ -31,7 +31,6 @@ struct PetSearchView: View {
             })
             .navigationBarTitle("Search Pets")
         }
-        
     }
 }
 
