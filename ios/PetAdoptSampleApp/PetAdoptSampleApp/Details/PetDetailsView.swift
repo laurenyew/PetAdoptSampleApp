@@ -74,8 +74,9 @@ struct PetDetailsView: View {
             }
             Text(self.description)
                 .font(.body)
-                .padding(.top, 7)
-            
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(   7)
             Spacer()
         }
         .navigationBarTitle(self.name)
