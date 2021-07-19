@@ -13,8 +13,8 @@ import Resolver
 
 class FavoritePetsRepository {
     @Injected private var petAdoptYapDatabase: PetAdoptYapDatabase
-   
-    func saveAnimalToFavorites(animal: AnimalRowViewModel){
+    
+    func saveAnimalToFavorites(animal: AnimalViewModel){
         let connection = self.petAdoptYapDatabase.database.newConnection()
         connection.readWrite {(transaction) in
             transaction.setObject(animal, forKey: String(animal.id), inCollection: self.petAdoptYapDatabase.collectionName)
@@ -28,11 +28,11 @@ class FavoritePetsRepository {
         }
     }
     
-    func getFavorites() -> [AnimalRowViewModel]{
+    func getFavorites() -> [AnimalViewModel]{
         let connection = self.petAdoptYapDatabase.database.newConnection()
-        var favorites:[AnimalRowViewModel] = []
+        var favorites:[AnimalViewModel] = []
         connection.read {(transaction) in
-            transaction.iterateKeysAndObjects(inCollection: self.petAdoptYapDatabase.collectionName) { (key, animal: AnimalRowViewModel, stop) in
+            transaction.iterateKeysAndObjects(inCollection: self.petAdoptYapDatabase.collectionName) { (key, animal: AnimalViewModel, stop) in
                 favorites.append(animal)
             }
         }
