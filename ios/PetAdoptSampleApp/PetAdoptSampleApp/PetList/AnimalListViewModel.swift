@@ -10,13 +10,13 @@ import Foundation
 import Resolver
 
 class AnimalListViewModel: ObservableObject, Identifiable {
-    @Published var dataSource: [AnimalRowViewModel] = []
+    @Published var dataSource: [AnimalViewModel] = []
     @Published var showError: Bool = false
     @Published var errorText: String = ""
     
     @Injected internal var favoritePetsRepository: FavoritePetsRepository
     
-    func onFavoriteClicked(animal: AnimalRowViewModel){
+    func onFavoriteClicked(animal: AnimalViewModel){
         let isFavorite = !animal.isFavorite
         self.dataSource.first(where: { $0.id == animal.id })?.isFavorite = isFavorite
         

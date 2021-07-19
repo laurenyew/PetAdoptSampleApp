@@ -19,8 +19,8 @@ struct FavoritePetsView: View {
     var body: some View {
         NavigationView {
             VStack{
-                AnimalListView(dataSource: favoritesViewModel.dataSource) { animalRowViewModel in
-                    favoritesViewModel.onFavoriteClicked(animal: animalRowViewModel)
+                AnimalListView(dataSource: favoritesViewModel.dataSource) { AnimalViewModel in
+                    favoritesViewModel.onFavoriteClicked(animal: AnimalViewModel)
                 }
                 Spacer()
             }
