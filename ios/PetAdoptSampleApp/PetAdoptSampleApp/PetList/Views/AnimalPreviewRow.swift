@@ -19,7 +19,7 @@ struct AnimalPreviewRow: View {
     private let favoriteImage: String
     private let updateFavoriteStatus: () -> Void
     
-    init(viewModel: AnimalRowViewModel, updateFavoriteStatus: @escaping () -> Void) {
+    init(viewModel: AnimalViewModel, updateFavoriteStatus: @escaping () -> Void) {
         self.name = viewModel.name
         self.gender = viewModel.gender
         switch viewModel.gender {
@@ -70,21 +70,38 @@ struct AnimalPreviewRow: View {
             }
             
         }
-        .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: 60.0, alignment: Alignment.leading)
+        .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: Alignment.leading)
     }
 }
 
 struct AnimalPreviewRow_Preview: PreviewProvider {
     static var previews: some View {
-        AnimalPreviewRow(
-            viewModel: AnimalRowViewModel(
-                id: 1,
-                name: "Happy",
-                gender: "Male",
-                species: "Dog",
-                photoUrl: nil,
-                isFavorite: true)) {
-            print("favorited")
+        Group{
+            AnimalPreviewRow(
+                viewModel: AnimalViewModel(
+                    id: 1,
+                    name: "Happy",
+                    gender: "Male",
+                    species: "Dog",
+                    age: "2 years",
+                    description: "A wonderful pet\nLooking for a good home\nLoves to play ball and fetch and eat and play and sleep.",
+                    photoUrl: nil,
+                    isFavorite: true)) {
+                print("favorited")
+            }
+            AnimalPreviewRow(
+                viewModel: AnimalViewModel(
+                    id: 2,
+                    name: "Cute",
+                    gender: "Female",
+                    species: "Cat",
+                    age: "1 years",
+                    description: "A sweet kitty",
+                    photoUrl: nil,
+                    isFavorite: false)) {
+                print("favorited")
+            }
         }
+        .previewLayout(.fixed(width: 300, height: 70))
     }
 }

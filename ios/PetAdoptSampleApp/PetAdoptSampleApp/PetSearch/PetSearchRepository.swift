@@ -34,13 +34,13 @@ class PetSearchRepository {
        self.scheduler = scheduler
     }
     
-    func searchForNearbyAnimals(forLocation location:String) -> Future <[AnimalRowViewModel], PetAdoptError> {
+    func searchForNearbyAnimals(forLocation location:String) -> Future <[AnimalViewModel], PetAdoptError> {
         return Future() { [weak self] promise in
             guard let self = self else { return }
             self.searchAPI.getAnimals(forLocation: location)
                 .map { response in
                     response.animals.map { animal in
-                        AnimalRowViewModel(animal: animal, isFavorite: false) //TODO
+                        AnimalViewModel(animal: animal, isFavorite: false) //TODO
                     }
                 }
                 .receive(on: self.scheduler)

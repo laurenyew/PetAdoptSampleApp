@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct AnimalListView: View {
-    private let dataSource: [AnimalRowViewModel]
-    private let onFavoriteClicked: (AnimalRowViewModel) -> Void
+    private let dataSource: [AnimalViewModel]
+    private let onFavoriteClicked: (AnimalViewModel) -> Void
     
-    init(dataSource: [AnimalRowViewModel],
-         onFavoriteClicked: @escaping (AnimalRowViewModel) -> Void
+    init(dataSource: [AnimalViewModel],
+         onFavoriteClicked: @escaping (AnimalViewModel) -> Void
     ){
         self.dataSource = dataSource
         self.onFavoriteClicked = onFavoriteClicked
@@ -30,12 +30,20 @@ struct AnimalListView: View {
     var animalSection: some View {
         List{
             ForEach(dataSource){ animal in
-                AnimalPreviewRow.init(
-                    viewModel: animal,
-                    updateFavoriteStatus: {
-                        self.onFavoriteClicked(animal)
-                    }
-                )
+                NavigationLink(
+                    destination: PetDetailsView(
+                        viewModel: animal,
+                        updateFavoriteStatus: {
+                            self.onFavoriteClicked(animal)
+                        })
+                ){
+                    AnimalPreviewRow.init(
+                        viewModel: animal,
+                        updateFavoriteStatus: {
+                            self.onFavoriteClicked(animal)
+                        }
+                    )
+                }
             }
         }.listStyle(PlainListStyle())
     }
