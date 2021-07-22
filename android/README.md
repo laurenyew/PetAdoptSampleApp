@@ -14,9 +14,6 @@ Sample App created to practice with different Android Tech
 * Hilt :heavy_check_mark:
 * ViewBinding :heavy_check_mark:
 
-## TODO Next
-* Make keyboard hide on search
-
 ## TODO (Tech)
 * Add Jetpack Pages
 
