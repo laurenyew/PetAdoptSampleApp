@@ -74,6 +74,7 @@ class RepositoryModule {
     @Provides
     fun providePetSearchRepository(
         searchPetsCommands: SearchPetsCommands,
+        petDetailCommands: PetDetailCommands,
         animalDatabaseProvider: AnimalDatabaseProvider,
         searchTermDatabaseProvider: SearchTermDatabaseProvider,
         pollManager: PollManager,
@@ -81,6 +82,7 @@ class RepositoryModule {
     ): PetSearchRepository =
         PetSearchRepository(
             searchPetsCommands,
+            petDetailCommands,
             animalDatabaseProvider,
             searchTermDatabaseProvider,
             pollManager,

@@ -1,10 +1,10 @@
 package laurenyew.petadoptsampleapp.ui.features.search
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
@@ -19,8 +19,8 @@ class PetSearchViewModel @Inject constructor(
     private val searchRepository: PetSearchRepository,
     private val favoriteRepository: PetFavoriteRepository,
 ) : PetListViewModel(favoriteRepository) {
-    val location: MutableState<String> =
-        mutableStateOf("")
+    private val _location = MutableStateFlow("")
+    val location: StateFlow<String> = _location
 
     private var currentSearchLocation = ""
     private var currentSearchJob: Job? = null
@@ -29,7 +29,8 @@ class PetSearchViewModel @Inject constructor(
         // Load up list with the results of the last search
         viewModelScope.launch {
             searchRepository.getLastSearchTerm()?.let { searchTerm ->
-                location.value = searchTerm.zipcode
+                _location.value = searchTerm.zipcode
+                currentSearchLocation = _location.value
                 val savedAnimalList = searchRepository.getSearchedAnimalList(searchTerm.searchId)
                 val updatedSavedAnimalListWithFavorites = parseWithFavorites(savedAnimalList)
                 if (updatedSavedAnimalListWithFavorites != null) {
@@ -41,17 +42,33 @@ class PetSearchViewModel @Inject constructor(
         }
     }
 
-    fun searchAnimals() {
+    fun setLocation(location: String) {
+        _location.value = location
+    }
+
+    fun searchAnimals(forceRefresh: Boolean = false) {
         val newLocation = location.value
-        if (newLocation != currentSearchLocation
-            && newLocation.isNotBlank()
-            && newLocation.length >= 5
-        ) {
+
+        // Check location
+        if (newLocation.isBlank()) {
+            _errorState.value = "No location specified. Please specify a 5 digit zipcode."
+            return
+        } else if (newLocation.length != 5) {
+            _errorState.value = "Invalid zipcode length. Please specify a 5 digit zipcode."
+            return
+        }
+
+        val isChangedLocation = newLocation != currentSearchLocation
+        if (isChangedLocation || forceRefresh) {
             if (currentSearchJob?.isActive == true) {
                 currentSearchJob?.cancel(CancellationException("New search started. Cancelling old search."))
             }
 
             _isLoading.value = true
+            if (isChangedLocation) {
+                _animals.value = emptyList()
+            }
+
             currentSearchLocation = newLocation
             currentSearchJob = viewModelScope.launch {
                 when (val searchResponse = searchRepository.getNearbyPets(newLocation)) {

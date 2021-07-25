@@ -8,8 +8,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
 import laurenyew.petadoptsampleapp.R
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.ui.features.list.ListItem
@@ -17,22 +20,27 @@ import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 
 @Composable
 fun PetList(
+    isRefreshing: State<Boolean>,
     animals: State<List<Animal>>,
+    onRefresh: () -> Unit,
     onItemClicked: (id: String) -> Unit,
     onItemFavorited: (item: Animal, isFavorited: Boolean) -> Unit
 ) {
     val items = animals.value
-    LazyColumn {
-        items(items.size) { index ->
-            val item = items[index]
-            PetListItem(
-                item = item,
-                onItemClicked = { id -> onItemClicked(id) },
-                onItemFavorited = { isFavorited ->
-                    onItemFavorited(item, isFavorited)
-                }
-            )
-            Divider(color = dividerColor)
+    val isRefreshingState = SwipeRefreshState(isRefreshing.value)
+    SwipeRefresh(state = isRefreshingState, onRefresh = { onRefresh() }) {
+        LazyColumn {
+            items(items.size) { index ->
+                val item = items[index]
+                PetListItem(
+                    item = item,
+                    onItemClicked = { id -> onItemClicked(id) },
+                    onItemFavorited = { isFavorited ->
+                        onItemFavorited(item, isFavorited)
+                    }
+                )
+                Divider(color = dividerColor)
+            }
         }
     }
 }

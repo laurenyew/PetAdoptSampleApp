@@ -45,7 +45,7 @@ class PetSearchFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(p0: String?): Boolean {
-                    petSearchViewModel.location.value = p0 ?: ""
+                    petSearchViewModel.setLocation(p0 ?: "")
                     return true
                 }
 
