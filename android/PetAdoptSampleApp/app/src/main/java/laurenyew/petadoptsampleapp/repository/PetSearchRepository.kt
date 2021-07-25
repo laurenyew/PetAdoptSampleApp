@@ -8,6 +8,7 @@ import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.search.SearchTerm
 import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
+import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import laurenyew.petadoptsampleapp.repository.poll.PollManager
 import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
@@ -18,6 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class PetSearchRepository @Inject constructor(
     private val searchPetCommand: SearchPetsCommands,
+    private val petDetailCommands: PetDetailCommands,
     private val animalDatabaseProvider: AnimalDatabaseProvider,
     private val searchTermDatabaseProvider: SearchTermDatabaseProvider,
     pollManager: PollManager,
@@ -53,6 +55,9 @@ class PetSearchRepository @Inject constructor(
         Timber.e(e)
         SearchPetsRepoResponse.Error.Unknown(e)
     }
+
+    suspend fun getAnimalDetails(animalId: String): Animal? =
+        petDetailCommands.fetchAnimalDetails(animalId)
 
     suspend fun getSearchTerms(): List<SearchTerm> =
         searchTermDatabaseProvider.getAllSearchTerms()
