@@ -1,7 +1,7 @@
 # Android PetAdoptSampleApp
 Sample App created to practice with different Android Tech
 
-<img src="./Screenshots/drawer.png" width="200"/> <img src="./Screenshots/home.png" width="200"/> <img src="./Screenshots/search_favorite.png" width="200"/> <img src="./Screenshots/favorites.png" width="200"/> <img src="./Screenshots/all_filters.png" width="200"/> <img src="./Screenshots/organizations.png" width="200"/> <img src="./Screenshots/settings.png" width="200"/>
+<img src="./Screenshots/drawer.png" width="200"/> <img src="./Screenshots/home.png" width="200"/> <img src="./Screenshots/search_favorite.png" width="200"/> <img src="./Screenshots/favorites.png" width="200"/> <img src="./Screenshots/all_filters.png" width="200"/> <img src="./Screenshots/organizations.png" width="200"/> <img src="./Screenshots/detail.png" width="200"/> <img src="./Screenshots/settings.png" width="200"/>
 
 ## Android Tech
 * Kotlin :heavy_check_mark:
@@ -18,7 +18,6 @@ Sample App created to practice with different Android Tech
 * Add Jetpack Pages
 
 ## TODO (Features)
-* Details Screen
 * More Search Query Filters (Animal type, etc)
 * Profile
 * Share Animal w/ others
