@@ -14,7 +14,7 @@ import Resolver
 class FavoritePetsRepository {
     @Injected private var petAdoptYapDatabase: PetAdoptYapDatabase
     
-    func saveAnimalToFavorites(animal: AnimalViewModel){
+    func saveAnimalToFavorites(animal: Animal){
         let connection = self.petAdoptYapDatabase.database.newConnection()
         connection.readWrite {(transaction) in
             transaction.setObject(animal, forKey: String(animal.id), inCollection: self.petAdoptYapDatabase.collectionName)
@@ -28,11 +28,11 @@ class FavoritePetsRepository {
         }
     }
     
-    func getFavorites() -> [AnimalViewModel]{
+    func getFavorites() -> [Animal]{
         let connection = self.petAdoptYapDatabase.database.newConnection()
-        var favorites:[AnimalViewModel] = []
+        var favorites:[Animal] = []
         connection.read {(transaction) in
-            transaction.iterateKeysAndObjects(inCollection: self.petAdoptYapDatabase.collectionName) { (key, animal: AnimalViewModel, stop) in
+            transaction.iterateKeysAndObjects(inCollection: self.petAdoptYapDatabase.collectionName) { (key, animal: Animal, stop) in
                 favorites.append(animal)
             }
         }

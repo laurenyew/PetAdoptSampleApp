@@ -10,14 +10,14 @@ import Foundation
 import Resolver
 
 class PetDetailsViewModel: ObservableObject, Identifiable {
-    @Published var animal: AnimalViewModel
+    @Published var animal: Animal
     @Injected private var favoritePetsRepository: FavoritePetsRepository
     
-    init(animal: AnimalViewModel) {
+    init(animal: Animal) {
         self.animal = animal
     }
     
-    func onFavoriteClicked(animal: AnimalViewModel){
+    func onFavoriteClicked(animal: Animal){
         let isFavorite = !animal.isFavorite
         
         if isFavorite {

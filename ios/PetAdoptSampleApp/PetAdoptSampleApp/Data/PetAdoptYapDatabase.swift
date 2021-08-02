@@ -21,7 +21,7 @@ class PetAdoptYapDatabase {
         let path = (try? PetAdoptYapDatabase.pathForDatabase(named: "PetAdoptDatabase")) ?? "BrokenPetAdoptDatabasePath.sqlite"
         let pathUrl = URL(fileURLWithPath: path)
         self.database = YapDatabase(url: pathUrl)!
-        self.database.registerCodableSerialization(AnimalViewModel.self, forCollection: collectionName)
+        self.database.registerCodableSerialization(Animal.self, forCollection: collectionName)
     }
     
     private static func pathForDatabase(named name: String) throws -> String {

@@ -20,8 +20,8 @@ struct PetSearchView: View {
         NavigationView {
             VStack{
                 searchField
-                AnimalListView(dataSource: searchViewModel.dataSource) { AnimalViewModel in
-                    searchViewModel.onFavoriteClicked(animal: AnimalViewModel)
+                AnimalListView(dataSource: searchViewModel.dataSource) { Animal in
+                    searchViewModel.onFavoriteClicked(animal: Animal)
                 }
                 Spacer()
             }

@@ -22,7 +22,7 @@ struct PetDetailsView: View {
     private let favoriteImage: String
     private let updateFavoriteStatus: () -> Void
     
-    init(viewModel: AnimalViewModel, updateFavoriteStatus: @escaping () -> Void) {
+    init(viewModel: Animal, updateFavoriteStatus: @escaping () -> Void) {
         self.name = viewModel.name
         self.gender = viewModel.gender
         switch viewModel.gender {
@@ -86,7 +86,7 @@ struct PetDetailsView: View {
 struct PetDetailsView_Preview: PreviewProvider {
     static var previews: some View {
         PetDetailsView(
-            viewModel: AnimalViewModel(
+            viewModel: Animal(
                 id: 1,
                 name: "Happy",
                 gender: "Male",

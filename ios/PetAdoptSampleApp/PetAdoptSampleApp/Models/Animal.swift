@@ -10,7 +10,7 @@ import Foundation
 import YapDatabase
 import PetAdoptNetworkingFramework
 
-class AnimalViewModel: Identifiable, ObservableObject, Codable {
+class Animal: Identifiable, ObservableObject, Codable {
     let id: Int
     let name: String
     let gender: String
@@ -43,8 +43,8 @@ class AnimalViewModel: Identifiable, ObservableObject, Codable {
     }
 }
 
-extension AnimalViewModel: Hashable {
-    static func == (lhs: AnimalViewModel, rhs: AnimalViewModel) -> Bool {
+extension Animal: Hashable {
+    static func == (lhs: Animal, rhs: Animal) -> Bool {
       return lhs.id == rhs.id
     }
 
