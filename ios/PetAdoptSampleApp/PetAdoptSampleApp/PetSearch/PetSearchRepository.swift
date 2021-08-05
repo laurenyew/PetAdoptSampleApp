@@ -34,13 +34,13 @@ class PetSearchRepository {
        self.scheduler = scheduler
     }
     
-    func searchForNearbyAnimals(forLocation location:String) -> Future <[AnimalViewModel], PetAdoptError> {
+    func searchForNearbyAnimals(forLocation location:String) -> Future <[Animal], PetAdoptError> {
         return Future() { [weak self] promise in
             guard let self = self else { return }
             self.searchAPI.getAnimals(forLocation: location)
                 .map { response in
                     response.animals.map { animal in
-                        AnimalViewModel(animal: animal, isFavorite: false) //TODO
+                        Animal(animal: animal, isFavorite: false) //TODO
                     }
                 }
                 .receive(on: self.scheduler)
@@ -51,11 +51,11 @@ class PetSearchRepository {
                     case .finished:
                         break
                     }
-                }) { animalViewModels in
+                }) { Animals in
                     
                     //TODO: Do some database work on animal view models to mark them as favorites or not...
                     
-                    promise(.success(animalViewModels))
+                    promise(.success(Animals))
                 }
                 .store(in: &self.disposables)
         }

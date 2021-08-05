@@ -14,6 +14,9 @@ Sample App created to practice with different Android Tech
 * Hilt :heavy_check_mark:
 * ViewBinding :heavy_check_mark:
 
+## TODO
+* Fix details favorite should update list item
+
 ## TODO (Tech)
 * Add Jetpack Pages
 

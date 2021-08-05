@@ -19,7 +19,7 @@ struct AnimalPreviewRow: View {
     private let favoriteImage: String
     private let updateFavoriteStatus: () -> Void
     
-    init(viewModel: AnimalViewModel, updateFavoriteStatus: @escaping () -> Void) {
+    init(viewModel: Animal, updateFavoriteStatus: @escaping () -> Void) {
         self.name = viewModel.name
         self.gender = viewModel.gender
         switch viewModel.gender {
@@ -78,7 +78,7 @@ struct AnimalPreviewRow_Preview: PreviewProvider {
     static var previews: some View {
         Group{
             AnimalPreviewRow(
-                viewModel: AnimalViewModel(
+                viewModel: Animal(
                     id: 1,
                     name: "Happy",
                     gender: "Male",
@@ -90,7 +90,7 @@ struct AnimalPreviewRow_Preview: PreviewProvider {
                 print("favorited")
             }
             AnimalPreviewRow(
-                viewModel: AnimalViewModel(
+                viewModel: Animal(
                     id: 2,
                     name: "Cute",
                     gender: "Female",

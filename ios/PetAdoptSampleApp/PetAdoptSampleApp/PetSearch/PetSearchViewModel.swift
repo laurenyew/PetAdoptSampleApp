@@ -61,13 +61,13 @@ class PetSearchViewModel: AnimalListViewModel {
      Update state for search result
      Also update search results for favorite status
      */
-    private func handleSearchResult(animals: [AnimalViewModel]) {
+    private func handleSearchResult(animals: [Animal]) {
         self.showError = false
         self.errorText = ""
         let favoriteIds = favoritePetsRepository.getFavorites().map { animal in
             animal.id
         }
-        let result: [AnimalViewModel] = animals.map { animal in
+        let result: [Animal] = animals.map { animal in
             if favoriteIds.contains(animal.id) {
                 animal.isFavorite = true
             } else {

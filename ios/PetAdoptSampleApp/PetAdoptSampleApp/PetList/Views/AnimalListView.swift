@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct AnimalListView: View {
-    private let dataSource: [AnimalViewModel]
-    private let onFavoriteClicked: (AnimalViewModel) -> Void
+    private let dataSource: [Animal]
+    private let onFavoriteClicked: (Animal) -> Void
     
-    init(dataSource: [AnimalViewModel],
-         onFavoriteClicked: @escaping (AnimalViewModel) -> Void
+    init(dataSource: [Animal],
+         onFavoriteClicked: @escaping (Animal) -> Void
     ){
         self.dataSource = dataSource
         self.onFavoriteClicked = onFavoriteClicked
