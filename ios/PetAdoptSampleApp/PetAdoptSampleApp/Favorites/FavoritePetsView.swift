@@ -10,11 +10,7 @@ import SwiftUI
 import Resolver
 
 struct FavoritePetsView: View {
-    @ObservedObject var favoritesViewModel: FavoritePetsViewModel
-    
-    init(favoritesViewModel: FavoritePetsViewModel){
-        self.favoritesViewModel = favoritesViewModel
-    }
+    @EnvironmentObject var favoritesViewModel: FavoritePetsViewModel
     
     var body: some View {
         NavigationView {
@@ -39,6 +35,7 @@ struct FavoritePetsView: View {
 
 struct FavoritePetsView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritePetsView(favoritesViewModel: FavoritePetsViewModel())
+        FavoritePetsView()
+            .environmentObject(FavoritePetsViewModel())
     }
 }

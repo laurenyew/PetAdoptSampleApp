@@ -9,11 +9,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel: HomeViewModel
-    
-    init(viewModel: HomeViewModel){
-        self.viewModel = viewModel
-    }
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         NavigationView {
@@ -50,7 +46,8 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
+    @StateObject var homeViewModel = HomeViewModel()
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel())
+        HomeView()
     }
 }

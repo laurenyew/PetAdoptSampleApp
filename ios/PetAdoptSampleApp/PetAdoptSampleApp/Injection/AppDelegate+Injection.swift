@@ -12,7 +12,6 @@ extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         registerDatabases()
         registerRepositories()
-        registerViewModels()
     }
     
     private static func registerDatabases(){
@@ -22,13 +21,5 @@ extension Resolver: ResolverRegistering {
     private static func registerRepositories(){
         register { FavoritePetsRepository() }.scope(.cached)
         register { PetSearchRepository() }.scope(.cached)
-    }
-    
-    private static func registerViewModels(){
-        register { AnimalListViewModel() }.scope(.cached)
-        register { FavoritePetsViewModel() }.scope(.cached)
-        register { PetSearchViewModel() }.scope(.cached)
-        register { HomeViewModel() }.scope(.cached)
-        register { SettingsViewModel() }.scope(.cached)
     }
 }

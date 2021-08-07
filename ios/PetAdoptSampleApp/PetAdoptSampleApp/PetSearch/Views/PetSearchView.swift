@@ -10,11 +10,7 @@ import SwiftUI
 import PetAdoptCommonViewsFramework
 
 struct PetSearchView: View {
-    @ObservedObject var searchViewModel: PetSearchViewModel
-    
-    init(searchViewModel: PetSearchViewModel){
-        self.searchViewModel = searchViewModel
-    }
+    @EnvironmentObject var searchViewModel: PetSearchViewModel
     
     var body: some View {
         NavigationView {

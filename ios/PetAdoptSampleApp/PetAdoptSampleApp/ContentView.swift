@@ -11,14 +11,14 @@ import Resolver
 
 struct ContentView: View {
     @State private var selection = 0
-    @Injected private var petSearchViewModel: PetSearchViewModel
-    @Injected private var favoritesViewModel: FavoritePetsViewModel
-    @Injected private var homeViewModel: HomeViewModel
-    @Injected private var settingsViewModel: SettingsViewModel
+    @StateObject var petSearchViewModel = PetSearchViewModel()
+    @StateObject var favoritesViewModel =  FavoritePetsViewModel()
+    @StateObject var homeViewModel = HomeViewModel()
+    @StateObject var settingsViewModel = SettingsViewModel()
     
     var body: some View {
         TabView(){
-            HomeView(viewModel: homeViewModel)
+            HomeView()
                 .font(.title)
                 .tabItem {
                     VStack {
@@ -27,18 +27,18 @@ struct ContentView: View {
                     }
                 }
                 .tag(0)
-            PetSearchView(
-                searchViewModel: petSearchViewModel
-            )
-            .font(.title)
-            .tabItem {
-                VStack {
-                    Image(systemName: "magnifyingglass")
-                    Text("search")
+                .environmentObject(homeViewModel)
+            PetSearchView()
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "magnifyingglass")
+                        Text("search")
+                    }
                 }
-            }
-            .tag(1)
-            FavoritePetsView(favoritesViewModel: favoritesViewModel)
+                .tag(1)
+                .environmentObject(petSearchViewModel)
+            FavoritePetsView()
                 .font(.title)
                 .tabItem {
                     VStack {
@@ -47,7 +47,8 @@ struct ContentView: View {
                     }
                 }
                 .tag(2)
-            SettingsView(viewModel: settingsViewModel)
+                .environmentObject(favoritesViewModel)
+            SettingsView()
                 .font(.title)
                 .tabItem {
                     VStack {
@@ -56,6 +57,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(3)
+                .environmentObject(settingsViewModel)
         }
     }
 }

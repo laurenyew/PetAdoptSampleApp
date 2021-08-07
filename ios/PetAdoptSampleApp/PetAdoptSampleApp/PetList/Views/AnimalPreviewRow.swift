@@ -61,14 +61,14 @@ struct AnimalPreviewRow: View {
             }
             .padding(.leading, 8)
             Spacer()
-            Button(action: self.updateFavoriteStatus) {
-                Image(systemName: self.favoriteImage)
-                    .resizable()
-                    .frame(minWidth: 10, idealWidth: 15, maxWidth: 25, minHeight: 10, idealHeight: 15, maxHeight: 20, alignment: .center)
-                    .padding(15)
-                    .foregroundColor(.red)
-            }
-            
+            Image(systemName: self.favoriteImage)
+                .resizable()
+                .frame(minWidth: 10, idealWidth: 15, maxWidth: 25, minHeight: 10, idealHeight: 15, maxHeight: 20, alignment: .center)
+                .padding(15)
+                .foregroundColor(.red)
+                .onTapGesture {
+                    self.updateFavoriteStatus()
+                }
         }
         .frame(minWidth: nil, idealWidth: nil, maxWidth: nil, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: Alignment.leading)
     }

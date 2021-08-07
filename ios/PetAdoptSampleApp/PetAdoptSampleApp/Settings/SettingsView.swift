@@ -9,11 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject var viewModel: SettingsViewModel
-    
-    init(viewModel: SettingsViewModel){
-        self.viewModel = viewModel
-    }
+    @EnvironmentObject var viewModel: SettingsViewModel
     
     var body: some View {
         NavigationView {
@@ -37,6 +33,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(viewModel: SettingsViewModel())
+        SettingsView()
+            .environmentObject(SettingsViewModel())
     }
 }
