@@ -19,7 +19,6 @@ Sample App created to practice with different iOS Tech
 * Home Page
 
 ## TODO
-* Fix favorites feature (details / list)
 * Setup similar feature to Android to auto curl the token key
 * Poll every hour (Petfinder Terms of Service)
 * Dark Mode
