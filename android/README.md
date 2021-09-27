@@ -13,13 +13,14 @@ Sample App created to practice with different Android Tech
 * Jetpack Compose :heavy_check_mark:
 * Hilt :heavy_check_mark:
 * ViewBinding :heavy_check_mark:
+* Coil :heavy_check_mark:
 
 ## TODO
 * Fix details favorite should update list item
+* Paging of search results
 
 ## TODO (Tech)
 * Add Jetpack Pages
-* Use Coil
 
 ## TODO (Features)
 * More Search Query Filters (Animal type, etc)
