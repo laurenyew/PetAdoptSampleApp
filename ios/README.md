@@ -26,6 +26,8 @@ Sample App created to practice with different iOS Tech
 * CoreData
 * Async/Await
 * AFNetworking
+* TCA (The Composable Architecture) https://github.com/pointfreeco/swift-composable-architecture
+* SPM (Swift Package Manager)
 
 ## Disclaimers
 

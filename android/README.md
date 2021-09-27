@@ -19,6 +19,7 @@ Sample App created to practice with different Android Tech
 
 ## TODO (Tech)
 * Add Jetpack Pages
+* Use Coil
 
 ## TODO (Features)
 * More Search Query Filters (Animal type, etc)
