@@ -122,6 +122,7 @@ dependencies {
 
     //Networking
     api("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
     //Parse JSON
     api "com.squareup.moshi:moshi:1.11.0"
