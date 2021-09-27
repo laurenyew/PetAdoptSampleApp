@@ -2,6 +2,7 @@ package laurenyew.petadoptsampleapp.repository.networking.api.responses
 
 import com.squareup.moshi.Json
 import laurenyew.petadoptsampleapp.database.animal.Animal
+import timber.log.Timber
 
 data class AnimalResponse(
     @Json(name = "id") val id: String,
@@ -31,6 +32,9 @@ data class AnimalResponse(
             photos[0].fullUrl
         } else {
             null
+        }
+        photo?.let {
+            Timber.d("Animal with valid photo: $name")
         }
 
         val description = parseDescription(description)
