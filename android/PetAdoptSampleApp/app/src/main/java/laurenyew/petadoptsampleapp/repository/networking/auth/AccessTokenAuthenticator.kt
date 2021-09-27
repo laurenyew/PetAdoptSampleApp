@@ -20,15 +20,15 @@ class AccessTokenAuthenticator(
      * Otherwise, give up.
      */
     override fun authenticate(route: Route?, response: Response): Request? {
-        Timber.d("Authenticate request: %s", route?.address()?.url())
+        Timber.d("Authenticate request: %s", route?.address?.url)
         val token = tokenProvider.token() ?: return null
         return if (!hasAuthHeader(response)) {
-            response.request()
+            response.request
                 .newBuilder()
                 .addHeader("Authorization", "Bearer $token")
                 .build()
         } else {
-            response.request()
+            response.request
                 .newBuilder()
                 .removeHeader("Authorization")
                 .addHeader("Authorization", "Bearer $token")
@@ -38,6 +38,6 @@ class AccessTokenAuthenticator(
 
 
     private fun hasAuthHeader(response: Response): Boolean =
-        response.request().header("Authorization") != null
+        response.request.header("Authorization") != null
 
 }

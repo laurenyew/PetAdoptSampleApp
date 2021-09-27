@@ -19,8 +19,10 @@ import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailComma
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchOrganizationsCommands
 import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import timber.log.Timber
 import java.util.*
 import javax.inject.Singleton
 
@@ -64,6 +66,13 @@ class NetworkModule {
                     .build()
                 it.proceed(request)
             }
+            addInterceptor(
+                HttpLoggingInterceptor {
+                    Timber.tag("OkHttp").d(it)
+                }.apply {
+                    setLevel(HttpLoggingInterceptor.Level.BODY)
+                }
+            )
             authenticator(AccessTokenAuthenticator(accessTokenProvider))
         }.build()
 
