@@ -1,11 +1,16 @@
 package laurenyew.petadoptsampleapp.repository.poll
 
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
@@ -15,7 +20,7 @@ import javax.inject.Inject
  * Subscribe to [dataRefreshRequiredFlow] to be notified of when to update
  */
 class PollManager @Inject constructor(
-    private val sharedPreferences: SharedPreferences,
+    private val dataStore: DataStore<Preferences>,
     private val externalScope: CoroutineScope,
     private val pollIntervalMillis: Long = DEFAULT_POLL_INTERVAL_MILLIS,
 ) : PollUpdateAPI {
@@ -31,7 +36,10 @@ class PollManager @Inject constructor(
         restartPoll()
     }
 
-    fun lastPollTime(): Long = sharedPreferences.getLong(LAST_POLL_KEY, -1L)
+    suspend fun lastPollTime(): Long =
+        dataStore.data.map {
+            it[lastPollPreferenceKey]
+        }.firstOrNull() ?: -1L
 
 
     fun isPastInterval(
@@ -43,12 +51,12 @@ class PollManager @Inject constructor(
         return diffPollTimes > pollInterval
     }
 
-    private fun isPastLastPollTime(currentTime: Long, pollInterval: Long): Boolean {
+    private suspend fun isPastLastPollTime(currentTime: Long, pollInterval: Long): Boolean {
         val lastPollTime = lastPollTime()
         return lastPollTime == -1L || isPastInterval(currentTime, lastPollTime, pollInterval)
     }
 
-    private fun diffLastPollTime(): Long = System.currentTimeMillis() - lastPollTime()
+    private suspend fun diffLastPollTime(): Long = System.currentTimeMillis() - lastPollTime()
 
     private fun restartPoll(pollInterval: Long = pollIntervalMillis) {
         pollJob?.cancel(CancellationException("Restarting Poll on interval: $pollInterval millis"))
@@ -66,10 +74,11 @@ class PollManager @Inject constructor(
         }
     }
 
-    private fun onPoll() {
-        sharedPreferences.edit()
-            .putLong(LAST_POLL_KEY, System.currentTimeMillis())
-            .apply()
+    private suspend fun onPoll() {
+        dataStore.edit {
+            it[lastPollPreferenceKey] = System.currentTimeMillis()
+        }
+
         numPolls++
         listener?.onPollCompleted(pollNum = numPolls)
     }
@@ -88,5 +97,6 @@ class PollManager @Inject constructor(
     companion object {
         private const val DEFAULT_POLL_INTERVAL_MILLIS: Long = 1000 * 60 * 60 // poll every hour
         private const val LAST_POLL_KEY = "last_refresh_poll"
+        private val lastPollPreferenceKey = longPreferencesKey(LAST_POLL_KEY)
     }
 }

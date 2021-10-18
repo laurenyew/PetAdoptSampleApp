@@ -1,6 +1,8 @@
 package laurenyew.petadoptsampleapp.database.animal
 
 interface AnimalDatabaseProvider {
+    suspend fun lastUpdatedSearchedAnimalList(): Long?
+
     suspend fun getSearchedAnimalList(searchId: String): List<Animal>?
 
     suspend fun deleteSearchedAnimalList(searchId: String)

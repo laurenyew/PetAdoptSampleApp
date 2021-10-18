@@ -3,6 +3,9 @@ package laurenyew.petadoptsampleapp.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -14,18 +17,24 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.util.concurrent.CancellationException
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ContextModule {
     private var applicationCoroutineScope: CoroutineScope? = null
 
+    // At the top level of your kotlin file:
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "petadopt_settings")
+
     @Provides
     fun providesContext(application: Application): Context = application.applicationContext
 
+
     @Provides
-    fun providesSharedPrefs(context: Context): SharedPreferences =
-        context.getSharedPreferences("petadoptsharedprefs", Context.MODE_PRIVATE)
+    @Singleton
+    fun providesDataStore(context: Context): DataStore<Preferences> =
+        context.dataStore
 
     /**
      * This application scope lives for the life of the application

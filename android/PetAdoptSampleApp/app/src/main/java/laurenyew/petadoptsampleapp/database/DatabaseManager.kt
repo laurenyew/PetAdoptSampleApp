@@ -1,5 +1,11 @@
 package laurenyew.petadoptsampleapp.database
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import laurenyew.petadoptsampleapp.database.animal.Animal
 import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
 import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimal
@@ -14,7 +20,8 @@ import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesFilter
 import javax.inject.Inject
 
 class DatabaseManager @Inject constructor(
-    private val database: PetAdoptDatabase
+    private val database: PetAdoptDatabase,
+    private val dataStore: DataStore<Preferences>
 ) : FavoriteAnimalDatabaseProvider,
     AnimalDatabaseProvider,
     SearchTermDatabaseProvider,
@@ -39,27 +46,43 @@ class DatabaseManager @Inject constructor(
         database.favoriteAnimalDao().insert(animal)
     }
 
-
     override suspend fun unFavoriteAnimal(id: String) {
         database.favoriteAnimalDao().deleteFavoriteAnimal(id)
     }
     //endregion
 
     //region Search Animal List
+    override suspend fun lastUpdatedSearchedAnimalList(): Long? =
+        dataStore.data.map {
+            it[lastSearchedAnimalListUpdatedTimeKey]
+        }.firstOrNull()
+
     override suspend fun getSearchedAnimalList(searchId: String): List<Animal>? =
         database.searchAnimalListDao().getSearchedAnimalList(searchId)?.animalList
 
     override suspend fun deleteSearchedAnimalList(searchId: String) {
         database.searchAnimalListDao().deleteSearchedAnimalList(searchId)
+        onUpdatedSearchedAnimalList()
     }
 
     override suspend fun deleteAllSearchedAnimalLists() {
         database.searchAnimalListDao().deleteAllSearchedAnimalLists()
+        onUpdatedSearchedAnimalList()
     }
 
     override suspend fun insertSearchedAnimalList(searchId: String, list: List<Animal>) {
         database.searchAnimalListDao()
             .insert(SearchAnimalList(searchId = searchId, animalList = list))
+        onUpdatedSearchedAnimalList()
+    }
+
+    /**
+     * Update the saved last updated time to our searched animal list
+     */
+    private suspend fun onUpdatedSearchedAnimalList() {
+        dataStore.edit {
+            it[lastSearchedAnimalListUpdatedTimeKey] = System.currentTimeMillis()
+        }
     }
     //endregion
 
@@ -124,4 +147,9 @@ class DatabaseManager @Inject constructor(
         }
     }
     //endregion
+
+    companion object {
+        private val lastSearchedAnimalListUpdatedTimeKey =
+            longPreferencesKey("lastSearchedAnimalListUpdatedTime")
+    }
 }

@@ -18,9 +18,13 @@ Sample App created to practice with different Android Tech
 ## TODO
 * Fix details favorite should update list item
 * Paging of search results
+* Filter out non-photo pets
 
 ## TODO (Tech)
 * Add Jetpack Pages
+* MotionLayout intro animation
+* WorkManager
+* Kotlin Multiplatform for Networking calls?
 
 ## TODO (Features)
 * More Search Query Filters (Animal type, etc)

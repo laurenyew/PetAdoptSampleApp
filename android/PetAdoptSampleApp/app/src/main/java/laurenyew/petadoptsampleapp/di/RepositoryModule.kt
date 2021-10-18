@@ -2,6 +2,8 @@ package laurenyew.petadoptsampleapp.di
 
 import android.app.Application
 import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -40,8 +42,11 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideDatabaseManager(database: PetAdoptDatabase): DatabaseManager =
-        DatabaseManager(database)
+    fun provideDatabaseManager(
+        database: PetAdoptDatabase,
+        dataStore: DataStore<Preferences>,
+    ): DatabaseManager =
+        DatabaseManager(database, dataStore)
 
     @Singleton
     @Provides
@@ -109,10 +114,10 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun providePollManager(
-        sharedPreferences: SharedPreferences,
+        dataStore: DataStore<Preferences>,
         applicationScope: CoroutineScope
     ): PollManager =
-        PollManager(sharedPreferences, applicationScope)
+        PollManager(dataStore, applicationScope)
 
 
     @Singleton
