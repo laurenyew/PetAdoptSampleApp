@@ -23,8 +23,14 @@ Sample App created to practice with different Android Tech
 ## TODO (Tech)
 * Add Jetpack Pages
 * MotionLayout intro animation
-* WorkManager
+* WorkManager for uploading logs / updating data
+* MaterialU with Jetpack Compose
+* Jetpack Compose Custom UI
+* BoxWithConstraints Jetpack Compose
+* Jetpack Compose animations
 * Kotlin Multiplatform for Networking calls?
+* Room 2.4 with relational / mapping queries
+* Performance check for recomposition issues
 
 ## TODO (Features)
 * More Search Query Filters (Animal type, etc)
@@ -36,6 +42,8 @@ Sample App created to practice with different Android Tech
 * Onboarding
 * Dark Mode
 * Accessibility
+* Beta Settings searchable with auto navigate + auto suggest
+* Remote logging solution + stream logs to web server local
 
 ## Disclaimers
 
