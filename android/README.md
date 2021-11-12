@@ -24,6 +24,7 @@ Sample App created to practice with different Android Tech
 * Add Jetpack Pages
 * MotionLayout intro animation
 * WorkManager for uploading logs / updating data
+* MaterialTheme3 with custom palette
 * MaterialU with Jetpack Compose
 * Jetpack Compose Custom UI
 * BoxWithConstraints Jetpack Compose
@@ -31,6 +32,7 @@ Sample App created to practice with different Android Tech
 * Kotlin Multiplatform for Networking calls?
 * Room 2.4 with relational / mapping queries
 * Performance check for recomposition issues
+* App Widgets
 
 ## TODO (Features)
 * More Search Query Filters (Animal type, etc)
@@ -44,6 +46,7 @@ Sample App created to practice with different Android Tech
 * Accessibility
 * Beta Settings searchable with auto navigate + auto suggest
 * Remote logging solution + stream logs to web server local
+* App Widgets for recent dogs / animals in my area
 
 ## Disclaimers
 
