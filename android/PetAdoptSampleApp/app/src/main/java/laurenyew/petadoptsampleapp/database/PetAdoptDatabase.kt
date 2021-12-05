@@ -23,7 +23,8 @@ import laurenyew.petadoptsampleapp.ui.features.favorites.FavoritesFilter
         FavoritesFilter::class,
         Organization::class
     ],
-    version = 3
+    version = 3,
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class PetAdoptDatabase : RoomDatabase() {
