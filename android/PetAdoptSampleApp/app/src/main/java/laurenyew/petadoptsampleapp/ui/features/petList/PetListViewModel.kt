@@ -8,8 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import laurenyew.petadoptsampleapp.database.animal.Animal
-import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
+import laurenyew.petadoptsampleapp.db.animal.Animal
+import laurenyew.petadoptsampleapp.data.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.ui.features.details.PetDetailsActivity
 import timber.log.Timber
 import javax.inject.Inject

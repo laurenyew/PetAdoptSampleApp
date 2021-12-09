@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.db.animal.Animal
 import laurenyew.petadoptsampleapp.ui.theme.PetAdoptTheme
 
 @Composable

@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import laurenyew.petadoptsampleapp.database.organization.Organization
+import laurenyew.petadoptsampleapp.db.organization.Organization
 import laurenyew.petadoptsampleapp.ui.features.list.ListItem
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 import laurenyew.petadoptsampleapp.ui.theme.sectionHeader

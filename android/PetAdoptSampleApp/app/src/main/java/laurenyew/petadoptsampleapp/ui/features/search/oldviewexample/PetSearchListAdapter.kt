@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import laurenyew.petadoptsampleapp.R
-import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.db.animal.Animal
 import laurenyew.petadoptsampleapp.databinding.AnimalPreviewBinding
 
 class PetSearchListAdapter(private val animals: MutableList<Animal> = arrayListOf()) :

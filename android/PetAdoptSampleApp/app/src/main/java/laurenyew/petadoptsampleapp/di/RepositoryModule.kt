@@ -1,7 +1,6 @@
 package laurenyew.petadoptsampleapp.di
 
 import android.app.Application
-import android.content.SharedPreferences
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.room.Room
@@ -10,20 +9,19 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
-import laurenyew.petadoptsampleapp.database.DatabaseManager
-import laurenyew.petadoptsampleapp.database.PetAdoptDatabase
-import laurenyew.petadoptsampleapp.database.animal.AnimalDatabaseProvider
-import laurenyew.petadoptsampleapp.database.favorite.FavoriteAnimalDatabaseProvider
-import laurenyew.petadoptsampleapp.database.favorite.FavoritesFilterDatabaseProvider
-import laurenyew.petadoptsampleapp.database.organization.OrganizationDatabaseProvider
-import laurenyew.petadoptsampleapp.database.search.SearchTermDatabaseProvider
-import laurenyew.petadoptsampleapp.repository.OrganizationSearchRepository
-import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
-import laurenyew.petadoptsampleapp.repository.PetSearchRepository
-import laurenyew.petadoptsampleapp.repository.networking.commands.PetDetailCommands
-import laurenyew.petadoptsampleapp.repository.networking.commands.SearchOrganizationsCommands
-import laurenyew.petadoptsampleapp.repository.networking.commands.SearchPetsCommands
-import laurenyew.petadoptsampleapp.repository.poll.PollManager
+import laurenyew.petadoptsampleapp.db.DatabaseManager
+import laurenyew.petadoptsampleapp.db.PetAdoptDatabase
+import laurenyew.petadoptsampleapp.db.favorite.FavoriteAnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.db.filter.AnimalFilterDatabaseProvider
+import laurenyew.petadoptsampleapp.db.organization.OrganizationDatabaseProvider
+import laurenyew.petadoptsampleapp.db.search.SearchTermDatabaseProvider
+import laurenyew.petadoptsampleapp.data.OrganizationSearchRepository
+import laurenyew.petadoptsampleapp.data.PetFavoriteRepository
+import laurenyew.petadoptsampleapp.data.PetSearchRepository
+import laurenyew.petadoptsampleapp.data.networking.commands.PetDetailCommands
+import laurenyew.petadoptsampleapp.data.networking.commands.SearchOrganizationsCommands
+import laurenyew.petadoptsampleapp.data.networking.commands.SearchPetsCommands
+import laurenyew.petadoptsampleapp.data.poll.PollManager
 import javax.inject.Singleton
 
 @Module(includes = [ContextModule::class])
@@ -66,7 +64,7 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideFavoritesFilterDatabaseProvider(databaseManager: DatabaseManager): FavoritesFilterDatabaseProvider =
+    fun provideFavoritesFilterDatabaseProvider(databaseManager: DatabaseManager): AnimalFilterDatabaseProvider =
         databaseManager
 
     @Singleton
@@ -99,14 +97,14 @@ class RepositoryModule {
     fun providePetFavoriteRepository(
         petDetailCommands: PetDetailCommands,
         favoriteAnimalDatabaseProvider: FavoriteAnimalDatabaseProvider,
-        favoritesFilterDatabaseProvider: FavoritesFilterDatabaseProvider,
+        animalFilterDatabaseProvider: AnimalFilterDatabaseProvider,
         pollManager: PollManager,
         externalScope: CoroutineScope,
     ): PetFavoriteRepository =
         PetFavoriteRepository(
             petDetailCommands,
             favoriteAnimalDatabaseProvider,
-            favoritesFilterDatabaseProvider,
+            animalFilterDatabaseProvider,
             pollManager,
             externalScope
         )

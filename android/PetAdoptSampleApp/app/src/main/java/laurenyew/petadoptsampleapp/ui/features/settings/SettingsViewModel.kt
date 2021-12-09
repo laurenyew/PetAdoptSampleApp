@@ -6,10 +6,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import laurenyew.petadoptsampleapp.database.search.SearchTerm
-import laurenyew.petadoptsampleapp.repository.PetSearchRepository
-import laurenyew.petadoptsampleapp.repository.poll.PollManager
-import laurenyew.petadoptsampleapp.repository.poll.PollUpdateAPI
+import laurenyew.petadoptsampleapp.db.search.SearchTerm
+import laurenyew.petadoptsampleapp.data.PetSearchRepository
+import laurenyew.petadoptsampleapp.data.poll.PollManager
+import laurenyew.petadoptsampleapp.data.poll.PollUpdateAPI
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject

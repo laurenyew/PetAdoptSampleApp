@@ -6,10 +6,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import laurenyew.petadoptsampleapp.database.animal.Animal
-import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
-import laurenyew.petadoptsampleapp.repository.PetSearchRepository
-import laurenyew.petadoptsampleapp.repository.responses.SearchPetsRepoResponse
+import laurenyew.petadoptsampleapp.db.animal.Animal
+import laurenyew.petadoptsampleapp.data.PetFavoriteRepository
+import laurenyew.petadoptsampleapp.data.PetSearchRepository
+import laurenyew.petadoptsampleapp.data.responses.SearchPetsRepoResponse
 import laurenyew.petadoptsampleapp.ui.features.petList.PetListViewModel
 import java.util.concurrent.CancellationException
 import javax.inject.Inject

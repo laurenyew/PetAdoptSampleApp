@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import laurenyew.petadoptsampleapp.R
-import laurenyew.petadoptsampleapp.repository.PetFavoriteRepository
+import laurenyew.petadoptsampleapp.data.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.ui.features.petList.PetList
 import laurenyew.petadoptsampleapp.ui.theme.sectionHeader
 import laurenyew.petadoptsampleapp.utils.collectAsStateLifecycleAware

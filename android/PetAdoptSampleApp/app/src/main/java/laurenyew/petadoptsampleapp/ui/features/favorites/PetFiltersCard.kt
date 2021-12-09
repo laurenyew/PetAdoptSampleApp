@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import laurenyew.petadoptsampleapp.R
-import laurenyew.petadoptsampleapp.ui.theme.sectionHeader
+import laurenyew.petadoptsampleapp.db.filter.FavoritesFilter
 
 @Composable
 fun PetFiltersCard(

@@ -2,7 +2,6 @@ package laurenyew.petadoptsampleapp.ui.features.details
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -15,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import laurenyew.petadoptsampleapp.R
-import laurenyew.petadoptsampleapp.database.animal.Animal
+import laurenyew.petadoptsampleapp.db.animal.Animal
 import laurenyew.petadoptsampleapp.ui.common.FavoriteButton
 import laurenyew.petadoptsampleapp.ui.common.LoadingImageView
 

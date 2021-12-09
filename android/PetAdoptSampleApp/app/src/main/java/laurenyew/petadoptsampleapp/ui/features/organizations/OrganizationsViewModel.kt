@@ -6,9 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import laurenyew.petadoptsampleapp.database.organization.Organization
-import laurenyew.petadoptsampleapp.repository.OrganizationSearchRepository
-import laurenyew.petadoptsampleapp.repository.PetSearchRepository
+import laurenyew.petadoptsampleapp.db.organization.Organization
+import laurenyew.petadoptsampleapp.data.OrganizationSearchRepository
+import laurenyew.petadoptsampleapp.data.PetSearchRepository
 import javax.inject.Inject
 
 @HiltViewModel
