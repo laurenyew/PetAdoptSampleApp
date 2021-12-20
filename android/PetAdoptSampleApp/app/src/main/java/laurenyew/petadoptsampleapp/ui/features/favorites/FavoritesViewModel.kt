@@ -1,6 +1,7 @@
 package laurenyew.petadoptsampleapp.ui.features.favorites
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -8,6 +9,7 @@ import laurenyew.petadoptsampleapp.db.animal.Animal
 import laurenyew.petadoptsampleapp.db.filter.FavoritesFilter
 import laurenyew.petadoptsampleapp.data.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.data.PetFavoriteRepository.Companion.DEFAULT_FAVORITES_FILTER
+import laurenyew.petadoptsampleapp.db.filter.AnimalFilter
 import laurenyew.petadoptsampleapp.ui.features.petList.PetListViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,14 +19,13 @@ class FavoritesViewModel @Inject constructor(
     private val favoriteRepository: PetFavoriteRepository
 ) : PetListViewModel(favoriteRepository) {
     private val _filterState = MutableStateFlow(DEFAULT_FAVORITES_FILTER)
-    val filterState: StateFlow<FavoritesFilter> = _filterState
+    val filterState: StateFlow<AnimalFilter> = _filterState
 
-    override val animals: StateFlow<List<Animal>>
-        get() = super.animals
-            .combine(
-                filterState,
-                ::applyFilterState
-            ).stateIn(
+    override val pagingDataFlow: Flow<PagingData<Animal>>
+        get() = super.pagingDataFlow
+            .combine(filterState,
+            ::applyFilterState)
+            .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(),
                 initialValue = emptyList()
@@ -71,9 +72,9 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun applyFilterState(
-        animalList: List<Animal>,
-        filter: FavoritesFilter
-    ): List<Animal> =
+        animalPagingData: PagingData<Animal>,
+        filter: AnimalFilter
+    ): PagingData<Animal> =
         animalList.filter { animal ->
             passesTypeFilterState(animal, filter)
                     && passesGenderFilterState(animal, filter)

@@ -1,18 +1,15 @@
 package laurenyew.petadoptsampleapp.data
 
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadType
-import androidx.paging.PagingState
-import androidx.paging.RemoteMediator
-import laurenyew.petadoptsampleapp.db.animal.Animal
-import laurenyew.petadoptsampleapp.db.animal.AnimalDatabaseProvider
-import laurenyew.petadoptsampleapp.db.search.SearchTerm
-import laurenyew.petadoptsampleapp.db.search.SearchTermDatabaseProvider
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
 import laurenyew.petadoptsampleapp.data.networking.commands.PetDetailCommands
 import laurenyew.petadoptsampleapp.data.networking.commands.SearchPetsCommands
-import laurenyew.petadoptsampleapp.data.responses.SearchPetsRepoResponse
-import timber.log.Timber
-import java.util.concurrent.TimeUnit
+import laurenyew.petadoptsampleapp.db.animal.Animal
+import laurenyew.petadoptsampleapp.db.search.SearchTerm
+import laurenyew.petadoptsampleapp.db.search.SearchTermDatabaseProvider
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,18 +18,16 @@ import javax.inject.Singleton
 class PetSearchRepository @Inject constructor(
     private val searchPetCommand: SearchPetsCommands,
     private val petDetailCommands: PetDetailCommands,
-    private val animalDatabaseProvider: AnimalDatabaseProvider,
     private val searchTermDatabaseProvider: SearchTermDatabaseProvider
 ) {
-
-    suspend fun getNearbyPets(zipcode: String): SearchPetsRepoResponse = try {
-        val animals = searchPetCommand.searchForNearbyPets(zipcode)
-        val searchId = saveSearchTerm(zipcode)
-        saveSearchedAnimalList(searchId, animals)
-        SearchPetsRepoResponse.Success(animals)
-    } catch (e: Exception) {
-        Timber.e(e)
-        SearchPetsRepoResponse.Error.Unknown(e)
+    fun getNearbyPets(query: String): Flow<PagingData<Animal>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { PetSearchPagingSource(searchPetCommand, query) }
+        ).flow
     }
 
     suspend fun getAnimalDetails(animalId: Long): Animal? =
@@ -50,17 +45,16 @@ class PetSearchRepository @Inject constructor(
      * @return searchId
      */
     suspend fun saveSearchTerm(zipcode: String): String {
-        val searchId = zipcode
         val searchTerm = SearchTerm(
-            searchId = searchId,
+            searchId = zipcode,
             zipcode = zipcode,
             timestamp = System.currentTimeMillis()
         )
         searchTermDatabaseProvider.insert(searchTerm)
-        return searchId
+        return zipcode
     }
 
     companion object {
-        private val cacheTimeout = TimeUnit.HOURS.convert(1, TimeUnit.MILLISECONDS)
+        private const val NETWORK_PAGE_SIZE = 50
     }
 }
