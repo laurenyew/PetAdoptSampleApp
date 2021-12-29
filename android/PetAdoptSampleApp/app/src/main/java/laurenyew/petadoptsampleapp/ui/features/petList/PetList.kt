@@ -21,7 +21,7 @@ import laurenyew.petadoptsampleapp.ui.features.list.ListItem
 import laurenyew.petadoptsampleapp.ui.theme.dividerColor
 
 @Composable
-fun PetList(
+fun PagingPetList(
     isRefreshing: State<Boolean>,
     animals: Flow<PagingData<Animal>>,
     onRefresh: () -> Unit,
@@ -44,6 +44,33 @@ fun PetList(
                     )
                     Divider(color = dividerColor)
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun PetList(
+    isRefreshing: State<Boolean>,
+    animals: State<List<Animal>>,
+    onRefresh: () -> Unit,
+    onItemClicked: (id: Long) -> Unit,
+    onItemFavorited: (item: Animal, isFavorited: Boolean) -> Unit
+) {
+    val items = animals.value
+    val isRefreshingState = SwipeRefreshState(isRefreshing.value)
+    SwipeRefresh(state = isRefreshingState, onRefresh = { onRefresh() }) {
+        LazyColumn {
+            items(items.size) { index ->
+                val item = items[index]
+                PetListItem(
+                    item = item,
+                    onItemClicked = { id -> onItemClicked(id) },
+                    onItemFavorited = { isFavorited ->
+                        onItemFavorited(item, isFavorited)
+                    }
+                )
+                Divider(color = dividerColor)
             }
         }
     }

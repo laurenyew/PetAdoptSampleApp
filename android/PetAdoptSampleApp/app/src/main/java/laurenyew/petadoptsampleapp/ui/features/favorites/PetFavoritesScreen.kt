@@ -2,7 +2,9 @@ package laurenyew.petadoptsampleapp.ui.features.favorites
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,7 +64,7 @@ fun PetFavoritesScreen(viewModel: FavoritesViewModel = viewModel()) {
                 if (isFavorited) {
                     viewModel.favorite(item)
                 } else {
-                    viewModel.unfavorite(item.animalId)
+                    viewModel.unfavorite(item)
                 }
             }
         )

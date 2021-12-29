@@ -4,10 +4,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import laurenyew.petadoptsampleapp.data.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.data.PetSearchRepository
@@ -18,14 +15,14 @@ import javax.inject.Inject
 @HiltViewModel
 class PetSearchViewModel @Inject constructor(
     private val searchRepository: PetSearchRepository,
-    private val favoriteRepository: PetFavoriteRepository,
+    favoriteRepository: PetFavoriteRepository,
 ) : PetListViewModel(favoriteRepository) {
     private val _location = MutableStateFlow("")
     val location: StateFlow<String> = _location
 
-    private val searchPagingDataFlow: Flow<PagingData<Animal>>
-    override val pagingDataFlow: Flow<PagingData<Animal>>
-        get() = searchPagingDataFlow
+    private val executeSearchFlow = MutableSharedFlow<Boolean>(0)
+
+    val pagingDataFlow: Flow<PagingData<Animal>>
 
     init {
         // Load up list with the results of the last search
@@ -35,12 +32,29 @@ class PetSearchViewModel @Inject constructor(
             }
         }
 
-        searchPagingDataFlow = location.flatMapLatest {
-            searchRepository.getNearbyPets(it)
-        }.cachedIn(viewModelScope)
+        pagingDataFlow = executeSearchFlow
+            .flatMapLatest {
+                searchRepository.getNearbyPets(location.value)
+            }
+            .cachedIn(viewModelScope)
     }
 
     fun setLocation(location: String) {
         _location.value = location
+    }
+
+    fun executeSearch() {
+        val searchedLocation = location.value
+        // Check location
+        if (searchedLocation.isBlank()) {
+            _errorState.value = "No location specified. Please specify a 5 digit zipcode."
+            return
+        } else if (searchedLocation.length != 5) {
+            _errorState.value = "Invalid zipcode length. Please specify a 5 digit zipcode."
+            return
+        }
+        viewModelScope.launch {
+            executeSearchFlow.emit(true)
+        }
     }
 }
