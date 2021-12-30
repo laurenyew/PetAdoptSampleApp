@@ -5,7 +5,7 @@ import laurenyew.petadoptsampleapp.db.animal.Animal
 import timber.log.Timber
 
 data class AnimalResponse(
-    @Json(name = "id") val id: String,
+    @Json(name = "id") val id: Long,
     @Json(name = "organization_id") val organizationId: String?,
     @Json(name = "url") val url: String?,
     @Json(name = "type") val type: String?,
@@ -59,7 +59,8 @@ data class AnimalResponse(
                         + contact.address.city + ", "
                         + contact.address.state + ", "
                         + contact.address.postcode
-            )
+            ),
+            index = 0L
         )
     }
 

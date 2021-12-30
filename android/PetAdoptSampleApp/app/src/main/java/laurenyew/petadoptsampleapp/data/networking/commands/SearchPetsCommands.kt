@@ -28,7 +28,7 @@ class SearchPetsCommands @Inject constructor(
         return if (networkResponse?.code() != 200 || data == null) {
             val error = "API call failed. Response error: ${networkResponse?.errorBody()?.string()}"
             Timber.e(error)
-            PetListResult.Error(error)
+            PetListResult.Error(RuntimeException(error))
         } else {
             val animalList = ArrayList<Animal>()
             data.animals.forEach {

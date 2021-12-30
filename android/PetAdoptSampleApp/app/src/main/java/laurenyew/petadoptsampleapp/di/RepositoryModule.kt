@@ -9,12 +9,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
-import laurenyew.petadoptsampleapp.db.DatabaseManager
-import laurenyew.petadoptsampleapp.db.PetAdoptDatabase
-import laurenyew.petadoptsampleapp.db.favorite.FavoriteAnimalDatabaseProvider
-import laurenyew.petadoptsampleapp.db.filter.AnimalFilterDatabaseProvider
-import laurenyew.petadoptsampleapp.db.organization.OrganizationDatabaseProvider
-import laurenyew.petadoptsampleapp.db.search.SearchTermDatabaseProvider
 import laurenyew.petadoptsampleapp.data.OrganizationSearchRepository
 import laurenyew.petadoptsampleapp.data.PetFavoriteRepository
 import laurenyew.petadoptsampleapp.data.PetSearchRepository
@@ -22,6 +16,13 @@ import laurenyew.petadoptsampleapp.data.networking.commands.PetDetailCommands
 import laurenyew.petadoptsampleapp.data.networking.commands.SearchOrganizationsCommands
 import laurenyew.petadoptsampleapp.data.networking.commands.SearchPetsCommands
 import laurenyew.petadoptsampleapp.data.poll.PollManager
+import laurenyew.petadoptsampleapp.db.DatabaseManager
+import laurenyew.petadoptsampleapp.db.PetAdoptDatabase
+import laurenyew.petadoptsampleapp.db.animal.AnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.db.favorite.FavoriteAnimalDatabaseProvider
+import laurenyew.petadoptsampleapp.db.filter.AnimalFilterDatabaseProvider
+import laurenyew.petadoptsampleapp.db.organization.OrganizationDatabaseProvider
+import laurenyew.petadoptsampleapp.db.search.SearchTermDatabaseProvider
 import javax.inject.Singleton
 
 @Module(includes = [ContextModule::class])
@@ -86,10 +87,7 @@ class RepositoryModule {
         PetSearchRepository(
             searchPetsCommands,
             petDetailCommands,
-            animalDatabaseProvider,
             searchTermDatabaseProvider,
-            pollManager,
-            externalScope
         )
 
     @Singleton
